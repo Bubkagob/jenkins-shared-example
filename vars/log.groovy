@@ -22,7 +22,7 @@ def warning(message) {
 void rc_analyze(message){
     echo "Release Candidate: ${message}"
     def resFiles = new FileNameFinder().getFileNames(".", '**/results*.txt')
-    reportFile = new File('report.txt')
+    //reportFile = new File('report.txt')
     int numFailed = 0
     int total = 0
     int ran = 0
@@ -31,7 +31,7 @@ void rc_analyze(message){
             String segment = resFile.getPath().split("/")[-1];
             resFile.eachLine {String line -> 
                 if (line.contains("ARCH_tmp")){
-                    reportFile.append(segment.padRight(30) + line.padRight(14))
+                    //.append(segment.padRight(30) + line.padRight(14))
                     print(segment.padRight(30) + line.padRight(14));
                 }
                 if (line.contains("Summary:")){
@@ -40,18 +40,18 @@ void rc_analyze(message){
                         ran += Integer.parseInt(resultList[0])
                         if (resultList[0] == resultList[1]){
                             
-                            reportFile.append(resultList[0].padLeft(4)+"/"+resultList[1].padRight(4)+"OK\n")
+                            //reportFile.append(resultList[0].padLeft(4)+"/"+resultList[1].padRight(4)+"OK\n")
                             printf("%s/%sOK\n", resultList[0].padLeft(4), resultList[1].padRight(4))
                         }
                         else{
                             numFailed ++
-                            reportFile.append(resultList[0].padLeft(4)+"/"+resultList[1].padRight(4)+"Failed\n")
+                            //reportFile.append(resultList[0].padLeft(4)+"/"+resultList[1].padRight(4)+"Failed\n")
                             printf("%s/%sFailed\n", resultList[0].padLeft(4), resultList[1].padRight(4))
                         }
                 }
             }
         println(String.format("Total: %s\nPassed: %s\nFailed: %s", total, ran, numFailed))
-        reportFile.append(String.format("Total: %s\nPassed: %s\nFailed: %s", total, ran, numFailed))
+        //reportFile.append(String.format("Total: %s\nPassed: %s\nFailed: %s", total, ran, numFailed))
     }
 }
 
