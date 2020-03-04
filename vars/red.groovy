@@ -21,3 +21,4 @@ List<Project> projectsWithHttpBasicAuth = mgr.getProjectManager().getProjects()
 for (Project project : projectsWithHttpBasicAuth) {
     echo project.toString()
 }
+echo "Hello"
