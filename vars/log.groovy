@@ -28,9 +28,9 @@ void rc_analyze(message){
     int ran = 0 //results_run_verilator.txt
     //resFiles.each{
     //File resFile = new File("${Jenkins.instance.getJob('JobName').workspace}/file.txt").text
-    File resFile = Jenkins.instance.getJob(env.JOB_NAME).workspace.readFileFromWorkspace('results_run_verilator.txt');
+    //File resFile = Jenkins.instance.getJob(env.JOB_NAME).workspace.readFileFromWorkspace('results_run_verilator.txt');
     //File resFile = new File("results_run_verilator.txt").text
-    //File resFile = new File ("${it}")
+    File resFile = new File ("${WORKSPACE}/results_run_verilator.txt")
     String segment = resFile.getPath().split("/")[-1];
     resFile.eachLine {String line -> 
           if (line.contains("ARCH_tmp")){
