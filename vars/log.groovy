@@ -3,6 +3,8 @@ import org.apache.commons.math3.primes.Primes
 void parallelize(int count) {
   if (!Primes.isPrime(count)) {
     error "${count} was not prime"
+  }else{
+      echo "IT Is a Prime: ${count}"
   }
 }
 
