@@ -1,3 +1,6 @@
+def hello() {
+    echo "HELLO WORLD"
+}
 def info(message) {
     echo "INFO: ${message}"
 }
