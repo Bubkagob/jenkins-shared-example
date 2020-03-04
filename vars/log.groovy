@@ -1,5 +1,5 @@
-def hello() {
-    echo "HELLO WORLD"
+def helloMe(message) {
+    echo "HELLO WORLD ${message}"
 }
 def info(message) {
     echo "INFO: ${message}"
