@@ -19,5 +19,5 @@ def password = 'Redmine665532!'
 RedmineManager mgr = RedmineManagerFactory.createWithUserAuth(uri, userName, password)
 List<Project> projectsWithHttpBasicAuth = mgr.getProjectManager().getProjects()
 for (Project project : projectsWithHttpBasicAuth) {
-    System.out.println(project.toString())
+    echo project.toString()
 }
