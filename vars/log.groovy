@@ -27,7 +27,7 @@ void rc_analyze(message){
     int total = 0
     int ran = 0 //results_run_verilator.txt
     //resFiles.each{
-    File resFile = new File("${Jenkins.instance.getJob('JobName').workspace}/results_run_verilator.txt").text
+    File resFile = new File("results_run_verilator.txt").text
     //File resFile = new File ("${it}")
     String segment = resFile.getPath().split("/")[-1];
     resFile.eachLine {String line -> 
