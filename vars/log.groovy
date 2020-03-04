@@ -21,19 +21,20 @@ def warning(message) {
 
 void rc_analyze(message){
     echo "Release Candidate: ${message}"
-    def resFiles = new FileNameFinder().getFileNames(".", '**/results*.txt')
+    //def resFiles = new FileNameFinder().getFileNames(".", '**/results*.txt')
     //reportFile = new File('report.txt')
     int numFailed = 0
     int total = 0
-    int ran = 0
-    resFiles.each{
-        File resFile = new File ("${it}")
-            String segment = resFile.getPath().split("/")[-1];
-            resFile.eachLine {String line -> 
-                if (line.contains("ARCH_tmp")){
+    int ran = 0 //results_run_verilator.txt
+    //resFiles.each{
+    File resFile = new File("${Jenkins.instance.getJob('JobName').workspace}/results_run_verilator.txt").text
+    //File resFile = new File ("${it}")
+    String segment = resFile.getPath().split("/")[-1];
+    resFile.eachLine {String line -> 
+          if (line.contains("ARCH_tmp")){
                     //.append(segment.padRight(30) + line.padRight(14))
                     print(segment.padRight(30) + line.padRight(14));
-                }
+          }
                 if (line.contains("Summary:")){
                     resultList = line.findAll( /\d+/ )
                         total += Integer.parseInt(resultList[1])
@@ -52,7 +53,7 @@ void rc_analyze(message){
             }
         println(String.format("Total: %s\nPassed: %s\nFailed: %s", total, ran, numFailed))
         //reportFile.append(String.format("Total: %s\nPassed: %s\nFailed: %s", total, ran, numFailed))
-    }
+   // }
 }
 
 def call(int buildNumber) {
