@@ -16,7 +16,9 @@ import groovy.json.JsonSlurper
 def uri = "http://192.168.1.100:8080/"
 def userName = 'ia-sc'
 def password = 'Redmine665532!'
-
+def hello() {
+    echo "HELLO WORLD"
+}
 RedmineManager mgr = RedmineManagerFactory.createWithUserAuth(uri, userName, password)
 def getProjects(){
     List<Project> projectsWithHttpBasicAuth = mgr.getProjectManager().getProjects()
