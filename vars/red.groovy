@@ -17,9 +17,7 @@ def uri = "http://192.168.1.100:8080/"
 def userName = 'ia-sc'
 def password = 'Redmine665532!'
 RedmineManager mgr = RedmineManagerFactory.createWithUserAuth(uri, userName, password)
-def getProjects(message){
-    List<Project> projectsWithHttpBasicAuth = mgr.getProjectManager().getProjects()
-    for (Project project : projectsWithHttpBasicAuth) {
-        System.out.println(project.toString())
-    }
+List<Project> projectsWithHttpBasicAuth = mgr.getProjectManager().getProjects()
+for (Project project : projectsWithHttpBasicAuth) {
+    System.out.println(project.toString())
 }
