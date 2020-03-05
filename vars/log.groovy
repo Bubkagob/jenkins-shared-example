@@ -32,7 +32,7 @@ void rc_analyze(message){
       def data = readFile(file: "${f}")
       //println(data)
       //echo data
-      data.eachLine {echo "hello"}
+      data.each {echo "hello"}
       //resFile.eachLine {String line -> echo line}
     //       if (line.contains("ARCH_tmp")){
     //                 //.append(segment.padRight(30) + line.padRight(14))
