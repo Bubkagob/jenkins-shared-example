@@ -68,6 +68,7 @@ String rc_analyze(message){
         //echo result
         //reportFile.append(String.format("Total: %s\nPassed: %s\nFailed: %s", total, ran, numFailed))
    }
+   return summary
 }
 
 def call(int buildNumber) {
