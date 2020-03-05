@@ -30,9 +30,10 @@ void rc_analyze(message){
       File resFile = new File ("${f}")
       String segment = resFile.getPath().split("/")[-1];
       def data = readFile(file: "${f}")
-      println(data)
-      echo data
-    // resFile.eachLine {String line -> 
+      //println(data)
+      //echo data
+      resFile.eachLine {echo "hello"}
+      //resFile.eachLine {String line -> echo line}
     //       if (line.contains("ARCH_tmp")){
     //                 //.append(segment.padRight(30) + line.padRight(14))
     //                 print(segment.padRight(30) + line.padRight(14));
