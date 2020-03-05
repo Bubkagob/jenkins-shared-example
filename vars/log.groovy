@@ -33,7 +33,7 @@ void rc_analyze(message){
       //println(data)
       //echo data
       //data.each {echo "hello"}
-      resFile.each {String line -> 
+      data.each {String line -> 
           if (line.contains("ARCH_tmp")){
                     //.append(segment.padRight(30) + line.padRight(14))
                     //print(segment.padRight(30) + line.padRight(14));
