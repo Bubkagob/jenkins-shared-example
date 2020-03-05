@@ -57,7 +57,7 @@ Result rc_analyze(message){
           }
                 if (line.contains("Summary:")){
                     resultList = line.findAll( /\d+/ )
-                        total += Integer.parseInt(resultList[1])
+                        all += Integer.parseInt(resultList[1])
                         ran += Integer.parseInt(resultList[0])
                         if (resultList[0] == resultList[1]){
                             
