@@ -28,22 +28,19 @@ List extractLines(final String content) {
     return myKeys
 }
 
-void rc_analyze(message){
+String rc_analyze(message){
     echo "Release Candidate: ${message}"
-    
-    int numFailed = 0
-    int total = 0
-    int ran = 0 //results_run_verilator.txt
+    String summary = ""
     for (f in findFiles(glob: '**/*results*.txt')) {
+      int numFailed = 0
+      int total = 0
+      int ran = 0
       echo "${f}"
+      summary += "${f}\n"
       File resFile = new File ("${f}")
       String segment = resFile.getPath().split("/")[-1];
-      //def data = readFile(file: "${f}")
       final String content = readFile(file: "${f}")
       final List myKeys = extractLines(content)
-      //println(data)
-      //echo data
-      //data.each {echo "hello"}
       myKeys.each {String line -> 
           if (line.contains("ARCH_tmp")){
                     //.append(segment.padRight(30) + line.padRight(14))
@@ -65,9 +62,10 @@ void rc_analyze(message){
                         }
                 }
             }
-        def summary = String.format("Total: %s\nPassed: %s\nFailed: %s", total, ran, numFailed)
+        def result = String.format("Total: %s\nPassed: %s\nFailed: %s", total, ran, numFailed)
         //println(summary)
-        echo summary
+        summary += "${result}\n"
+        //echo result
         //reportFile.append(String.format("Total: %s\nPassed: %s\nFailed: %s", total, ran, numFailed))
    }
 }
