@@ -8,6 +8,11 @@
 //       echo "IT Is a Prime: ${count}"
 //   }
 // }
+class Result {
+     String failed
+     String total
+     String report
+}
 
 def helloMe(message) {
     echo "HELLO WORLD ${message}"
@@ -29,7 +34,7 @@ List extractLines(final String content) {
     return myKeys
 }
 
-String rc_analyze(message){
+Result rc_analyze(message){
     //echo "Release Candidate: ${message}"
     String summary = ""
     for (f in findFiles(glob: '**/*results*.txt')) {
@@ -69,7 +74,7 @@ String rc_analyze(message){
         //echo result
         //reportFile.append(String.format("Total: %s\nPassed: %s\nFailed: %s", total, ran, numFailed))
    }
-   return summary
+   return new Result(failed: numFailed, total: total, report: summary)
 }
 
 def call(int buildNumber) {
