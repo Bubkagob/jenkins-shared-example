@@ -1,12 +1,13 @@
-@Grab('org.apache.commons:commons-math3:3.4.1')
-import org.apache.commons.math3.primes.Primes
-void parallelize(int count) {
-  if (!Primes.isPrime(count)) {
-    error "${count} was not prime"
-  }else{
-      echo "IT Is a Prime: ${count}"
-  }
-}
+// @Grab('org.apache.commons:commons-math3:3.4.1')
+// import org.apache.commons.math3.primes.Primes
+
+// void parallelize(int count) {
+//   if (!Primes.isPrime(count)) {
+//     error "${count} was not prime"
+//   }else{
+//       echo "IT Is a Prime: ${count}"
+//   }
+// }
 
 def helloMe(message) {
     echo "HELLO WORLD ${message}"
@@ -29,13 +30,13 @@ List extractLines(final String content) {
 }
 
 String rc_analyze(message){
-    echo "Release Candidate: ${message}"
+    //echo "Release Candidate: ${message}"
     String summary = ""
     for (f in findFiles(glob: '**/*results*.txt')) {
       int numFailed = 0
       int total = 0
       int ran = 0
-      echo "${f}"
+      //echo "${f}"
       summary += "${f}\n"
       File resFile = new File ("${f}")
       String segment = resFile.getPath().split("/")[-1];
