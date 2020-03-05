@@ -19,6 +19,14 @@ def warning(message) {
     echo "WARNING: ${message}"
 }
 
+List extractLines(final String content) {
+    List myKeys = []
+    content.eachLine { line -> 
+        myKeys << line
+    }
+    return myKeys
+}
+
 void rc_analyze(message){
     echo "Release Candidate: ${message}"
     
@@ -29,11 +37,13 @@ void rc_analyze(message){
       echo "${f}"
       File resFile = new File ("${f}")
       String segment = resFile.getPath().split("/")[-1];
-      def data = readFile(file: "${f}")
+      //def data = readFile(file: "${f}")
+      final String content = readFile(file: "${f}")
+      final List myKeys = extractLines(content)
       //println(data)
       //echo data
       //data.each {echo "hello"}
-      data.each {String line -> 
+      myKeys.each {String line -> 
           if (line.contains("ARCH_tmp")){
                     //.append(segment.padRight(30) + line.padRight(14))
                     //print(segment.padRight(30) + line.padRight(14));
