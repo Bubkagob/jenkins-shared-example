@@ -19,6 +19,7 @@ def warning(message) {
     echo "WARNING: ${message}"
 }
 
+@NonCPS
 List extractLines(final String content) {
     List myKeys = []
     content.eachLine { line -> 
