@@ -57,6 +57,7 @@ void rc_analyze(message){
         //reportFile.append(String.format("Total: %s\nPassed: %s\nFailed: %s", total, ran, numFailed))
    // }
 }
+}
 
 def call(int buildNumber) {
   if (buildNumber % 2 == 0) {
