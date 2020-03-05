@@ -37,9 +37,12 @@ List extractLines(final String content) {
 Result rc_analyze(message){
     //echo "Release Candidate: ${message}"
     String summary = ""
+    int total_failed = 0
+    int total_all = 0
+    int total_ran = 0
     for (f in findFiles(glob: '**/*results*.txt')) {
-      int numFailed = 0
-      int total = 0
+      int failed = 0
+      int all = 0
       int ran = 0
       //echo "${f}"
       summary += "${f}\n"
@@ -62,19 +65,21 @@ Result rc_analyze(message){
                             //printf("%s/%sOK\n", resultList[0].padLeft(4), resultList[1].padRight(4))
                         }
                         else{
-                            numFailed ++
+                            failed ++
                             //reportFile.append(resultList[0].padLeft(4)+"/"+resultList[1].padRight(4)+"Failed\n")
                             //printf("%s/%sFailed\n", resultList[0].padLeft(4), resultList[1].padRight(4))
                         }
                 }
             }
-        def result = String.format("Total: %s\nPassed: %s\nFailed: %s", total, ran, numFailed)
+        total_all += all
+        total_failed += failed
+        def result = String.format("Total: %s\nPassed: %s\nFailed: %s", all, ran, failed)
         //println(summary)
         summary += "${result}\n"
         //echo result
-        //reportFile.append(String.format("Total: %s\nPassed: %s\nFailed: %s", total, ran, numFailed))
+        //reportFile.append(String.format("Total: %s\nPassed: %s\nFailed: %s", total, ran, failed))
    }
-   return new Result(failed: numFailed, total: total, report: summary)
+   return new Result(failed: total_failed, total: total_all, report: summary)
 }
 
 def call(int buildNumber) {
