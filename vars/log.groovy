@@ -42,7 +42,7 @@ def readDir(project_path) {
  echo project_path
   dlist = []
 	flist = []
-	new File(project_path + "/READ.md").eachDir {dlist << it.name }
+	new File(".").eachDir{dlist << it.name }
 	dlist.sort()
 
 
