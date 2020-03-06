@@ -36,11 +36,27 @@ List extractLines(final String content) {
 }
 
 
+// @NonCPS
+// def readDir()
+// {
+
+//   dlist = []
+// 	flist = []
+// 	new File(".").eachDir {dlist << it.name }
+// 	dlist.sort()
+
+
+
+//   dlist.each{
+//     echo it
+//   }
+
+// }
+
 @NonCPS
 def readDir()
 {
-new File("${workspace}\\").eachDir() { dir -> echo dir}
-
+  new File("${workspace}/READ.md").eachDir() {dir -> echo dir}
 }
 
 Result rc_analyze(message){
