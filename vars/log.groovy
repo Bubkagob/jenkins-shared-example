@@ -36,28 +36,28 @@ List extractLines(final String content) {
 }
 
 
-// @NonCPS
-// def readDir()
-// {
-
-//   dlist = []
-// 	flist = []
-// 	new File(".").eachDir {dlist << it.name }
-// 	dlist.sort()
-
-
-
-//   dlist.each{
-//     echo it
-//   }
-
-// }
-
 @NonCPS
 def readDir()
 {
-  new File("/var/jenkins_home/").eachDir() {dir -> echo dir}
+
+  dlist = []
+	flist = []
+	new File("/var/jenkins_home/").eachDir {dlist << it.name }
+	dlist.sort()
+
+
+
+  dlist.each{
+    echo it
+  }
+
 }
+
+// @NonCPS
+// def readDir()
+// {
+//   new File("/var/jenkins_home/").eachDir() {dir -> echo dir}
+// }
 
 Result rc_analyze(message){
     //echo "Release Candidate: ${message}"
