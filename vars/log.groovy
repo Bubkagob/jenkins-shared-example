@@ -8,8 +8,7 @@
 //       echo "IT Is a Prime: ${count}"
 //   }
 // }
-import groovy.io.*
-
+import groovy.io.FileType
 class Result {
      String failed
      String total
@@ -38,16 +37,19 @@ List extractLines(final String content) {
 
 
 @NonCPS
-void readDir()
+def readDir()
 {
-  dlist = []
-	new File(".").eachDir{
-    dlist << it.name
-    }
-	dlist.sort()
-  dlist.each{
-    echo it
+  def list = []
+
+  def dir = new File(".")
+  dir.eachFileRecurse(FileType.FILES) { file ->
+    echo file.name
   }
+
+  list.each {
+    println it.path 
+  }
+
 }
 
 Result rc_analyze(message){
