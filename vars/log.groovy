@@ -8,7 +8,7 @@
 //       echo "IT Is a Prime: ${count}"
 //   }
 // }
-import groovy.io.FileType
+import static groovy.io.FileType.DIRECTORIES
 class Result {
      String failed
      String total
@@ -39,17 +39,9 @@ List extractLines(final String content) {
 @NonCPS
 def readDir()
 {
-  def list = []
-
-  def dir = new File(".")
-  dir.eachFileRecurse(FileType.FILES) { file ->
+  new File("${env.WORKSPACE}/rename/**").eachFileRecurse(DIRECTORIES){ file ->
     echo file.name
   }
-
-  list.each {
-    println it.path 
-  }
-
 }
 
 Result rc_analyze(message){
