@@ -50,11 +50,11 @@ def prepareBuildDir(){
   for (f in findFiles(glob: "**/regression_default_*.yaml")){
     echo "${f.path}"
     String segment = "${f.path}".split("/")[-1]
-    String segment2 = "${f.path}".split("/")[1]
+    String build_dir = "build/"+"${f.path}".split("/")[1]
     echo segment
-    echo "${segment2}"
-    sh "[ -d ${segment2} ] && echo OK || mkdir ${segment2}"
-    scenariosMap.put(segment2, "${f.path}")
+    echo "${build_dir}"
+    sh "[ -d ${build_dir} ] && echo OK || mkdir ${build_dir}"
+    scenariosMap.put(build_dir, "${f.path}")
   }
   scenariosMap.values().each{
     echo "VALUE = "
