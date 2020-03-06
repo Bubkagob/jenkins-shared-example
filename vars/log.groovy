@@ -37,8 +37,10 @@ List extractLines(final String content) {
 
 
 def getFiles(){
+  scenarios_list = []
   for (f in findFiles(glob: "**/rename/scr4/**/regression_default_*.yaml")){
     echo "${f}"
+    scenarios_list << "${f}"
   }
 }
 
