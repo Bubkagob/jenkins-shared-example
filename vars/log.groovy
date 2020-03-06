@@ -52,7 +52,7 @@ def listMe(){
     String segment2 = "${f.path}".split("/")[1]
     echo segment
     echo "${segment2}"
-    sh "[ -d ${segment2} ] || mkdir ${segment2}"
+    sh "[ -d ${segment2} ]&& echo OK || mkdir ${segment2}"
   }
 }
 
