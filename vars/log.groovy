@@ -49,7 +49,9 @@ def listMe(){
   for (f in findFiles(glob: "**/regression_default_*.yaml")){
     echo "${f.path}"
     String segment = "${f.path}".split("/")[-1]
+    String segment2 = "${f.path}".split("/")[1]
     echo segment
+    echo segment2
   }
 }
 
