@@ -42,7 +42,7 @@ def readDir()
 
   dlist = []
 	flist = []
-	new File("${workspace}/rename").eachDir {dlist << it.name }
+	new File("${workspace}").eachDir {dlist << it.name }
 	dlist.sort()
 
 
