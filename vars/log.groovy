@@ -37,7 +37,7 @@ List extractLines(final String content) {
 
 
 def getFiles(){
-  for (f in findFiles(glob: "**/rename/scr4/**/*.yaml")){
+  for (f in findFiles(glob: "**/rename/scr4/**/regression_default_*.yaml")){
     echo "${f}"
   }
 }
