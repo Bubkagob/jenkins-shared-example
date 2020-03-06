@@ -37,19 +37,19 @@ List extractLines(final String content) {
 
 
 @NonCPS
-def readDir()
-{
+def readDir(project_path) {
+ echo "Prject path"
+ echo project_path
+  // dlist = []
+	// flist = []
+	// new File("/var/jenkins_home/").eachDir {dlist << it.name }
+	// dlist.sort()
 
-  dlist = []
-	flist = []
-	new File("/var/jenkins_home/").eachDir {dlist << it.name }
-	dlist.sort()
 
 
-
-  dlist.each{
-    echo it
-  }
+  // dlist.each{
+  //   echo it
+  // }
 
 }
 
