@@ -36,9 +36,9 @@ List extractLines(final String content) {
 }
 
 
-def getFiles(){
+def getFiles(subdir){
   scenarios_list = []
-  for (f in findFiles(glob: "**/rename/scr4/**/regression_default_*.yaml")){
+  for (f in findFiles(glob: "**/rename/"+subdir+"/**/regression_default_*.yaml")){
     echo "${f}"
     echo "pushing"
     scenarios_list << "${f}"
@@ -50,17 +50,13 @@ def getFiles(){
 def readDir(project_path) {
   echo "Prject path"
   echo project_path
-  def scenarios = getFiles()
-  echo scenarios
+  //def scenarios = getFiles()
   dlist = []
-  flist = []
 	new File(project_path + "/rename").eachDir{dlist << it.name }
 	dlist.sort()
   dlist.each{
     echo it
-    // for (f in getFiles()) {
-    //   echo f
-    // }
+    def scenarios = getFiles(it)
   }
 }
 
