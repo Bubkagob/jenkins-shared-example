@@ -45,15 +45,22 @@ def getFiles(subdir){
   }
 }
 
-def listMe(){
+def prepareBuildDir(){
+  def scenariosMap = [:]
   for (f in findFiles(glob: "**/regression_default_*.yaml")){
     echo "${f.path}"
     String segment = "${f.path}".split("/")[-1]
     String segment2 = "${f.path}".split("/")[1]
     echo segment
     echo "${segment2}"
-    sh "[ -d ${segment2} ]&& echo OK || mkdir ${segment2}"
+    sh "[ -d ${segment2} ] && echo OK || mkdir ${segment2}"
+    scenariosMap.put(segment2, "${f.path}")
   }
+  scenariosMap.values().each{
+    echo "VALUE = "
+    echo it
+  }
+  return scenariosMap
 }
 
 def listMeOld(){
@@ -66,7 +73,7 @@ def listMeOld(){
     node("beta") {
       stage("Even Stage ${segment2}"){
         echo "${segment2}"
-        sh "[[ -d ${segment2} ]] || mkdir ${segment2}"
+        sh "[ -d ${segment2} ] || mkdir ${segment2}"
       }
     }
     
