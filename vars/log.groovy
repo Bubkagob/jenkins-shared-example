@@ -42,7 +42,7 @@ def readDir(project_path) {
  echo project_path
   dlist = []
 	flist = []
-	new File(project_path + "/rename").eachDir {dlist << it.name }
+	new File(project_path + "/rename/.").eachDir {dlist << it.name }
 	dlist.sort()
 
 
@@ -107,10 +107,15 @@ Result rc_analyze(message){
    return new Result(failed: total_failed, total: total_all, report: summary)
 }
 
-def run_multiple(int numTests){
-  numTests.times {
+def runMultiple(int numTests){
+  numTests.times{
     echo "${it}"
     println "Hello World ${it}"
+    stage("Even Stage ${it}"){
+      steps {
+        echo "The build number is ${it}"
+      }
+    }
   }
 }
 
