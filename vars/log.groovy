@@ -8,7 +8,7 @@
 //       echo "IT Is a Prime: ${count}"
 //   }
 // }
-import groovy.io.FileType
+import groovy.io.*
 class Result {
      String failed
      String total
