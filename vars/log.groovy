@@ -53,7 +53,7 @@ def prepareBuildDir(){
     String build_dir = "build/"+"${f.path}".split("/")[1]
     echo segment
     echo "${build_dir}"
-    sh "[ -d ${build_dir} ] && echo OK || mkdir ${build_dir}"
+    sh "[ -d ${build_dir} ] && echo OK || mkdir -p ${build_dir}"
     scenariosMap.put(build_dir, "${f.path}")
   }
   scenariosMap.values().each{
