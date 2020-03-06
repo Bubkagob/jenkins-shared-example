@@ -36,7 +36,12 @@ List extractLines(final String content) {
 }
 
 
-//@NonCPS
+def getFiles(){
+  return findFiles(glob: "rename/"+"${f}"+"/**/*.yaml")
+}
+
+
+@NonCPS
 def readDir(project_path) {
  echo "Prject path"
  echo project_path
@@ -46,7 +51,7 @@ def readDir(project_path) {
 	dlist.sort()
   dlist.each{
     echo it
-    for (f in findFiles(glob: "rename/"+"${f}"+"/**/*.yaml")) {
+    for (f in getFiles()) {
       echo f
     }
   }
