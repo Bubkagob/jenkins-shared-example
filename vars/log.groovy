@@ -34,6 +34,21 @@ List extractLines(final String content) {
     return myKeys
 }
 
+@NonCPS
+def readDir()
+{
+    def  dirsl = [] 
+    new File("${workspace}").eachDir()
+    {
+        dirs -> println dirs.getName() 
+        if (!dirs.getName().startsWith('.')) {
+            echo dirs.getName()
+            dirsl.add(dirs.getName())
+        }
+    }
+    dirsl
+}
+
 Result rc_analyze(message){
     //echo "Release Candidate: ${message}"
     String summary = ""
