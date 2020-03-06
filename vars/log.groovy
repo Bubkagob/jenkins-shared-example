@@ -45,18 +45,22 @@ def getFiles(subdir){
   }
 }
 
+def listMe(){
+  for (f in findFiles(glob: "**/regression_default_*.yaml")){
+    echo "${f.directory}"
+  }
+}
+
 
 @NonCPS
 def readDir(project_path) {
   echo "Prject path"
   echo project_path
-  //def scenarios = getFiles()
   dlist = []
 	new File(project_path + "/rename").eachDir{dlist << it.name }
 	dlist.sort()
   dlist.each{
     echo it
-    def scenarios = getFiles(it)
   }
 }
 
