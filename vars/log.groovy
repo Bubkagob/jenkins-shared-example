@@ -56,7 +56,7 @@ List extractLines(final String content) {
 @NonCPS
 def readDir()
 {
-  new File("${workspace}/READ.md").eachDir() {dir -> echo dir}
+  new File("/var/jenkins_home/").eachDir() {dir -> echo dir}
 }
 
 Result rc_analyze(message){
