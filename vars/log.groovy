@@ -53,6 +53,9 @@ def listMe(){
     echo segment
     echo segment2
     stage("Even Stage ${segment2}"){
+      agent{
+        label "beta"
+      }
         echo "${segment2}"
         sh "mkdir ${segment2}"
     }
