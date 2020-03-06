@@ -39,7 +39,7 @@ List extractLines(final String content) {
 @NonCPS
 def readDir()
 {
-  new File("${env.WORKSPACE}/rename").eachFileRecurse (DIRECTORIES) { file ->
+  new File("${env.WORKSPACE}/rename/**").eachFileRecurse(DIRECTORIES){ file ->
     echo file.name
   }
 }
