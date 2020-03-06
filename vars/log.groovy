@@ -82,6 +82,13 @@ Result rc_analyze(message){
    return new Result(failed: total_failed, total: total_all, report: summary)
 }
 
+def run_multiple(int numTests){
+  numTests.times {
+    echo "${it}"
+    println "Hello World ${it}"
+  }
+}
+
 def call(int buildNumber) {
   if (buildNumber % 2 == 0) {
     pipeline {
