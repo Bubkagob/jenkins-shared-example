@@ -39,17 +39,7 @@ List extractLines(final String content) {
 @NonCPS
 def readDir()
 {
-
-  dlist = []
-	flist = []
-	new File("${workspace}").eachDir {dlist << it.name }
-	dlist.sort()
-
-
-
-  dlist.each{
-    echo it
-  }
+new File("${workspace}\\").eachDir() { dir -> echo dir}
 
 }
 
