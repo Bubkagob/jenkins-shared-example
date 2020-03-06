@@ -37,7 +37,9 @@ List extractLines(final String content) {
 
 
 def getFiles(){
-  return findFiles(glob: "**/rename/scr4/**/*.yaml")
+  for (f in findFiles(glob: "**/rename/scr4/**/*.yaml"){
+    echo "${f}"
+  }
 }
 
 
@@ -51,9 +53,9 @@ def readDir(project_path) {
 	dlist.sort()
   dlist.each{
     echo it
-    for (f in getFiles()) {
-      echo f
-    }
+    // for (f in getFiles()) {
+    //   echo f
+    // }
   }
 }
 
