@@ -44,13 +44,12 @@ def readDir(project_path) {
 	flist = []
 	new File(project_path + "/rename").eachDir{dlist << it.name }
 	dlist.sort()
-
-
-
   dlist.each{
     echo it
+    for (f in findFiles(glob: "rename/"+"${f}"+"/**/*.yaml")) {
+      echo f
+    }
   }
-
 }
 
 // @NonCPS
