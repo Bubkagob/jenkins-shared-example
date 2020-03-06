@@ -51,11 +51,22 @@ def listMe(){
     String segment = "${f.path}".split("/")[-1]
     String segment2 = "${f.path}".split("/")[1]
     echo segment
+    echo "${segment2}"
+    sh "[[ -d ${segment2} ]] || mkdir ${segment2}"
+  }
+}
+
+def listMeOld(){
+  for (f in findFiles(glob: "**/regression_default_*.yaml")){
+    echo "${f.path}"
+    String segment = "${f.path}".split("/")[-1]
+    String segment2 = "${f.path}".split("/")[1]
+    echo segment
     echo segment2
     node("beta") {
       stage("Even Stage ${segment2}"){
         echo "${segment2}"
-        sh "mkdir ${segment2}"
+        sh "[[ -d ${segment2} ]] || mkdir ${segment2}"
       }
     }
     
