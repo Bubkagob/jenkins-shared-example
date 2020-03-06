@@ -52,13 +52,13 @@ def listMe(){
     String segment2 = "${f.path}".split("/")[1]
     echo segment
     echo segment2
-    stage("Even Stage ${segment2}"){
-      agent{
-        label "beta"
-      }
+    node("beta") {
+      stage("Even Stage ${segment2}"){
         echo "${segment2}"
         sh "mkdir ${segment2}"
+      }
     }
+    
   }
 }
 
