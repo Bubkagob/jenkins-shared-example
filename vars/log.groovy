@@ -113,9 +113,7 @@ def runMultiple(int numTests){
     println "Hello World ${it}"
     node {
       stage("Even Stage ${it}"){
-        steps {
-          echo "The build number is ${it}"
-        }
+        echo "${it}"
       }
     }
   }
