@@ -45,10 +45,12 @@ def getFiles(){
 
 @NonCPS
 def readDir(project_path) {
- echo "Prject path"
- echo project_path
+  echo "Prject path"
+  echo project_path
+  def scenarios = getFiles()
+  echo scenarios
   dlist = []
-	flist = []
+  flist = []
 	new File(project_path + "/rename").eachDir{dlist << it.name }
 	dlist.sort()
   dlist.each{
