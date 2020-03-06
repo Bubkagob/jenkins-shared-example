@@ -36,7 +36,7 @@ List extractLines(final String content) {
 }
 
 
-//@NonCPS
+@NonCPS
 def readDir(project_path) {
  echo "Prject path"
  echo project_path
