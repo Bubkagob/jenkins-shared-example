@@ -41,7 +41,7 @@ def readDir()
 {
   def list = []
 
-  def dir = new File("${env.WORKSPACE}/rename/")
+  def dir = new File("${env.WORKSPACE}/temp/")
   dir.eachFileRecurse(FileType.FILES) { file ->
     echo file
   }
