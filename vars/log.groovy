@@ -48,7 +48,7 @@ def readDir()
 
 
   dlist.each{
-    echo it.path 
+    echo it
   }
 
 }
