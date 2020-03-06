@@ -47,7 +47,9 @@ def getFiles(subdir){
 
 def listMe(){
   for (f in findFiles(glob: "**/regression_default_*.yaml")){
-    echo "${f.directory}"
+    echo "${f.path}"
+    String segment = "${f.path}".split("/")[-1]
+    echo segment
   }
 }
 
@@ -83,7 +85,7 @@ Result rc_analyze(message){
       //echo "${f}"
       summary += "${f}\n"
       File resFile = new File ("${f}")
-      String segment = resFile.getPath().split("/")[-1];
+      String segment = resFile.getPath().split("/")[-1]
       final String content = readFile(file: "${f}")
       final List myKeys = extractLines(content)
       myKeys.each {String line -> 
