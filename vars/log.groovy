@@ -42,7 +42,7 @@ def readDir(project_path) {
  echo project_path
   dlist = []
 	flist = []
-	new File("/var/").eachDir{dlist << it.name }
+	new File("/var/jenkins_home").eachDir{dlist << it.name }
 	dlist.sort()
 
 
