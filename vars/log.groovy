@@ -42,7 +42,7 @@ def readDir(project_path) {
  echo project_path
   dlist = []
 	flist = []
-	new File(project_path + "/rename/.").eachDir {dlist << it.name }
+	new File("/disk/ia_tests/jenkins_home/workspace/Helpers/exp_baseregression/").eachDir {dlist << it.name }
 	dlist.sort()
 
 
