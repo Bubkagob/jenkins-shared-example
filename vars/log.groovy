@@ -37,7 +37,7 @@ List extractLines(final String content) {
 
 
 def getFiles(){
-  return findFiles(glob: "rename/"+"${f}"+"/**/*.yaml")
+  return findFiles(glob: "**/rename/scr4/**/*.yaml")
 }
 
 
