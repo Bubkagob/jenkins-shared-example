@@ -63,7 +63,7 @@ def prepareBuildDir(){
     echo scenario
     echo launcherPath
     echo "${build_dir}"
-    echo 
+    echo folder
     sh "[ -d ${build_dir} ] && echo OK || mkdir -p ${build_dir}"
     scenariosMap.put(build_dir, "${f.path}")
   }
