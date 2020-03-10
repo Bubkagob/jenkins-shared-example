@@ -56,9 +56,10 @@ def prepareBuildDir(){
   for (f in findFiles(glob: "**/regression_default_*.yaml")){
     echo "${f.path}"
     String scenario = "${f.path}".split("/")[-1]
+    String tests = "${f.path}".split("/")[-2]
     String folder = "${f.path}".split("/")[1]
     String build_dir = "build/"+"${f.path}".split("/")[1]
-    String launcherPath = "${f.path}".split(scenario)[0]
+    String launcherPath = "${f.path}".split(tests)[0]
     // rename
     echo scenario
     echo launcherPath
