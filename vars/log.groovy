@@ -15,6 +15,12 @@ class Result {
      String report
 }
 
+class LaunchConf {
+     String scenarioFile
+     String buildDir
+     String launcher
+}
+
 def helloMe(message) {
     echo "HELLO WORLD ${message}"
 }
@@ -49,16 +55,17 @@ def prepareBuildDir(){
   def scenariosMap = [:]
   for (f in findFiles(glob: "**/regression_default_*.yaml")){
     echo "${f.path}"
-    String segment = "${f.path}".split("/")[-1]
+    String scenario = "${f.path}".split("/")[-1]
+    String folder = "${f.path}".split("/")[1]
     String build_dir = "build/"+"${f.path}".split("/")[1]
-    echo segment
+    String launcherPath = "${f.path}".split(folder)[0]
+    // rename
+    echo scenario
+    echo launcherPath
     echo "${build_dir}"
+    echo 
     sh "[ -d ${build_dir} ] && echo OK || mkdir -p ${build_dir}"
     scenariosMap.put(build_dir, "${f.path}")
-  }
-  scenariosMap.values().each{
-    echo "VALUE = "
-    echo it
   }
   return scenariosMap
 }
