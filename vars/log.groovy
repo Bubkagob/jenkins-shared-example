@@ -59,10 +59,10 @@ def prepareBuildDir(){
     String tests = "${f.path}".split("/")[-3]
     String folder = "${f.path}".split("/")[1]
     String build_dir = "build/"+"${f.path}".split("/")[1]
-    String launcherPath = "${f.path}".split(tests)[0] + "/framework/launcher/launch.pl"
+    String launcherPath = "${f.path}".split(tests)[0] + "framework/launcher/launch.pl"
     // rename
     echo scenario
-    echo launcherPath
+    echo "LAUNCHER: " + launcherPath
     echo "${build_dir}"
     echo folder
     sh "[ -d ${build_dir} ] && echo OK || mkdir -p ${build_dir}"
