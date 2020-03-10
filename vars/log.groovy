@@ -17,7 +17,6 @@ class Result {
 
 class LaunchConf {
      String scenarioFile
-     String buildDir
      String launcher
 }
 
@@ -64,10 +63,10 @@ def prepareBuildDir(){
     echo "LAUNCHER: " + launcherPath
     echo "BUILDDIR: " +"${build_dir}"
     sh "[ -d ${build_dir} ] && echo OK || mkdir -p ${build_dir}"
-    scenariosMap.put(build_dir, "${f.path}")
+    scenariosMap.put(build_dir, new LaunchConf(scenarioFile: "../../${f.path}", launcher: launcherPath))
   }
-  return new LaunchConf(scenarioFile: "../../${f.path}", buildDir: "${build_dir}", launcher: launcherPath)
-  //return scenariosMap
+//return new LaunchConf(scenarioFile: "../../${f.path}", launcher: launcherPath)
+  return scenariosMap
 }
 
 def listMeOld(){
