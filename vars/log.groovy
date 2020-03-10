@@ -66,7 +66,8 @@ def prepareBuildDir(){
     sh "[ -d ${build_dir} ] && echo OK || mkdir -p ${build_dir}"
     scenariosMap.put(build_dir, "${f.path}")
   }
-  return scenariosMap
+  return new LaunchConf(scenarioFile: "../../${f.path}", buildDir: "${build_dir}", launcher: launcherPath)
+  //return scenariosMap
 }
 
 def listMeOld(){
