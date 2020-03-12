@@ -25,6 +25,7 @@ import org.apache.http.entity.ContentType;
 /*
         configuration
 */
+@NonCPS
 def createRedmineReport(){
         def uri = "http://192.168.1.100:8080/"
         def apiAccessKey = "0c86aa59eeed3aca23b0973554deec18ebbd4182"
@@ -54,6 +55,8 @@ def createRedmineReport(){
         createdIssue.setStatusId(3)
         issue_manager.update(createdIssue)
 
-        //File file = new File("log.json");
-        //attachmentManager.addAttachmentToIssue(createdIssue.getId(), file, ContentType.TEXT_PLAIN.getMimeType());
+        File file = new File("reportlib.groovy");
+        attachmentManager.addAttachmentToIssue(createdIssue.getId(), file, ContentType.TEXT_PLAIN.getMimeType());
 }
+
+createRedmineReport()
