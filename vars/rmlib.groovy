@@ -1,3 +1,14 @@
+@Grapes([
+        @Grab(group = 'com.taskadapter', module = 'redmine-java-api', version = '3.0.0'),
+        @Grab(group = 'org.slf4j', module = 'slf4j-jdk14', version = '1.7.1'),
+        @Grab(group = 'org.apache.httpcomponents', module = 'httpclient', version = '4.5.12'),
+        @Grab(group = 'org.easytesting', module = 'fest-assert', version = '1.4'),
+        @Grab(group = 'org.json', module = 'json', version = '20090211'),
+        @Grab(group = 'org.slf4j', module = 'slf4j-api', version = '1.7.1'),
+        @Grab(group = 'org.apache.httpcomponents', module = 'httpcore', version = '4.4.13'),
+        @Grab(group = 'junit', module = 'junit', version = '4.10')
+])
+
 import com.taskadapter.redmineapi.RedmineManager
 import com.taskadapter.redmineapi.RedmineManagerFactory
 import com.taskadapter.redmineapi.bean.Project
@@ -9,16 +20,7 @@ import com.taskadapter.redmineapi.bean.VersionFactory
 import groovy.json.JsonSlurper
 import org.apache.http.entity.ContentType;
 
-@Grapes([
-        @Grab(group = 'com.taskadapter', module = 'redmine-java-api', version = '3.0.0'),
-        @Grab(group = 'org.slf4j', module = 'slf4j-jdk14', version = '1.7.1'),
-        @Grab(group = 'org.apache.httpcomponents', module = 'httpclient', version = '4.5.12'),
-        @Grab(group = 'org.easytesting', module = 'fest-assert', version = '1.4'),
-        @Grab(group = 'org.json', module = 'json', version = '20090211'),
-        @Grab(group = 'org.slf4j', module = 'slf4j-api', version = '1.7.1'),
-        @Grab(group = 'org.apache.httpcomponents', module = 'httpcore', version = '4.4.13'),
-        @Grab(group = 'junit', module = 'junit', version = '4.10')
-])
+
 
 /*
         configuration
