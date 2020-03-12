@@ -1,11 +1,22 @@
+// @Grapes([
+//         @Grab(group = 'com.taskadapter', module = 'redmine-java-api', version = '3.0.1'),
+//         @Grab(group = 'org.slf4j', module = 'slf4j-jdk14', version = '1.7.1'),
+//         @Grab(group = 'org.apache.httpcomponents', module = 'httpclient', version = '4.5.12'),
+//         @Grab(group = 'org.easytesting', module = 'fest-assert', version = '1.4'),
+//         @Grab(group = 'org.json', module = 'json', version = '20190722'),
+//         @Grab(group = 'org.slf4j', module = 'slf4j-api', version = '1.7.30'),
+//         //@Grab(group = 'org.apache.httpcomponents', module = 'httpcore', version = '4.4.11'),
+//         @Grab(group = 'junit', module = 'junit', version = '4.10')
+// ])
+
 @Grapes([
-        @Grab(group = 'com.taskadapter', module = 'redmine-java-api', version = '3.0.1'),
+        @Grab(group = 'com.taskadapter', module = 'redmine-java-api', version = '2.2.0'),
         @Grab(group = 'org.slf4j', module = 'slf4j-jdk14', version = '1.7.1'),
-        @Grab(group = 'org.apache.httpcomponents', module = 'httpclient', version = '4.5.12'),
+        @Grab(group = 'org.apache.httpcomponents', module = 'httpclient', version = '4.2'),
         @Grab(group = 'org.easytesting', module = 'fest-assert', version = '1.4'),
-        @Grab(group = 'org.json', module = 'json', version = '20190722'),
-        @Grab(group = 'org.slf4j', module = 'slf4j-api', version = '1.7.30'),
-        //@Grab(group = 'org.apache.httpcomponents', module = 'httpcore', version = '4.4.11'),
+        @Grab(group = 'org.json', module = 'json', version = '20090211'),
+        @Grab(group = 'org.slf4j', module = 'slf4j-api', version = '1.7.1'),
+        @Grab(group = 'org.apache.httpcomponents', module = 'httpcore', version = '4.2'),
         @Grab(group = 'junit', module = 'junit', version = '4.10')
 ])
 
@@ -44,7 +55,7 @@ def createRedmineReport(){
         Issue issue = new Issue()
         issue.setSubject("Weekend regression")
         issue.setDescription("weekend regression task")
-        issue.setAssigneeId(authorId)
+        //issue.setAssigneeId(authorId)
         issue.setParentId(parentId)
         issue.setTracker(tracker)
         issue.setProjectId(project.getId())
