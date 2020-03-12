@@ -32,8 +32,9 @@ def createRedmineReport(){
         def parentId = 3699
         def authorId = 47
 
-        // Create an issue
-        RedmineManager manager = RedmineManagerFactory.createWithApiKey(uri, apiAccessKey);
+        // Create an issue .createWithUserAuth(redmineURI, login, password);
+        //RedmineManager manager = RedmineManagerFactory.createWithApiKey(uri, apiAccessKey);
+        RedmineManager manager = RedmineManagerFactory.createWithUserAuth(uri, "ia-sc", "Redmine665532!");
         def projectManager = manager.getProjectManager();
         def attachmentManager = manager.getAttachmentManager();
         def issue_manager = manager.getIssueManager();
