@@ -69,24 +69,6 @@ def prepareBuildDir(){
   return scenariosMap
 }
 
-def listMeOld(){
-  for (f in findFiles(glob: "**/regression_default_*.yaml")){
-    echo "${f.path}"
-    String segment = "${f.path}".split("/")[-1]
-    String segment2 = "${f.path}".split("/")[1]
-    echo segment
-    echo segment2
-    node("beta") {
-      stage("Even Stage ${segment2}"){
-        echo "${segment2}"
-        sh "[ -d ${segment2} ] || mkdir ${segment2}"
-      }
-    }
-    
-  }
-}
-
-
 @NonCPS
 def readDir(project_path) {
   echo "Prject path"
@@ -145,10 +127,7 @@ Result rc_analyze(message){
         total_all += all
         total_failed += failed
         def result = String.format("Total: %s\nPassed: %s\nFailed: %s", all, ran, failed)
-        //println(summary)
         summary += "${result}\n"
-        //echo result
-        //reportFile.append(String.format("Total: %s\nPassed: %s\nFailed: %s", total, ran, failed))
    }
    return new Result(failed: total_failed, total: total_all, report: summary)
 }
