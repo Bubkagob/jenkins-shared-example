@@ -178,7 +178,7 @@ def generateHTMLreport(build_dir){
                     markup.th(title:"Field #2", class:"header", "Failed tests")
                 } // tr
             ) // thead
-            markup.tbody(
+            markup.tbody{
             def count = 0
             markup.tr(
                 failedMap.each {
@@ -211,7 +211,7 @@ def generateHTMLreport(build_dir){
                     markup.td(title:"Field #2", 'class':'header', "${count} / ${total}")
                 }
 
-            ) //tbody
+            } //tbody
             // markup.tr(
             //     markup.td(class:"row", "hello world!")  
             // )
