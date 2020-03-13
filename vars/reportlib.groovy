@@ -199,7 +199,7 @@ def generateHTMLreport(build_dir){
                         tot_failed = flist.size()
                         count += tot_failed
                         markup.td(title:"Field #1", 'class':'row', "Total")
-                        markup.td(title:"Field #2", 'class':'row', "${tot_failed})
+                        markup.td(title:"Field #2", 'class':'row', "${tot_failed}")
                     }
                 }
             ) // tr
