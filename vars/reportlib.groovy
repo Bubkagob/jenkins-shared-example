@@ -31,7 +31,6 @@ def getSummaryMap(build_dir){
     return resultMap
 }
 
-@NonCPS
 def getFailedReport(build_dir){
     def resultMap = getSummaryMap(build_dir)
     def failList = []
@@ -53,7 +52,7 @@ def getFailedReport(build_dir){
     return [failedReportMap, totalCounter]
 }
 
-@NonCPS
+
 def generateTextReport(build_dir){
     def newFile = new File("yourFilePath.txt")
     def failedMap = getFailedReport(build_dir)[0]
