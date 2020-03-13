@@ -178,6 +178,40 @@ def generateHTMLreport(build_dir){
                     markup.th(title:"Field #2", class:"header", "Failed tests")
                 } // tr
             ) // thead
+            markup.tbody(
+            def count = 0
+            markup.tr(
+                failedMap.each {
+                conf, flist ->
+                    markup.tr {
+                        markup.th(title:"Field #1", 'class':'first', conf)
+                        markup.td(title:"Field #2", 'class':'row',{  
+                            markup.ul(
+                                flist.each{
+                                    test_name ->
+                                    markup.li(align:"right", test_name)
+                                    }
+                                )
+                            }
+                        )
+                    }
+                    markup.tr {
+                        count += flist.size()
+                        markup.td(title:"Field #1", 'class':'row', "Total")
+                        markup.td(title:"Field #2", 'class':'row', flist.size())
+                    }
+                }
+            ) // tr
+            markup.tr{
+                    markup.td(title:"Field #1", 'class':'header', "Passed")
+                    markup.td(title:"Field #2", 'class':'header', "${total - count} / ${total}")
+                }
+            markup.tr{
+                    markup.td(title:"Field #1", 'class':'header', "Failed")
+                    markup.td(title:"Field #2", 'class':'header', "${count} / ${total}")
+                }
+
+            ) //tbody
             // markup.tr(
             //     markup.td(class:"row", "hello world!")  
             // )
