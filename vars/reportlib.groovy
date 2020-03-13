@@ -57,23 +57,16 @@ def generateTextReport(build_dir){
     def testAlignFormat = "| %-30s|%60s\t|%n";
     def resultString = ""
     resultString = resultString.concat("+"+"-"*95+"+\n")
-    println "RESULT IS "
     resultString += String.format(testAlignFormat, "CONFIG", "Failed tests")
     resultString = resultString.concat("+"+"-"*95+"+\n")
-    println resultString
-    println "RESULT TS "
-    println("+"+"-"*95+"+")
-    printf(testAlignFormat, "CONFIG", "Failed tests")
-    println("+"+"-"*95+"+")
     failedMap.each{
         configName, failedList ->
-        printf(testAlignFormat, configName, "");
+        resultString += String.format(testAlignFormat, configName, "");
         failedList.each{ test_name ->
             resultString += String.format(testAlignFormat, "", test_name)
-            System.out.format(testAlignFormat, "", test_name);
+            //System.out.format(testAlignFormat, "", test_name);
         }
         resultString = resultString.concat("+"+"-"*95+"+\n")
-        println("+"+"-"*95+"+")
     }
     return resultString
 }
