@@ -186,12 +186,12 @@ def generateHTMLreport(build_dir){
                     markup.tr {
                         markup.th(title:"Field #1", 'class':'first', conf)
                         markup.td(title:"Field #2", 'class':'row',{  
-                            markup.ul(
+                            markup.ul{
                                 flist.each{
                                     test_name ->
                                     markup.li(align:"right", test_name)
                                     }
-                                )
+                                }
                             }
                         )
                     }
