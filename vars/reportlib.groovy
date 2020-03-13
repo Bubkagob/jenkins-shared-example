@@ -3,6 +3,12 @@ import groovy.json.JsonSlurper
 import groovy.json.JsonParserType
 import groovy.json.JsonOutput
 
+class Result {
+     String failed
+     String total
+     String report
+}
+
 @NonCPS
 def mergeJSON(pair){
     def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
@@ -54,7 +60,10 @@ def getFailedReport(build_dir){
 }
 
 def generateTextReport(build_dir){
-    def failedMap = getFailedReport(build_dir)[0]
+    def failedReport = getFailedReport(build_dir)
+    def failedMap = failedReport[0]
+    def total = failedReport[1]
+    def total_failed = 0
     def testAlignFormat = "| %-30s|%60s\t|%n";
     def resultString = ""
     resultString = resultString.concat("+"+"-"*95+"+\n")
@@ -64,12 +73,13 @@ def generateTextReport(build_dir){
         configName, failedList ->
         resultString += String.format(testAlignFormat, configName, "");
         failedList.each{ test_name ->
+            tatal_failed += 1
             resultString += String.format(testAlignFormat, "", test_name)
             //System.out.format(testAlignFormat, "", test_name);
         }
         resultString = resultString.concat("+"+"-"*95+"+\n")
     }
-    return resultString
+    return new Result(failed: total_failed, total: total, report: resultString)
 }
 
 @NonCPS
@@ -83,70 +93,6 @@ def generateHTMLreport(build_dir){
     def writer = new StringWriter()  // html is written here by markup builder
     def markup = new groovy.xml.MarkupBuilder(writer)  // the builder
 
-    // MAKE OF HTML
-    // markup.html{
-    //     head{
-    //         style(type:"text/css", '''
-    //             .header, .first, .row {
-    //                 border: 1px solid;
-    //                 margin: 30px;
-    //                 padding: 10px;
-    //             }
-    //             .header {
-    //                 color: white;
-    //                 font-size: 18pt;
-    //                 background-color: #aec4c7
-    //             }
-    //             .first {
-    //                 background-color:  #ffffff
-    //             }
-    //             .row {
-    //                 text-align:right;
-    //                 background-color:  #e0f7fa
-    //             }
-    //         ''')
-    // } 
-    // markup.table(style: 'border:2px solid;padding: 2px;text-align:center;style: "border-collapse:collapse;"') {
-    // markup.thead{
-    //     markup.tr {
-    //         markup.th(title:"Field #1", 'class':'header', "Config name")
-    //         markup.th(title:"Field #2", 'class':'header', "Failed tests")
-    //     } // tr
-    // } // thead
-    // markup.tbody{
-    // def count = 0
-    // markup.tr{failedMap.each {
-    //     conf, flist ->
-    //     markup.tr {
-    //         markup.th(title:"Field #1", 'class':'first', conf)
-    //         markup.td(title:"Field #2", 'class':'row',{
-                
-    //             markup.ul {
-    //                 flist.each{test_name ->
-    //                     markup.li(align:"right", test_name)
-    //                 }
-    //             }
-    //         })
-    //     }
-    //     markup.tr{
-    //         count += flist.size()
-    //         markup.td(title:"Field #1", 'class':'row', "Total")
-    //         markup.td(title:"Field #2", 'class':'row', flist.size())
-    //     }
-    // } // td
-    // } // tr
-    // markup.tr{
-    //         markup.td(title:"Field #1", 'class':'header', "Passed")
-    //         markup.td(title:"Field #2", 'class':'header', "${total - count} / ${total}")
-    //     }
-    // markup.tr{
-    //         markup.td(title:"Field #1", 'class':'header', "Failed")
-    //         markup.td(title:"Field #2", 'class':'header', "${count} / ${total}")
-    //     }
-
-    // } //tbody
-    // } // table
-    // }
     markup.html{
       
             markup.style(
@@ -218,68 +164,5 @@ def generateHTMLreport(build_dir){
     resultString = resultString.concat(writer.toString())
     return resultString
 }
-
-
-
-//generateTextReport('build')
-//generateHTMLreport('build')
-
-
-
-// failedCollection = getFailedReport('build')
-// def total = 0
-// failedCollection.each{conf, arr ->
-//     println conf
-//     total += arr.size()
-//     println arr.size()
-// }
-// println "Total"
-// println total
-
-//def resultMap = getSummaryMap('build')
-//def json = JsonOutput.toJson(resultMap)
-//println JsonOutput.prettyPrint(json)
-//def failedMap = getFailedReport('build')
-//def json = JsonOutput.toJson(failedMap)
-//def InputJSON = new JsonSlurper().parseText(json)
-//println JsonOutput.prettyPrint(json)
-//def json = JsonOutput.toJson(failed)
-//println JsonOutput.prettyPrint(json)
-//println(failed)
-//println(failed.size())
-
-//def failedList = resultMap['scr1_cfg_rv32ic0'].findResults{it -> it.tests.passed.value == false? it.tests.test_name: null}
-
-// def failedList = resultMap['scr1_cfg_rv32ic0'].findResults{
-//         it -> 
-//         it.tests.findResults{it.passed == false? it.test_name:null}
-//     }
-
-//failedList.each{it -> println it.size()}
-//failedList =  failedList.findAll { item -> !item.isEmpty() }
-//println(failedList)
-
-
-//def failedList = resultMap['scr1_cfg_rv32imc3'].findResults{it.tests.passed.value.contains('false')}
-//def failedList = resultMap['scr1_cfg_rv32imc3'].findAll{it.tests.passed.value.contains('false')}
-//def failedList = resultMap['scr1_cfg_rv32ic0'].findResults{it.tests.passed}
-
-//failedList.each{println it.getClass()}
-//def newFailed = resultMap.entrySet().stream().filter {it.key == "scr1_cfg_rv32ic0" && it.value.tests.passed.contains('false')}.findAny().isPresent()
-//println(newFailed)
-// def x = mymap.find{ it.key == "likes" }?.value
-// if(x)
-//     println "x value: ${x}"
-//def c = [1, 2, 3, 4]
-
-// def c = [["true"], ["false", "true", "false"]]
-// def results  = c.findResults { it ->
-//     it.contains("false") ?    // if this is true
-//         it:    // return this
-//         null        // otherwise skip this one
-// }
-
-// println(results)
-
 
 
