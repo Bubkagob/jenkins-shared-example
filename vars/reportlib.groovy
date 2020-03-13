@@ -54,25 +54,22 @@ def getFailedReport(build_dir){
 
 def generateTextReport(build_dir){
     def failedMap = getFailedReport(build_dir)[0]
-    def resultString = ''
+
     String testAlignFormat = "| %-30s|%60s\t|%n";
-    resultString << println("+"+"-"*95+"+")
     println("+"+"-"*95+"+")
-    resultString << System.out.format(testAlignFormat,"CONFIG", "Failed tests");
+    printf("| %-30s|%60s\t|%n", "CONFIG", "Failed tests")
+    printf(testAlignFormat, "CONFIG", "Failed tests")
     System.out.format(testAlignFormat,"CONFIG", "Failed tests");
-    resultString << println("+"+"-"*95+"+")
+
     println("+"+"-"*95+"+")
     failedMap.each{
         configName, failedList ->
         System.out.format(testAlignFormat, configName, "");
         failedList.each{ test_name ->
-            resultString << System.out.format(testAlignFormat, "", test_name);
             System.out.format(testAlignFormat, "", test_name);
         }
-        resultString << println("+"+"-"*95+"+")
         println("+"+"-"*95+"+")
     }
-    return resultString
 }
 
 def generateHTMLreport(build_dir){
