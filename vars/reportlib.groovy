@@ -3,6 +3,7 @@ import groovy.json.JsonSlurper
 import groovy.json.JsonParserType
 import groovy.json.JsonOutput
 
+@NonCPS
 def mergeJSON(pair){
     def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
     def bArr = jsonSlurper.parseText(pair[0])
