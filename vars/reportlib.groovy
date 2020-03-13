@@ -31,6 +31,7 @@ def getSummaryMap(build_dir){
     return resultMap
 }
 
+@NonCPS
 def getFailedReport(build_dir){
     def resultMap = getSummaryMap(build_dir)
     def failList = []
