@@ -11,6 +11,7 @@ def mergeJSON(pair){
     return bArr + rArr
 }
 
+@NonCPS
 def getSummaryMap(build_dir){
     def resultMap = [:]
     new File(build_dir).eachFileRecurse(FILES) {
