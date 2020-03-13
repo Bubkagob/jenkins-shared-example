@@ -187,7 +187,9 @@ def generateHTMLreport(build_dir){
                         markup.th(title:"Field #1", 'class':'first', conf)
                         markup.td(title:"Field #2", 'class':'row',{  
                             markup.ul{
+                                def fcount = 0
                                 flist.each{
+                                    fcount += 1
                                     test_name ->
                                         markup.li(align:"right", test_name)
                                     }
@@ -195,12 +197,12 @@ def generateHTMLreport(build_dir){
                             }
                         )
                     }
-                    def tot_failed = flist.size()
+                    def tot_failed = fcount
                     count += tot_failed
-                    // markup.tr{
-                    //     markup.th(title:"Field #1", 'class':'row', "Total")
-                    //     markup.td(title:"Field #2", 'class':'row', "${tot_failed}")
-                    // }
+                    markup.tr{
+                        markup.th(title:"Field #1", 'class':'row', "Total")
+                        markup.td(title:"Field #2", 'class':'row', "${tot_failed}")
+                    }
                 }
             ) // tr
             markup.tr{
