@@ -71,6 +71,7 @@ def generateTextReport(build_dir){
     return resultString
 }
 
+@NonCPS
 def generateHTMLreport(build_dir){
     def resultString = ""
     def failedReport = getFailedReport(build_dir)
