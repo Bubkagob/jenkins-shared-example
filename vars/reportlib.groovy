@@ -195,20 +195,20 @@ def generateHTMLreport(build_dir){
                             }
                         )
                     }
-                    markup.tr{
+                    markup.tr(
                         tot_failed = flist.size()
                         count += tot_failed
-                        markup.td(title:"Field #1", 'class':'row', "Total")
+                        markup.th(title:"Field #1", 'class':'row', "Total")
                         markup.td(title:"Field #2", 'class':'row', "${tot_failed}")
-                    }
+                    )
                 }
             ) // tr
             markup.tr{
-                    markup.td(title:"Field #1", 'class':'header', "Passed")
+                    markup.th(title:"Field #1", 'class':'header', "Passed")
                     markup.td(title:"Field #2", 'class':'header', "${total - count} / ${total}")
                 }
             markup.tr{
-                    markup.td(title:"Field #1", 'class':'header', "Failed")
+                    markup.th(title:"Field #1", 'class':'header', "Failed")
                     markup.td(title:"Field #2", 'class':'header', "${count} / ${total}")
                 }
             }
