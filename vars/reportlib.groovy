@@ -147,9 +147,9 @@ def generateHTMLreport(build_dir){
     // } // table
     // }
     markup.html{
-        table(
-            tr(
-                td(class:"row", "hello world!")  
+        markup.table(
+            markup.tr(
+                markup.td(class:"row", "hello world!")  
             )
         )
     }
