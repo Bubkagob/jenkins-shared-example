@@ -189,17 +189,17 @@ def generateHTMLreport(build_dir){
                             markup.ul{
                                 flist.each{
                                     test_name ->
-                              
-                                        markup.li(align:"right", test_name.getClass())
+                                        markup.li(align:"right", test_name)
                                     }
                                 }
                             }
                         )
                     }
-                    markup.tr {
-                        count += flist.size()
+                    markup.tr{
+                        tot_failed = flist.size()
+                        count += tot_failed
                         markup.td(title:"Field #1", 'class':'row', "Total")
-                        markup.td(title:"Field #2", 'class':'row', flist.size())
+                        markup.td(title:"Field #2", 'class':'row', "${tot_failed})
                     }
                 }
             ) // tr
@@ -211,11 +211,7 @@ def generateHTMLreport(build_dir){
                     markup.td(title:"Field #1", 'class':'header', "Failed")
                     markup.td(title:"Field #2", 'class':'header', "${count} / ${total}")
                 }
-
-            } //tbody
-            // markup.tr(
-            //     markup.td(class:"row", "hello world!")  
-            // )
+            }
         }
     }
     resultString = resultString.concat(writer.toString())
