@@ -25,7 +25,7 @@ import org.apache.http.entity.ContentType;
 /*
         configuration
 */
-@NonCPS
+
 def createRedmineReport(){
         def uri = "http://192.168.1.100:8080/"
         def apiAccessKey = "0c86aa59eeed3aca23b0973554deec18ebbd4182"
@@ -34,29 +34,29 @@ def createRedmineReport(){
         def authorId = 47
 
         // Create an issue
-        RedmineManager manager = RedmineManagerFactory.createWithApiKey(uri, apiAccessKey);
-        def projectManager = manager.getProjectManager();
-        def attachmentManager = manager.getAttachmentManager();
-        def issue_manager = manager.getIssueManager();
-        Project project = projectManager.getProjectByKey(projectKey);
-        def tracker = project.getTrackerByName("Task");
+        // RedmineManager manager = RedmineManagerFactory.createWithApiKey(uri, apiAccessKey);
+        // def projectManager = manager.getProjectManager();
+        // def attachmentManager = manager.getAttachmentManager();
+        // def issue_manager = manager.getIssueManager();
+        // Project project = projectManager.getProjectByKey(projectKey);
+        // def tracker = project.getTrackerByName("Task");
         
-        Issue issue = new Issue()
-        issue.setSubject("Weekend regression")
-        issue.setDescription("weekend regression task")
-        issue.setAssigneeId(authorId)
-        issue.setParentId(parentId)
-        issue.setTracker(tracker)
-        issue.setProjectId(project.getId())
-        Issue createdIssue = issue_manager.createIssue(issue);
-        createdIssue.setDoneRatio(100)
-        createdIssue.setSpentHours(2.3)
-        createdIssue.setAuthorId(authorId)
-        createdIssue.setStatusId(3)
-        issue_manager.update(createdIssue)
+        // Issue issue = new Issue()
+        // issue.setSubject("Weekend regression")
+        // issue.setDescription("weekend regression task")
+        // issue.setAssigneeId(authorId)
+        // issue.setParentId(parentId)
+        // issue.setTracker(tracker)
+        // issue.setProjectId(project.getId())
+        // Issue createdIssue = issue_manager.createIssue(issue);
+        // createdIssue.setDoneRatio(100)
+        // createdIssue.setSpentHours(2.3)
+        // createdIssue.setAuthorId(authorId)
+        // createdIssue.setStatusId(3)
+        // issue_manager.update(createdIssue)
 
-        File file = new File("reportlib.groovy");
-        attachmentManager.addAttachmentToIssue(createdIssue.getId(), file, ContentType.TEXT_PLAIN.getMimeType());
+        // File file = new File("reportlib.groovy");
+        // attachmentManager.addAttachmentToIssue(createdIssue.getId(), file, ContentType.TEXT_PLAIN.getMimeType());
 }
 
 createRedmineReport()
