@@ -51,7 +51,7 @@ def getFailedReport(build_dir){
 }
 
 def generateTextReport(build_dir){
-    def failedMap = getFailedReport('build')[0]
+    def failedMap = getFailedReport(build_dir)[0]
     String testAlignFormat = "| %-30s|%60s\t|%n";
     println("+"+"-"*95+"+")
     System.out.format(testAlignFormat,"CONFIG", "Failed tests");
@@ -67,7 +67,7 @@ def generateTextReport(build_dir){
 }
 
 def generateHTMLreport(build_dir){
-    def failedReport = getFailedReport('build')
+    def failedReport = getFailedReport(build_dir)
     def failedMap = failedReport[0]
     def total = failedReport[1]
     def json = JsonOutput.toJson(failedMap)
