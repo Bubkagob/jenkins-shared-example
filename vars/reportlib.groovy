@@ -73,7 +73,7 @@ def generateTextReport(build_dir){
         configName, failedList ->
         resultString += String.format(testAlignFormat, configName, "");
         failedList.each{ test_name ->
-            tatal_failed += 1
+            total_failed += 1
             resultString += String.format(testAlignFormat, "", test_name)
             //System.out.format(testAlignFormat, "", test_name);
         }
