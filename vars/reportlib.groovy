@@ -180,6 +180,7 @@ def generateHTMLreport(build_dir){
             ) // thead
             markup.tbody{
             def count = 0
+            def fcount = 0
             markup.tr(
                 failedMap.each {
                 conf, flist ->
@@ -187,10 +188,10 @@ def generateHTMLreport(build_dir){
                         markup.th(title:"Field #1", 'class':'first', conf)
                         markup.td(title:"Field #2", 'class':'row',{  
                             markup.ul{
-                                def fcount = 0
+                                fcount = 0
                                 flist.each{
-                                    fcount += 1
                                     test_name ->
+                                        fcount += 1
                                         markup.li(align:"right", test_name)
                                     }
                                 }
