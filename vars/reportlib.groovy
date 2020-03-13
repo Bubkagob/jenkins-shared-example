@@ -52,24 +52,25 @@ def getFailedReport(build_dir){
     return [failedReportMap, totalCounter]
 }
 
+@NonCPS
 def generateTextReport(build_dir){
+    def newFile = new File("yourFilePath.txt")
     def failedMap = getFailedReport(build_dir)[0]
-
-    String testAlignFormat = "| %-30s|%60s\t|%n";
+    def testAlignFormat = "| %-30s|%60s\t|%n";
+    def resString = ''
+    newFile.text="+"+"-"*95+"+"
     println("+"+"-"*95+"+")
-    printf("| %-30s|%60s\t|%n", "CONFIG", "Failed tests")
     printf(testAlignFormat, "CONFIG", "Failed tests")
-    System.out.format(testAlignFormat,"CONFIG", "Failed tests");
-
     println("+"+"-"*95+"+")
     failedMap.each{
         configName, failedList ->
-        System.out.format(testAlignFormat, configName, "");
+        printf(testAlignFormat, configName, "");
         failedList.each{ test_name ->
-            System.out.format(testAlignFormat, "", test_name);
+            printf(testAlignFormat, "", test_name);
         }
         println("+"+"-"*95+"+")
     }
+    newFile.createNewFile()
 }
 
 def generateHTMLreport(build_dir){
