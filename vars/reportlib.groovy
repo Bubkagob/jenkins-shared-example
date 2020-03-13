@@ -148,11 +148,34 @@ def generateHTMLreport(build_dir){
     // } // table
     // }
     markup.html{
-        markup.table(
+        markup.head(
+            style(
+                type:"text/css", '''
+                .header, .first, .row {
+                    border: 1px solid;
+                    margin: 30px;
+                    padding: 10px;
+                }
+                .header {
+                    color: white;
+                    font-size: 18pt;
+                    background-color: #aec4c7
+                }
+                .first {
+                    background-color:  #ffffff
+                }
+                .row {
+                    text-align:right;
+                    background-color:  #e0f7fa
+                }
+            '''
+            )
+        )
+        markup.table(style: 'border:2px solid;padding: 2px;text-align:center;style: "border-collapse:collapse;"'){
             markup.tr(
                 markup.td(class:"row", "hello world!")  
             )
-        )
+        }
     }
     resultString = resultString.concat(writer.toString())
     return resultString
