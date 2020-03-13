@@ -56,7 +56,7 @@ def generateTextReport(build_dir){
     def failedMap = getFailedReport(build_dir)[0]
     def testAlignFormat = "| %-30s|%60s\t|%n";
     def resultString = ""
-    resultString.concat("+"+"-"*95+"+")
+    resultString = resultString.concat("+"+"-"*95+"+")
     println "RESULT IS "
     println resultString
     println "RESULT TS "
