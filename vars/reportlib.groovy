@@ -172,15 +172,13 @@ def generateHTMLreport(build_dir){
             )
         )
         markup.table(style: 'border:2px solid;padding: 2px;text-align:center;style: "border-collapse:collapse;"'){
-            markup.thead(
-                markup.tr{
-                    markup.th(title:"Field #1", class:"header", "Config name")
-                    markup.th(title:"Field #2", class:"header", "Failed tests")
-                } // tr
-            ) // thead
             markup.tbody{
             def count = 0
             def fcount = 0
+            markup.tr{
+                markup.th(title:"Field #1", class:"header", "Config name")
+                markup.th(title:"Field #2", class:"header", "Failed tests")
+            } // tr
             markup.tr{
                 failedMap.each {
                 conf, flist ->
