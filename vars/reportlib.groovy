@@ -149,7 +149,7 @@ def generateHTMLreport(build_dir){
     // }
     markup.html{
         markup.head(
-            style(
+            markup.style(
                 type:"text/css", '''
                 .header, .first, .row {
                     border: 1px solid;
