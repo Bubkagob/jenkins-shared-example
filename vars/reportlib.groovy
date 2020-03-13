@@ -183,7 +183,7 @@ def generateHTMLreport(build_dir){
             def fcount = 0
             markup.tr(
                 failedMap.each {
-                conf, flist ->
+                (conf, flist) ->
                     markup.tr {
                         markup.th(title:"Field #1", 'class':'first', conf)
                         markup.td(title:"Field #2", 'class':'row',{  
