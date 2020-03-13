@@ -58,7 +58,7 @@ def generateTextReport(build_dir){
     def resultString = ""
     resultString = resultString.concat("+"+"-"*95+"+")
     println "RESULT IS "
-    resultString += String.format(testAlignFormat, "CONFIG", "Failed tests"))
+    resultString += String.format(testAlignFormat, "CONFIG", "Failed tests")
     resultString = resultString.concat("+"+"-"*95+"+")
     println resultString
     println "RESULT TS "
