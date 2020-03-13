@@ -72,8 +72,7 @@ def generateTextReport(build_dir){
         resultString << println("+"+"-"*95+"+")
         println("+"+"-"*95+"+")
     }
-    def newFile = new File("new_report.txt")
-    newFile.write(resultString)
+    return resultString
 }
 
 def generateHTMLreport(build_dir){
