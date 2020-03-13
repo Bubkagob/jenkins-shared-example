@@ -31,7 +31,6 @@ def getSummaryMap(build_dir){
     return resultMap
 }
 
-@NonCPS
 def getFailedReport(build_dir){
     def resultMap = getSummaryMap(build_dir)
     def failList = []
@@ -72,7 +71,7 @@ def generateTextReport(build_dir){
     return resultString
 }
 
-@NonCPS
+
 def generateHTMLreport(build_dir){
     def resultString = ""
     def failedReport = getFailedReport(build_dir)
@@ -84,68 +83,75 @@ def generateHTMLreport(build_dir){
     def markup = new groovy.xml.MarkupBuilder(writer)  // the builder
 
     // MAKE OF HTML
-    markup.html{
-        head{
-        style(type:"text/css", '''
-            .header, .first, .row {
-                border: 1px solid;
-                margin: 30px;
-                padding: 10px;
-            }
-            .header {
-                color: white;
-                font-size: 18pt;
-                background-color: #aec4c7
-            }
-            .first {
-                background-color:  #ffffff
-            }
-            .row {
-                text-align:right;
-                background-color:  #e0f7fa
-            }
-        ''')
-    } 
-    markup.table(style: 'border:2px solid;padding: 2px;text-align:center;style: "border-collapse:collapse;"') {
-    markup.thead{
-        markup.tr {
-            markup.th(title:"Field #1", 'class':'header', "Config name")
-            markup.th(title:"Field #2", 'class':'header', "Failed tests")
-        } // tr
-    } // thead
-    markup.tbody{
-    def count = 0
-    markup.tr{failedMap.each {
-        conf, flist ->
-        markup.tr {
-            markup.th(title:"Field #1", 'class':'first', conf)
-            markup.td(title:"Field #2", 'class':'row',{
+    // markup.html{
+    //     head{
+    //         style(type:"text/css", '''
+    //             .header, .first, .row {
+    //                 border: 1px solid;
+    //                 margin: 30px;
+    //                 padding: 10px;
+    //             }
+    //             .header {
+    //                 color: white;
+    //                 font-size: 18pt;
+    //                 background-color: #aec4c7
+    //             }
+    //             .first {
+    //                 background-color:  #ffffff
+    //             }
+    //             .row {
+    //                 text-align:right;
+    //                 background-color:  #e0f7fa
+    //             }
+    //         ''')
+    // } 
+    // markup.table(style: 'border:2px solid;padding: 2px;text-align:center;style: "border-collapse:collapse;"') {
+    // markup.thead{
+    //     markup.tr {
+    //         markup.th(title:"Field #1", 'class':'header', "Config name")
+    //         markup.th(title:"Field #2", 'class':'header', "Failed tests")
+    //     } // tr
+    // } // thead
+    // markup.tbody{
+    // def count = 0
+    // markup.tr{failedMap.each {
+    //     conf, flist ->
+    //     markup.tr {
+    //         markup.th(title:"Field #1", 'class':'first', conf)
+    //         markup.td(title:"Field #2", 'class':'row',{
                 
-                markup.ul {
-                    flist.each{test_name ->
-                        markup.li(align:"right", test_name)
-                    }
-                }
-            })
-        }
-        markup.tr{
-            count += flist.size()
-            markup.td(title:"Field #1", 'class':'row', "Total")
-            markup.td(title:"Field #2", 'class':'row', flist.size())
-        }
-    } // td
-    } // tr
-    markup.tr{
-            markup.td(title:"Field #1", 'class':'header', "Passed")
-            markup.td(title:"Field #2", 'class':'header', "${total - count} / ${total}")
-        }
-    markup.tr{
-            markup.td(title:"Field #1", 'class':'header', "Failed")
-            markup.td(title:"Field #2", 'class':'header', "${count} / ${total}")
-        }
+    //             markup.ul {
+    //                 flist.each{test_name ->
+    //                     markup.li(align:"right", test_name)
+    //                 }
+    //             }
+    //         })
+    //     }
+    //     markup.tr{
+    //         count += flist.size()
+    //         markup.td(title:"Field #1", 'class':'row', "Total")
+    //         markup.td(title:"Field #2", 'class':'row', flist.size())
+    //     }
+    // } // td
+    // } // tr
+    // markup.tr{
+    //         markup.td(title:"Field #1", 'class':'header', "Passed")
+    //         markup.td(title:"Field #2", 'class':'header', "${total - count} / ${total}")
+    //     }
+    // markup.tr{
+    //         markup.td(title:"Field #1", 'class':'header', "Failed")
+    //         markup.td(title:"Field #2", 'class':'header', "${count} / ${total}")
+    //     }
 
-    } //tbody
-    } // table
+    // } //tbody
+    // } // table
+    // }
+    markup.html{
+    table {
+            tr {
+            td(class:"row", "hello world!")  
+            }
+        }
     }
     resultString = resultString.concat(writer.toString())
     return resultString
