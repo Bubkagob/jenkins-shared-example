@@ -72,6 +72,7 @@ def generateTextReport(build_dir){
 }
 
 def generateHTMLreport(build_dir){
+    def resultString = ""
     def failedReport = getFailedReport(build_dir)
     def failedMap = failedReport[0]
     def total = failedReport[1]
@@ -144,7 +145,8 @@ def generateHTMLreport(build_dir){
     } //tbody
     } // table
     }
-    println writer.toString()
+    resultString = resultString.concat(writer.toString())
+    return resultString
 }
 
 
