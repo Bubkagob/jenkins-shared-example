@@ -147,11 +147,11 @@ def generateHTMLreport(build_dir){
     // } // table
     // }
     markup.html{
-    table {
-            tr {
-            td(class:"row", "hello world!")  
-            }
-        }
+        table(
+            tr(
+                td(class:"row", "hello world!")  
+            )
+        )
     }
     resultString = resultString.concat(writer.toString())
     return resultString
