@@ -189,7 +189,10 @@ def generateHTMLreport(build_dir){
                             markup.ul{
                                 flist.each{
                                     test_name ->
-                                    markup.li(align:"right", test_name)
+                                    if(test_name.getClass() == List) {
+                                        println ( " LIST here " + test_name)
+                                    }
+                                        markup.li(align:"right", test_name)
                                     }
                                 }
                             }
