@@ -30,7 +30,8 @@ def getSummaryMap(build_dir){
     }
     return resultMap
 }
-@nonCPS
+
+@NonCPS
 def getFailedReport(build_dir){
     def resultMap = getSummaryMap(build_dir)
     def failList = []
@@ -71,7 +72,7 @@ def generateTextReport(build_dir){
     return resultString
 }
 
-@nonCPS
+@NonCPS
 def generateHTMLreport(build_dir){
     def resultString = ""
     def failedReport = getFailedReport(build_dir)
@@ -105,14 +106,13 @@ def generateHTMLreport(build_dir){
             }
         ''')
     } 
-    markup.table(style: 'border:2px solid;padding: 2px;text-align:center;style: "border-collapse:collapse;"')
-    {
-        markup.thead{
-            markup.tr {
-                markup.th(title:"Field #1", 'class':'header', "Config name")
-                markup.th(title:"Field #2", 'class':'header', "Failed tests")
-            } // tr
-        } // thead
+    markup.table(style: 'border:2px solid;padding: 2px;text-align:center;style: "border-collapse:collapse;"') {
+    markup.thead{
+        markup.tr {
+            markup.th(title:"Field #1", 'class':'header', "Config name")
+            markup.th(title:"Field #2", 'class':'header', "Failed tests")
+        } // tr
+    } // thead
     markup.tbody{
     def count = 0
     markup.tr{failedMap.each {
