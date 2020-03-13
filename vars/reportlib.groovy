@@ -148,7 +148,7 @@ def generateHTMLreport(build_dir){
     // } // table
     // }
     markup.html{
-        markup.head(
+      
             markup.style(
                 type:"text/css", '''
                 .header, .first, .row {
@@ -170,7 +170,7 @@ def generateHTMLreport(build_dir){
                 }
             '''
             )
-        )
+        
         markup.table(style: 'border:2px solid;padding: 2px;text-align:center;style: "border-collapse:collapse;"'){
             markup.tbody{
             def count = 0
