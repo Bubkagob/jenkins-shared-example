@@ -81,6 +81,38 @@ def readDir(project_path) {
   }
 }
 
+
+def prepareReleaseBuildDir(){
+  def scenariosMap = [:]
+  for (f in findFiles(glob: "**/release_*.yaml")){
+    echo "${f.path}"
+    String scenario = "${f.path}".split("/")[-1]
+    String tests = "${f.path}".split("/")[-3]
+    String build_dir = "build/"+"${f.path}".split("/")[1]
+    String launcherPath = "../../${f.path}".split(tests)[0] + "framework/launcher/launch.pl"
+    // rename
+    echo "SCENARIO: " + "../../${f.path}"
+    echo "LAUNCHER: " + launcherPath
+    echo "BUILDDIR: " +"${build_dir}"
+    sh "[ -d ${build_dir} ] && echo OK || mkdir -p ${build_dir}"
+    scenariosMap.put(build_dir, new LaunchConf(scenarioFile: "../../${f.path}", launcher: launcherPath))
+  }
+//return new LaunchConf(scenarioFile: "../../${f.path}", launcher: launcherPath)
+  return scenariosMap
+}
+
+@NonCPS
+def readReleaseDir(project_path) {
+  echo "Prject path"
+  echo project_path
+  dlist = []
+	new File(project_path + "/release").eachDir{dlist << it.name }
+	dlist.sort()
+  dlist.each{
+    echo it
+  }
+}
+
 // @NonCPS
 // def readDir()
 // {
