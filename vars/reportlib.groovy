@@ -14,7 +14,7 @@ def mergeJSON(pair){
     def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
     def bArr = jsonSlurper.parseText(pair[0])
     def rArr = jsonSlurper.parseText(pair[1])
-    return bAReportResultrr + rArr
+    return bArr + rArr
 }
 
 @NonCPS
