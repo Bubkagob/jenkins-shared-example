@@ -3,11 +3,11 @@ import groovy.json.JsonSlurper
 import groovy.json.JsonParserType
 import groovy.json.JsonOutput
 
-class Result {
-     String failed
-     String total
-     String report
-}
+// class Result {
+//      String failed
+//      String total
+//      String report
+// }
 
 @NonCPS
 def mergeJSON(pair){
