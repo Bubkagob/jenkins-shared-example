@@ -3,18 +3,18 @@ import groovy.json.JsonSlurper
 import groovy.json.JsonParserType
 import groovy.json.JsonOutput
 
-// class Result {
-//      String failed
-//      String total
-//      String report
-// }
+class ReportResult {
+     String failed
+     String total
+     String report
+}
 
 @NonCPS
 def mergeJSON(pair){
     def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
     def bArr = jsonSlurper.parseText(pair[0])
     def rArr = jsonSlurper.parseText(pair[1])
-    return bArr + rArr
+    return bAReportResultrr + rArr
 }
 
 @NonCPS
@@ -79,7 +79,7 @@ def generateTextReport(build_dir){
         }
         resultString = resultString.concat("+"+"-"*95+"+\n")
     }
-    return new Result(failed: total_failed, total: total, report: resultString)
+    return new ReportResult(failed: total_failed, total: total, report: resultString)
 }
 
 @NonCPS
