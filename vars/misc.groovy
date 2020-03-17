@@ -111,7 +111,7 @@ def prepareReleaseBuildDirWithCoverage(){
     String launcherPath = "../../${f.path}".split(tests)[0] + "framework/launcher/launch.pl"
     // rename
     echo "SCENARIO: " + "../../${f.path}"
-    sh "sed -i -- 's/mode: cli/mode: coverage/g'../../${f.path}"
+    sh '''sed -i -- "s/mode: cli/mode: coverage/g" ../../${f.path}'''
     echo "LAUNCHER: " + launcherPath
     echo "BUILDDIR: " +"${build_dir}"
     sh "[ -d ${build_dir} ] && echo OK || mkdir -p ${build_dir}"
