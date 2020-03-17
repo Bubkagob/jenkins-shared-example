@@ -108,10 +108,11 @@ def prepareReleaseBuildDirWithCoverage(){
     String scenario = "${f.path}".split("/")[-1]
     String tests = "${f.path}".split("/")[-3]
     String build_dir = "build/"+"${f.path}".split("/")[1]
+    String scenarioPath = "../../${f.path}"
     String launcherPath = "../../${f.path}".split(tests)[0] + "framework/launcher/launch.pl"
     // rename
     echo "SCENARIO: " + "../../${f.path}"
-    sh '''sed -i -- 's/mode: cli/mode: coverage/g' ../../${f.path}'''
+    sh "sed -i -- 's/mode: cli/mode: coverage/g' ${scenarioPath}"
     echo "LAUNCHER: " + launcherPath
     echo "BUILDDIR: " +"${build_dir}"
     sh "[ -d ${build_dir} ] && echo OK || mkdir -p ${build_dir}"
