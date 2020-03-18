@@ -31,8 +31,6 @@ def call(String repo, String branch) {
             }
         }
     }
-    return [
-        GIT_VARS: scmVars
-    ]
+    return scmVars
 }
 
