@@ -1,0 +1,1 @@
+def BUILD_USER = currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
