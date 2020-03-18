@@ -3,7 +3,7 @@ def call(String repo, String branch) {
     stage("Checkout ${project_name}") {
         script{
             retry(5){
-                scmVars = checkout([
+                def GIT_VARS = checkout([
                     $class: 'GitSCM',
                     branches: [[name: "*/${branch}"]],
                     doGenerateSubmoduleConfigurations: false,
