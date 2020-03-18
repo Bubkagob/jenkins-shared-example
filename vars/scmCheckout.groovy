@@ -33,6 +33,5 @@ def call(String repo, String branch) {
             }
         }
     }
-    return scmVars
 }
 
