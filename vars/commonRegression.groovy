@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 def call(currentBuild, scenarios) {
-    def repo = "https://github.com/ar-sc/scrx_src_release"
-    def branch = "scr4_release_niime"
+    def repo = "https://github.com/ar-sc/sc_riscv.git"
+    def branch = "scr3_release_niime"
     def choices = scenarios.join(',')
     pipeline {
         agent {
