@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 def call(currentBuild) {
     def repo = "https://github.com/ar-sc/scr1"
-    def branch = "development_ia"
+    //def branch = "development_ia"
     pipeline {
         agent {
             label "beta"
