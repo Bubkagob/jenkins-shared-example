@@ -1,7 +1,5 @@
 #!/usr/bin/env groovy
-def call(currentBuild, scenarios) {
-    def repo = "https://github.com/ar-sc/sc_riscv.git"
-    def branch = "scr3_release_niime"
+def call(currentBuild, scenarios, repo, branch) {
     def choices = scenarios.join(',')
     pipeline {
         agent {
@@ -28,6 +26,8 @@ def call(currentBuild, scenarios) {
                 quoteValue: false, 
                 saveJSONParameterToFile: false, 
                 type: 'PT_CHECKBOX', 
+    def repo = "https://github.com/ar-sc/sc_riscv"
+    def branch = "scr3_release_niime"
                 value: choices, 
                 visibleItemCount: 10
             )
@@ -36,7 +36,7 @@ def call(currentBuild, scenarios) {
             stage('Checkout SCM') {
                 steps {
                     script {
-                        scmVars = scmSimpleCheckout(repo, branch)
+                        scmVars = scmCheckout(repo, branch)
                         echo "${CHOSEN_SCENARIOS}"
                     }
                 }
