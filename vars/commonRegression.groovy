@@ -39,7 +39,7 @@ def call(currentBuild, scenarios) {
                 defaultValue: 'regression_default_tcm_nofpu_axi_cfg.yaml', 
                 description: '', 
                 multiSelectDelimiter: ',', 
-                name: 'SAMPLE_EXTENDED_CHOICE', 
+                name: 'CHOSEN_SCENARIOS', 
                 quoteValue: false, 
                 saveJSONParameterToFile: false, 
                 type: 'PT_CHECKBOX', 
@@ -52,6 +52,7 @@ def call(currentBuild, scenarios) {
                 steps {
                     script {
                         scmVars = scmCheckout(repo, branch)
+                        echo "${CHOSEN_SCENARIOS}"
                     }
                 }
             }
