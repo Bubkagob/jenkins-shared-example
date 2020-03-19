@@ -2,6 +2,7 @@
 def call(currentBuild, scenarios) {
     def repo = "https://github.com/ar-sc/scr1"
     def branch = "development_ia"
+    def choices = scenarios.join(',')
     pipeline {
         agent {
             label "beta"
@@ -43,7 +44,7 @@ def call(currentBuild, scenarios) {
                 quoteValue: false, 
                 saveJSONParameterToFile: false, 
                 type: 'PT_CHECKBOX', 
-                value: scenarios.join(','), 
+                value: choices, 
                 visibleItemCount: 10
             )
         }
