@@ -106,6 +106,21 @@ def call(currentBuild, scenarios) {
                     }
                 }
             }
+
+            stage('Make stages') {
+                steps {
+                    script {
+                        scenarios.each{
+                            scenario_name -> {
+                                echo "${scenario_name}"
+                                stage("Run scenario ${scenario_name}"){
+                                    echo "${scenario_name}"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             
             stage("Check variables"){
                 steps {
