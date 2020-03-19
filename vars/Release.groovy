@@ -1,3 +1,4 @@
+#!/usr/bin/env groovy
 def call() {
     def repo = "https://github.com/ar-sc/scr1"
     pipeline {
@@ -5,7 +6,7 @@ def call() {
             label "beta"
         }
         environment {
-            BUILD_USER = currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
+            //BUILD_USER = currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
             FTP_DIR = new Date().format("yy_MM_dd_${BUILD_NUMBER}", TimeZone.getTimeZone('Europe/Moscow'))
         }
         options {
@@ -14,7 +15,7 @@ def call() {
             timestamps()
         }
         triggers{
-            pollSCM('H/5 * * * *')
+            pollSCM('H/50 * * * *')
         }
         parameters {
             // string(
@@ -37,6 +38,7 @@ def call() {
             stage('Checkout SCM') {
                 steps {
                     script {
+                        echo "${BUILD_USER}"
                         scmVars = scmCheckout(repo, branch)
                     }
                 }
