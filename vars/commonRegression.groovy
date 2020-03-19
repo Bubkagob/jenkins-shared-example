@@ -26,8 +26,6 @@ def call(currentBuild, scenarios, repo, branch) {
                 quoteValue: false, 
                 saveJSONParameterToFile: false, 
                 type: 'PT_CHECKBOX', 
-    def repo = "https://github.com/ar-sc/sc_riscv"
-    def branch = "scr3_release_niime"
                 value: choices, 
                 visibleItemCount: 10
             )
