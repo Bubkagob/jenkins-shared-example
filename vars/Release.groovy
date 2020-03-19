@@ -1,15 +1,12 @@
 #!/usr/bin/env groovy
-def call() {
+def call(currentBuild) {
     def repo = "https://github.com/ar-sc/scr1"
-    def envOverrides = it.getAction('org.jenkinsci.plugins.workflow.cps.EnvActionImpl').getOverriddenEnvironment()
-    def BUILD_U = envOverrides['BUILD_USER']
     pipeline {
         agent {
             label "beta"
         }
         environment {
-            //BUILD_USER = envOverrides['BUILD_USER']
-            //BUILD_USER = currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
+            BUILD_USER = currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
             FTP_DIR = new Date().format("yy_MM_dd_${BUILD_NUMBER}", TimeZone.getTimeZone('Europe/Moscow'))
         }
         options {
@@ -41,7 +38,7 @@ def call() {
             stage('Checkout SCM') {
                 steps {
                     script {
-                        echo "${vars}"
+                        echo "${BUILD_USER}"
                         scmVars = scmCheckout(repo, branch)
                     }
                 }
