@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 def call() {
     def repo = "https://github.com/ar-sc/scr1"
-    def vars = this.getBinding().getVariables()
+    def vars = this.getBinding().getVariables().get('BUILD_USER')
     pipeline {
         agent {
             label "beta"
