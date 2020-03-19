@@ -16,19 +16,17 @@ def call(String repo, String branch) {
                         recursiveSubmodules: true,
                         reference: '',
                         trackingSubmodules: false]
-                        ],
-                        submoduleCfg: [],
-                        userRemoteConfigs: [
-                            [
-                                credentialsId: 'IVAN_PASS',
-                                name: 'origin',
-                                refspec: "+refs/heads/${branch}:refs/remotes/origin/${branch}",
-                                url: "${repo}"
+                    ],
+                    submoduleCfg: [],
+                    userRemoteConfigs: [[
+                            credentialsId: 'IVAN_PASS',
+                            name: 'origin',
+                            refspec: "+refs/heads/${branch}:refs/remotes/origin/${branch}",
+                             url: "${repo}"
                             ]
                         ]
                     ]
                 )
-                
             }
         }
     }
