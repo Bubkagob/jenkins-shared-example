@@ -1,6 +1,7 @@
 #!/usr/bin/env groovy
 def call(currentBuild) {
     def repo = "https://github.com/ar-sc/scr1"
+    def branch = "development_ia"
     pipeline {
         agent {
             label "beta"
@@ -38,7 +39,6 @@ def call(currentBuild) {
             stage('Checkout SCM') {
                 steps {
                     script {
-                        echo "${BUILD_USER}"
                         scmVars = scmCheckout(repo, branch)
                     }
                 }
@@ -96,7 +96,25 @@ def call(currentBuild) {
             
             stage("Check variables"){
                 steps {
-                    echo "scmVars ${scmVars} " 
+                    echo "scmVars ${scmVars} "
+                    
+                    script{
+                        def paramValue = "development_ia"
+                        if (!branch=="development_ia")
+                        {
+                            build(
+                                job: 'new_release',
+                                parameters: [
+                                    [
+                                        $class: 'StringParameterValue',
+                                        name: 'branch',
+                                        value: paramValue
+                                    ],
+                                ]
+                            )
+                        }
+                    }
+                    
                 }
             }
         }
