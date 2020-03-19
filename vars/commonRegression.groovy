@@ -77,13 +77,8 @@ def call(currentBuild, scenarios) {
                                 stage("Run scenario ${scenario_name}"){
                                     echo "${scenario_name}"
                                     echo "========Run ${scenario_name}========"
-                                    sh '''
-                                    #!/bin/bash -l
-                                    [ -d build ] && echo OK || mkdir -p build
-                                    cd build
-                                    echo ${scenario_name}
-                                    perl ../tests/common/framework/launcher/launch.pl --scenario ../tests/_scenarios/${scenario_name}
-                                    '''
+                                    sh "[ -d build ] && echo OK || mkdir -p build"
+                                    sh "cd build; perl ../tests/common/framework/launcher/launch.pl --scenario ../tests/_scenarios/${scenario_name}"
                                 }
                         }
                     }
