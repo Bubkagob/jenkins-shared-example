@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
-def call(currentBuild) {
+def call(currentBuild, scenarios) {
     def repo = "https://github.com/ar-sc/scr1"
     def branch = "development_ia"
     pipeline {
@@ -36,14 +36,14 @@ def call(currentBuild) {
             // )
 
             extendedChoice(
-                defaultValue: 'One,Two,Three,Four', 
+                defaultValue: 'regression_default_tcm_nofpu_axi_cfg.yaml', 
                 description: '', 
                 multiSelectDelimiter: ',', 
                 name: 'SAMPLE_EXTENDED_CHOICE', 
                 quoteValue: false, 
                 saveJSONParameterToFile: false, 
                 type: 'PT_CHECKBOX', 
-                value:'One,Two,Three,Four,Five,Six,Seven,Eight,Nine,Ten', 
+                value: scenarios, 
                 visibleItemCount: 10
             )
         }
