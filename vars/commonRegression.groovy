@@ -36,8 +36,8 @@ def call(currentBuild, scenarios) {
             // )
 
             extendedChoice(
-                defaultValue: 'regression_default_tcm_nofpu_axi_cfg.yaml', 
-                description: '', 
+                defaultValue: '', 
+                description: 'Choose scenarios to run', 
                 multiSelectDelimiter: ',', 
                 name: 'CHOSEN_SCENARIOS', 
                 quoteValue: false, 
