@@ -1,4 +1,5 @@
-def call(String branch, String repo) {
+def repo = "https://github.com/ar-sc/scr1"
+def call() {
     pipeline {
         agent {
             label "beta"
@@ -16,21 +17,21 @@ def call(String branch, String repo) {
             pollSCM('H/5 * * * *')
         }
         parameters {
-            string(
-                defaultValue: '',
-                description: '',
-                name: 'GIT_REPO_URL'
-                )
-            string(
-                defaultValue: '',
-                description: '',
-                name: 'COMMIT_ID'
-                )
-            // choice(
-            //     name: "scenario",
-            //     choices: ['DEV', 'QA', 'UAT', 'PROD'],
-            //     description: 'Passing the Environment'
-            // )
+            // string(
+            //     defaultValue: '',
+            //     description: '',
+            //     name: 'GIT_REPO_URL'
+            //     )
+            // string(
+            //     defaultValue: '',
+            //     description: '',
+            //     name: 'COMMIT_ID'
+            //     )
+            choice(
+                name: "branch",
+                choices: ['development', 'development_ia', 'development_is'],
+                description: 'Select branch'
+            )
         }
         stages{
             stage('Checkout SCM') {
