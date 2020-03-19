@@ -1,5 +1,5 @@
-def repo = "https://github.com/ar-sc/scr1"
 def call() {
+    def repo = "https://github.com/ar-sc/scr1"
     pipeline {
         agent {
             label "beta"
