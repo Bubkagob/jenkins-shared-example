@@ -111,12 +111,12 @@ def call(currentBuild, scenarios) {
                 steps {
                     script {
                         scenarios.each{
-                            scenario_name -> {
+                            scenario_name -> 
                                 echo "${scenario_name}"
                                 stage("Run scenario ${scenario_name}"){
                                     echo "${scenario_name}"
                                 }
-                            }
+                            
                         }
                     }
                 }
