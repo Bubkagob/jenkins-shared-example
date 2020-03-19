@@ -34,7 +34,7 @@ def call(currentBuild, scenarios, repo, branch) {
             stage('Checkout SCM') {
                 steps {
                     script {
-                        scmVars = scmCheckout(repo, branch)
+                        scmVars = scmSimpleCheckout(repo, branch)
                         echo "${CHOSEN_SCENARIOS}"
                     }
                 }
@@ -67,30 +67,29 @@ def call(currentBuild, scenarios, repo, branch) {
                 }
             }
             
-            stage("Check variables"){
-                steps {
-                    echo "scmVars ${scmVars} "
+            // stage("Check variables"){
+            //     steps {
+            //         echo "scmVars ${scmVars} "
                     
-                    script{
-                        def paramValue = "development_ia"
-                        echo "${branch}"
-                        if (branch != "development_ia")
-                        {
-                            build(
-                                job: 'new_release',
-                                parameters: [
-                                    [
-                                        $class: 'StringParameterValue',
-                                        name: 'branch',
-                                        value: paramValue
-                                    ],
-                                ]
-                            )
-                        }
-                    }
-                    
-                }
-            }
+            //         script{
+            //             def paramValue = "development_ia"
+            //             echo "${branch}"
+            //             if (branch != "development_ia")
+            //             {
+            //                 build(
+            //                     job: 'new_release',
+            //                     parameters: [
+            //                         [
+            //                             $class: 'StringParameterValue',
+            //                             name: 'branch',
+            //                             value: paramValue
+            //                         ],
+            //                     ]
+            //                 )
+            //             }
+            //         } 
+            //     }
+            // }
         }
     }
 }
