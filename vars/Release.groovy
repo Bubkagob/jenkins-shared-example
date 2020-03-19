@@ -101,7 +101,7 @@ def call(currentBuild) {
                     script{
                         def paramValue = "development_ia"
                         echo "${branch}"
-                        if (!branch=="development_ia")
+                        if (branch != "development_ia")
                         {
                             build(
                                 job: 'new_release',
