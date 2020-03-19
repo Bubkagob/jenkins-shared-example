@@ -67,15 +67,15 @@ def call(currentBuild, scenarios) {
             }
 
             stage('Make stages') {
+                agent{
+                    label "power"
+                }
                 steps {
                     script {
                         scenarios.each{
                             scenario_name -> 
                                 stage("Run scenario ${scenario_name}"){
                                     echo "${scenario_name}"
-                                    agent{
-                                        label "power"
-                                    }
                                     steps{
                                         echo "========Run ${scenario_name}========"
                                         sh '''
