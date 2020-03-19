@@ -1,6 +1,7 @@
 #!/usr/bin/env groovy
 def call() {
     def repo = "https://github.com/ar-sc/scr1"
+    def vars = this.getBinding().getVariables()
     pipeline {
         agent {
             label "beta"
@@ -38,7 +39,7 @@ def call() {
             stage('Checkout SCM') {
                 steps {
                     script {
-                        echo "${BUILD_USER}"
+                        echo "${vars}"
                         scmVars = scmCheckout(repo, branch)
                     }
                 }
