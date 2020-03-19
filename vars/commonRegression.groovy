@@ -43,7 +43,7 @@ def call(currentBuild, scenarios) {
                 quoteValue: false, 
                 saveJSONParameterToFile: false, 
                 type: 'PT_CHECKBOX', 
-                value: scenarios, 
+                value: scenarios.join(','), 
                 visibleItemCount: 10
             )
         }
