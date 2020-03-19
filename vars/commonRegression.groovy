@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 def call(currentBuild, scenarios) {
-    def repo = "https://github.com/ar-sc/scr1"
-    def branch = "development_ia"
+    def repo = "https://github.com/ar-sc/scrx_src_release"
+    def branch = "scr4_release_niime"
     def choices = scenarios.join(',')
     pipeline {
         agent {
@@ -20,22 +20,6 @@ def call(currentBuild, scenarios) {
             pollSCM('H/50 * * * *')
         }
         parameters {
-            // string(
-            //     defaultValue: '',
-            //     description: '',
-            //     name: 'GIT_REPO_URL'
-            //     )
-            // string(
-            //     defaultValue: '',
-            //     description: '',
-            //     name: 'COMMIT_ID'
-            //     )
-            // choice(
-            //     name: "branch",
-            //     choices: ['development', 'development_ia', 'development_is'],
-            //     description: 'Select branch'
-            // )
-
             extendedChoice(
                 defaultValue: '', 
                 description: 'Choose scenarios to run', 
@@ -52,7 +36,7 @@ def call(currentBuild, scenarios) {
             stage('Checkout SCM') {
                 steps {
                     script {
-                        scmVars = scmCheckout(repo, branch)
+                        scmVars = scmSimpleCheckout(repo, branch)
                         echo "${CHOSEN_SCENARIOS}"
                     }
                 }
