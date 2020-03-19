@@ -57,49 +57,7 @@ def call(currentBuild, scenarios) {
                     }
                 }
             }
-            // stage('My Stage') {
-            //     steps {
-            //         script {
-            //             def GIT_TAGS = sh (script: 'git tag -l', returnStdout:true).trim()
-            //             inputResult = input(
-            //                 message: "Select a git tag",
-            //                 parameters: [choice(name: "git_tag", choices: "${GIT_TAGS}", description: "Git tag")]
-            //             )
-            //         }
-            //     }
-            // }
-            // stage('Parallel In Sequential') {
-            //     parallel {
-            //         stage('In Parallel 1') {
-            //             steps {
-            //                 echo "In Parallel 1"
-            //                 echo "${FTP_DIR}"
-            //             }
-            //         }
-            //         stage('In Parallel 2') {
-            //             steps {
-            //                 echo "In Parallel 2"
-            //                 echo "${JOB_NAME}"
-            //             }
-            //         }
-            //         stage('In Parallel 3') {
-            //             steps {
-            //                 echo "In Parallel 3"
-            //                 echo "${BUILD_USER}"
-            //             }
-            //         }
-            //         stage('In Parallel 4') {
-            //             steps {
-            //                 echo "In Parallel 4"
-            //                 echo "${BUILD_NUMBER}"
-            //                 script{
-            //                     scmVars = scmCheckout(repo, branch)
-            //                 }
-                            
-            //             }
-            //         }
-            //     }
-            // }
+
             stage('Push To VM') {
                 steps {
                     script {
@@ -113,11 +71,22 @@ def call(currentBuild, scenarios) {
                     script {
                         scenarios.each{
                             scenario_name -> 
-                                echo "${scenario_name}"
                                 stage("Run scenario ${scenario_name}"){
                                     echo "${scenario_name}"
+                                    agent{
+                                        label "power"
+                                    }
+                                    steps{
+                                        echo "========Run ${scenario_name}========"
+                                        sh '''
+                                            #!/bin/bash -l
+                                            [ -d build ] && echo OK || mkdir -p build
+                                            cd build
+                                            echo ${scenario_name}
+                                            perl ../tests/common/framework/launcher/launch.pl --scenario ../tests/_scenarios/${scenario_name}
+                                        '''
+                                    }
                                 }
-                            
                         }
                     }
                 }
