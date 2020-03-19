@@ -1,14 +1,13 @@
 #!/usr/bin/env groovy
 def call() {
     def repo = "https://github.com/ar-sc/scr1"
-    def envvars = new HashMap()
-    envvars.putAll(build.getEnvironment(listener))
-    def myvar= envvars['BUILD_USER']
+    def envOverrides = it.getAction('org.jenkinsci.plugins.workflow.cps.EnvActionImpl').getOverriddenEnvironment()
     pipeline {
         agent {
             label "beta"
         }
         environment {
+            BUILD_USER = envOverrides['BUILD_USER']
             //BUILD_USER = currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
             FTP_DIR = new Date().format("yy_MM_dd_${BUILD_NUMBER}", TimeZone.getTimeZone('Europe/Moscow'))
         }
@@ -41,7 +40,7 @@ def call() {
             stage('Checkout SCM') {
                 steps {
                     script {
-                        echo "${myvar}"
+                        echo "${vars}"
                         scmVars = scmCheckout(repo, branch)
                     }
                 }
