@@ -123,6 +123,7 @@ def call(currentBuild, repo, branch) {
                     subject: "${currentBuild.fullDisplayName} ${currentBuild.durationString.minus(' and counting')} ${currentBuild.currentResult}",
                     to: "${mailRecipients}",
                     replyTo: "${mailRecipients}",
+                    recipientProviders: [[$class: 'DevelopersRecipientProvider']]
                     //recipientProviders: [[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']],
                     //recipientProviders: [[$class: 'CulpritsRecipientProvider']]
                 )
