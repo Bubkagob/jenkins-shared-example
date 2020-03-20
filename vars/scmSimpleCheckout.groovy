@@ -20,10 +20,7 @@ def call(String repo, String branch) {
                             ]
                         ]
                     ]
-                )
-                sh "sed -i 's+https://+ssh://git@+g' .gitmodules"
-                sh "git submodule sync"
-                sh "git submodule update --init tests"  
+                ) 
             }
         }
     }
