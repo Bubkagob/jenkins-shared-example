@@ -20,7 +20,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
             stage('Checkout SCM') {
                 steps {
                     script {
-                        scmVars = scmCheckout(repo, branch)
+                        scmVars = scmSimpleCheckout(repo, branch)
                         sh "git status"
                         sh "ls -lat"
                     }
