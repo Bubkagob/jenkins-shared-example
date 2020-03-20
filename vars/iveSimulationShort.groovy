@@ -40,14 +40,15 @@ def call(currentBuild, repo, branch, mailRecipients) {
                     label "power"
                 }
                 steps{
-                    sh '''
+                    sh """
                         #!/bin/bash -l
                         export RISCV=/home/soft/riscv-sw/180115-sc-riscv64-ge5275d6f_64f
+                        export PATH=\$RISCV/bin:\$PATH
                         cd encr/ive
                         cd tests_src
                         chmod +x build_rtl_sim.sh
                         ./build_rtl_sim.sh
-                    '''
+                    """
                     sh "ls -la"
                 }
             }
@@ -60,6 +61,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
                     sh '''
                         #!/bin/bash -l
                         export RISCV=/home/soft/riscv-sw/180115-sc-riscv64-ge5275d6f_64f
+                        export PATH=\$RISCV/bin:\$PATH
                         cd encr/ive
                         cd rtl_src
                         make build_vcs
@@ -82,6 +84,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
                                 cd encr/ive
                                 cd rtl_src
                                 export RISCV=/home/soft/riscv-sw/180115-sc-riscv64-ge5275d6f_64f
+                                export PATH=\$RISCV/bin:\$PATH
                                 make run_vcs MEM=${memory_name} platform_dir=scr4
                                 """
                             }
