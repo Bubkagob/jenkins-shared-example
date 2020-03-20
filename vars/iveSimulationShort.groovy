@@ -35,7 +35,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
                 }
             }
 
-            stage('Run Simulation') {
+            stage('Check VARS') {
                 agent{
                     label "power"
                 }
