@@ -56,7 +56,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
                                     export RISCVT=/home/soft/riscv-sw/180115-sc-riscv64-ge5275d6f_64f
                                     echo \$RISCVT
                                     echo \$RISCV
-                                    echo \$repo
+                                    echo "\${repo}"
                                 '''
                                 //sh "[ -d build ] && echo OK || mkdir -p build"
                                 //sh "cd build; perl ../tests/common/framework/launcher/launch.pl --scenario ../tests/_scenarios/${scenario_name}"
