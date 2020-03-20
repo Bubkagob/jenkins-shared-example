@@ -45,16 +45,11 @@ def call(currentBuild, repo, branch, mailRecipients) {
                         memories.each{ memory_name ->
                             stage("Run simulation ${memory_name}"){
                                 sh """
-                                    #!/bin/bash -l
-                                    cd encr/ive
-                                    cd rtl_src
-                                    echo ${RISCV}
-                                    export RISCV=/home/soft/riscv-sw/180115-sc-riscv64-ge5275d6f_64f
-                                    echo ${RISCV}
-                                    echo \$RISCV
-                                    echo $RISCV
-                                    echo ${memory_name}
-                                    # make run_vcs MEM=${memory_name} platform_dir=scr4
+                                #!/bin/bash -l
+                                cd encr/ive
+                                cd rtl_src
+                                export RISCV=/home/soft/riscv-sw/180115-sc-riscv64-ge5275d6f_64f
+                                make run_vcs MEM=${memory_name} platform_dir=scr4
                                 """
                             }
                         }
