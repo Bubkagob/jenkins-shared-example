@@ -14,9 +14,9 @@ def call(currentBuild, scenarios, repo, branch, mailRecipients) {
             disableConcurrentBuilds()
             timestamps()
         }
-        triggers{
-            pollSCM('H/50 * * * *')
-        }
+        // triggers{
+        //     pollSCM('H/50 * * * *')
+        // }
         parameters {
             extendedChoice(
                 defaultValue: '', 

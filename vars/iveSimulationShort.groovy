@@ -27,32 +27,49 @@ def call(currentBuild, repo, branch, mailRecipients) {
                 }
             }
 
-            // stage('Push To VM') {
-            //     steps {
-            //         script {
-            //             pushToVm()
-            //         }
-            //     }
-            // }
+            stage('Push To VM') {
+                steps {
+                    script {
+                        pushToVm()
+                    }
+                }
+            }
 
-            // stage('Make stages') {
-            //     agent{
-            //         label "power"
-            //     }
-            //     steps {
-            //         script {
-            //             scenarios.each{
-            //                 scenario_name -> 
-            //                     stage("Run scenario ${scenario_name}"){
-            //                         echo "${scenario_name}"
-            //                         echo "========Run ${scenario_name}========"
-            //                         sh "[ -d build ] && echo OK || mkdir -p build"
-            //                         sh "cd build; perl ../tests/common/framework/launcher/launch.pl --scenario ../tests/_scenarios/${scenario_name}"
-            //                     }
-            //             }
-            //         }
-            //     }
-            // }
+            stage("Build simulator"){
+                agent{
+                    label "power"
+                }
+                steps{
+                    sh '''
+                        #!/bin/bash -l
+                        echo ${RISCV}
+                        cd encr/ive
+                        cd rtl_src
+                        make build_vcs
+                    '''
+                    sh "ls -la"
+                }
+            }
+
+            stage('Run Simulation') {
+                agent{
+                    label "power"
+                }
+                steps {
+                    script {
+                        def memories = ["sram", "tcm"]
+                        memories.each{
+                            memory_name -> 
+                                stage("Run simulation ${memory_name}"){
+                                    echo "${memory_name}"
+                                    echo "========Run ${memory_name}========"
+                                    //sh "[ -d build ] && echo OK || mkdir -p build"
+                                    //sh "cd build; perl ../tests/common/framework/launcher/launch.pl --scenario ../tests/_scenarios/${scenario_name}"
+                                }
+                        }
+                    }
+                }
+            }
 
             // stage("Analyze and Collect antifacts"){
             //     agent{
