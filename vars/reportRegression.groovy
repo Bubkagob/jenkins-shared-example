@@ -1,6 +1,5 @@
 #!/usr/bin/env groovy
 def call(currentBuild) {
-    def choices = scenarios.join(',')
     pipeline {
         agent {
             label "beta"
@@ -15,6 +14,14 @@ def call(currentBuild) {
             timestamps()
         }
         stages{
+            stage('Checkout SCM') {
+                steps {
+                    script {
+                        scmVars = scmSimpleCheckout(repo, branch)
+                        echo "${scmVars}"
+                    }
+                }
+            }
             stage("Analyze and Collect antifacts"){
                 agent{
                     label "power"
