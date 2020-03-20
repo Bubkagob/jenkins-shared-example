@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
-def call(currentBuild) {
+def call(currentBuild, repo, branch) {
     pipeline {
         agent {
             label "beta"
