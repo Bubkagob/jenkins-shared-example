@@ -51,6 +51,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
                                     echo ${RISCV}
                                     export RISCV=/home/soft/riscv-sw/180115-sc-riscv64-ge5275d6f_64f
                                     echo ${RISCV}
+                                    echo RISCV
                                     echo ${memory_name}
                                 """
                             }
