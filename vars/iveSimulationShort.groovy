@@ -20,7 +20,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
             stage('Checkout SCM') {
                 steps {
                     script {
-                        scmVars = scmSimpleCheckout(repo, branch)
+                        scmVars = scmCheckout(repo, branch)
                         sh "git status"
                         sh "ls -lat"
                     }
@@ -58,14 +58,13 @@ def call(currentBuild, repo, branch, mailRecipients) {
                 steps {
                     script {
                         def memories = ["sram", "tcm"]
-                        memories.each{
-                            memory_name -> 
-                                stage("Run simulation ${memory_name}"){
-                                    echo "${memory_name}"
-                                    echo "========Run ${memory_name}========"
-                                    //sh "[ -d build ] && echo OK || mkdir -p build"
-                                    //sh "cd build; perl ../tests/common/framework/launcher/launch.pl --scenario ../tests/_scenarios/${scenario_name}"
-                                }
+                        memories.each{ memory_name ->
+                            stage("Run simulation ${memory_name}"){
+                                echo "${memory_name}"
+                                echo "========Run ${memory_name}========"
+                                //sh "[ -d build ] && echo OK || mkdir -p build"
+                                //sh "cd build; perl ../tests/common/framework/launcher/launch.pl --scenario ../tests/_scenarios/${scenario_name}"
+                            }
                         }
                     }
                 }
