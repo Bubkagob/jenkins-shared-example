@@ -182,7 +182,9 @@ def call(currentBuild, scenarios, repo, branch, mailRecipients) {
                 //     color: COLOR_MAP[currentBuild.currentResult],
                 //     message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} in time ${currentBuild.durationString.minus(' and counting')}\nMore info at: ${env.BUILD_URL}\n${REPORT}\n"
                 // )
-                notificators.notifyGeneral(currentBuild.result)
+                script{
+                    notificators.notifyGeneral(currentBuild.result)
+                }
                 emailext(
                     attachmentsPattern: "report.txt, report.html",
                     attachLog: true,
