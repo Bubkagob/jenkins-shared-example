@@ -35,6 +35,23 @@ def call(currentBuild, repo, branch, mailRecipients) {
                 }
             }
 
+            stage("Build tests"){
+                agent{
+                    label "power"
+                }
+                steps{
+                    sh '''
+                        #!/bin/bash -l
+                        export RISCV=/home/soft/riscv-sw/180115-sc-riscv64-ge5275d6f_64f
+                        cd encr/ive
+                        cd tests_src
+                        chmod +x build_rtl_sim.sh
+                        ./build_rtl_sim.sh
+                    '''
+                    sh "ls -la"
+                }
+            }
+
             stage("Build simulator"){
                 agent{
                     label "power"
@@ -42,7 +59,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
                 steps{
                     sh '''
                         #!/bin/bash -l
-                        echo ${RISCV}
+                        export RISCV=/home/soft/riscv-sw/180115-sc-riscv64-ge5275d6f_64f
                         cd encr/ive
                         cd rtl_src
                         make build_vcs
