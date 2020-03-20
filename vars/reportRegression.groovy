@@ -53,7 +53,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
                     sh 'ls -la'
                 }
             }
-            stage("create reports"){
+            stage("Generate reports"){
                 steps{
                     echo "======== Generate reports with groovy scripts ========"
                     script {
