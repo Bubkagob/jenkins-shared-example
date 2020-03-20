@@ -1,5 +1,6 @@
 #!/usr/bin/env groovy
 def call(currentBuild, repo, branch, mailRecipients) {
+    def toolchain = "/home/soft/riscv-sw/riscv-gcc-9.2.0-g3a2b213--200304T2355"
     pipeline {
         agent {
             label "beta"
@@ -42,7 +43,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
                 steps{
                     sh """
                         #!/bin/bash -l
-                        export RISCV=/home/soft/riscv-sw/180115-sc-riscv64-ge5275d6f_64f
+                        export RISCV=${toolchain}
                         export PATH=\$RISCV/bin:\$PATH
                         cd encr/ive
                         cd tests_src
@@ -58,14 +59,14 @@ def call(currentBuild, repo, branch, mailRecipients) {
                     label "power"
                 }
                 steps{
-                    sh '''
+                    sh """
                         #!/bin/bash -l
-                        export RISCV=/home/soft/riscv-sw/180115-sc-riscv64-ge5275d6f_64f
+                        export RISCV=${toolchain}
                         export PATH=\$RISCV/bin:\$PATH
                         cd encr/ive
                         cd rtl_src
                         make build_vcs
-                    '''
+                    """
                     sh "ls -la"
                 }
             }
@@ -83,7 +84,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
                                 #!/bin/bash -l
                                 cd encr/ive
                                 cd rtl_src
-                                export RISCV=/home/soft/riscv-sw/180115-sc-riscv64-ge5275d6f_64f
+                                export RISCV=${toolchain}
                                 export PATH=\$RISCV/bin:\$PATH
                                 make run_vcs MEM=${memory_name} platform_dir=scr4
                                 """
