@@ -106,8 +106,8 @@ def call(currentBuild, repo, branch) {
             }
         }
     }
-    post{
-        always{
+   
+        finally {
             // slackSend(
             //     channel: "#ci",
             //     color: COLOR_MAP[currentBuild.currentResult],
@@ -127,5 +127,5 @@ def call(currentBuild, repo, branch) {
                 //recipientProviders: [[$class: 'CulpritsRecipientProvider']]
             )
         }
-    }
+    
 }
