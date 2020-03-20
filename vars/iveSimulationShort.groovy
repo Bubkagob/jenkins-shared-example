@@ -35,21 +35,43 @@ def call(currentBuild, repo, branch, mailRecipients) {
                 }
             }
 
-            stage("Build simulator"){
+            stage('Run Simulation') {
                 agent{
                     label "power"
                 }
-                steps{
-                    sh '''
-                        #!/bin/bash -l
-                        echo ${RISCV}
-                        cd encr/ive
-                        cd rtl_src
-                        make build_vcs
-                    '''
-                    sh "ls -la"
+                steps {
+                    script {
+                        def memories = ["sram", "tcm"]
+                        memories.each{ memory_name ->
+                            stage("Run simulation ${memory_name}"){
+                                echo "${memory_name}"
+                                echo "========Run ${memory_name}========"
+                                echo "${RISCV}"
+                                sh "export RISCV=/home/soft/riscv-sw/180115-sc-riscv64-ge5275d6f_64f"
+                                echo "${RISCV}"
+                                //sh "[ -d build ] && echo OK || mkdir -p build"
+                                //sh "cd build; perl ../tests/common/framework/launcher/launch.pl --scenario ../tests/_scenarios/${scenario_name}"
+                            }
+                        }
+                    }
                 }
             }
+
+            // stage("Build simulator"){
+            //     agent{
+            //         label "power"
+            //     }
+            //     steps{
+            //         sh '''
+            //             #!/bin/bash -l
+            //             echo ${RISCV}
+            //             cd encr/ive
+            //             cd rtl_src
+            //             make build_vcs
+            //         '''
+            //         sh "ls -la"
+            //     }
+            // }
 
             stage('Run Simulation') {
                 agent{
