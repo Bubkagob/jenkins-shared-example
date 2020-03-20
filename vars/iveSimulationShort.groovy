@@ -44,22 +44,15 @@ def call(currentBuild, repo, branch, mailRecipients) {
                         def memories = ["sram", "tcm"]
                         memories.each{ memory_name ->
                             stage("Run simulation ${memory_name}"){
-                                echo "${memory_name}"
-                                echo "========Run ${memory_name}========"
-                                echo "${RISCV}"
-                                sh "export RISCV=/home/soft/riscv-sw/180115-sc-riscv64-ge5275d6f_64f"
-                                echo "${RISCV}"
                                 sh """
                                     #!/bin/bash -l
                                     cd encr/ive
                                     cd rtl_src
-                                    export RISCVT=/home/soft/riscv-sw/180115-sc-riscv64-ge5275d6f_64f
-                                    echo \$RISCVT
-                                    echo \$RISCV
+                                    echo ${RISCV}
+                                    export RISCV=/home/soft/riscv-sw/180115-sc-riscv64-ge5275d6f_64f
+                                    echo ${RISCV}
                                     echo ${memory_name}
                                 """
-                                //sh "[ -d build ] && echo OK || mkdir -p build"
-                                //sh "cd build; perl ../tests/common/framework/launcher/launch.pl --scenario ../tests/_scenarios/${scenario_name}"
                             }
                         }
                     }
