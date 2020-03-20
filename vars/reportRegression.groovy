@@ -1,5 +1,6 @@
 #!/usr/bin/env groovy
 def call(currentBuild, repo, branch) {
+    def mailRecipients = "ivan.alexandrov@syntacore.com"
     pipeline {
         agent {
             label "beta"
@@ -105,27 +106,27 @@ def call(currentBuild, repo, branch) {
                 }
             }
         }
-    }
-   
-        finally {
-            // slackSend(
-            //     channel: "#ci",
-            //     color: COLOR_MAP[currentBuild.currentResult],
-            //     message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} in time ${currentBuild.durationString.minus(' and counting')}\nMore info at: ${env.BUILD_URL}\n${REPORT}\n"
-            // )
-            // notificators.notifyGeneral(currentBuild.result)
-            emailext(
-                attachmentsPattern: "report.txt, report.html",
-                attachLog: true,
-                compressLog: true,
-                body: '''${SCRIPT, template="regression.template"}''',
-                mimeType: 'text/html',
-                subject: "${currentBuild.fullDisplayName} ${currentBuild.durationString.minus(' and counting')} ${currentBuild.currentResult}",
-                to: "${mailRecipients}",
-                replyTo: "${mailRecipients}",
-                //recipientProviders: [[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']],
-                //recipientProviders: [[$class: 'CulpritsRecipientProvider']]
-            )
+        post{
+            always {
+                // slackSend(
+                //     channel: "#ci",
+                //     color: COLOR_MAP[currentBuild.currentResult],
+                //     message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} in time ${currentBuild.durationString.minus(' and counting')}\nMore info at: ${env.BUILD_URL}\n${REPORT}\n"
+                // )
+                // notificators.notifyGeneral(currentBuild.result)
+                emailext(
+                    attachmentsPattern: "report.txt, report.html",
+                    attachLog: true,
+                    compressLog: true,
+                    body: '''${SCRIPT, template="regression.template"}''',
+                    mimeType: 'text/html',
+                    subject: "${currentBuild.fullDisplayName} ${currentBuild.durationString.minus(' and counting')} ${currentBuild.currentResult}",
+                    to: "${mailRecipients}",
+                    replyTo: "${mailRecipients}",
+                    //recipientProviders: [[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+                    //recipientProviders: [[$class: 'CulpritsRecipientProvider']]
+                )
+            }
         }
-    
+    } 
 }
