@@ -1,38 +1,41 @@
 @Grapes([
-        @Grab(group = 'com.taskadapter', module = 'redmine-java-api', version = '2.2.0'),
+        @Grab(group = 'com.taskadapter', module = 'redmine-java-api', version = '3.1.2'),
         @Grab(group = 'org.slf4j', module = 'slf4j-jdk14', version = '1.7.1'),
-        @Grab(group = 'org.apache.httpcomponents', module = 'httpclient', version = '4.2'),
+        @Grab(group = 'org.apache.httpcomponents', module = 'httpclient', version = '4.5.12'),
         @Grab(group = 'org.easytesting', module = 'fest-assert', version = '1.4'),
-        
+        @Grab(group = 'org.json', module = 'json', version = '20090211'),
         @Grab(group = 'org.slf4j', module = 'slf4j-api', version = '1.7.1'),
-        @Grab(group = 'org.apache.httpcomponents', module = 'httpcore', version = '4.2'),
+        @Grab(group = 'org.apache.httpcomponents', module = 'httpcore', version = '4.4.13'),
         @Grab(group = 'junit', module = 'junit', version = '4.10')
 ])
 
 import com.taskadapter.redmineapi.RedmineManager
 import com.taskadapter.redmineapi.RedmineManagerFactory
 import com.taskadapter.redmineapi.bean.Project
-// import com.taskadapter.redmineapi.bean.Issue
-// import com.taskadapter.redmineapi.bean.Tracker
-// import com.taskadapter.redmineapi.bean.IssueFactory
-// import com.taskadapter.redmineapi.bean.Version
-// import com.taskadapter.redmineapi.bean.VersionFactory
-// import org.apache.http.entity.ContentType;
-@NonCPS
+import com.taskadapter.redmineapi.bean.Issue
+import com.taskadapter.redmineapi.bean.Tracker
+import com.taskadapter.redmineapi.bean.IssueFactory
+import com.taskadapter.redmineapi.bean.Version
+import com.taskadapter.redmineapi.bean.VersionFactory
+import groovy.json.JsonSlurper
+import org.apache.http.entity.ContentType;
+
 def call(){
-    def uri = "http://192.168.1.100:8080/"
+    def uri = "http://demo.redmine.com/"
     def apiAccessKey = "0c86aa59eeed3aca23b0973554deec18ebbd4182"
     def parentId = 3699
     def authorId = 47
-    RedmineManager mgr = RedmineManagerFactory.createWithUserAuth(uri, "bubkagob", "Redmine665532!")
-    //RedmineManager mgr = RedmineManagerFactory.createWithApiKey(uri, apiAccessKey)
-    List<Project> projectsWithHttpBasicAuth = mgr.getProjectManager().getProjects()
-    for (Project project : projectsWithHttpBasicAuth) {
-        System.out.println(project.toString())
-    }
+    RedmineManager manager = RedmineManagerFactory.createWithUserAuth(uri, "bubkagob", "Redmine665532!")
+    //RedmineManager manager = RedmineManagerFactory.createWithApiKey(uri, apiAccessKey)
+    // List<Project> projectsWithHttpBasicAuth = manager.getProjectManager().getProjects()
+    // for (Project project : projectsWithHttpBasicAuth) {
+    //     System.out.println(project.toString())
+    // }
+    def projectManager = manager.getProjectManager();
+    List<Project> projectsWithHttpBasicAuth = manager.getProjects()
 }
 
-//call()
+call()
 
 /*
         configuration
