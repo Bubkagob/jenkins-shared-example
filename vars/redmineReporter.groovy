@@ -24,8 +24,8 @@ def call(){
     def apiAccessKey = "0c86aa59eeed3aca23b0973554deec18ebbd4182"
     def parentId = 3699
     def authorId = 47
-    //RedmineManager mgr = RedmineManagerFactory.createWithUserAuth(uri, userName, password)
-    RedmineManager mgr = RedmineManagerFactory.createWithApiKey(uri, apiAccessKey)
+    RedmineManager mgr = RedmineManagerFactory.createWithUserAuth(uri, "bubkagob", "Redmine665532!")
+    //RedmineManager mgr = RedmineManagerFactory.createWithApiKey(uri, apiAccessKey)
     List<Project> projectsWithHttpBasicAuth = mgr.getProjectManager().getProjects()
     for (Project project : projectsWithHttpBasicAuth) {
         System.out.println(project.toString())
