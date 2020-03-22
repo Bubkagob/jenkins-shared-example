@@ -34,12 +34,12 @@ def call(){
         def authorId = 47
 
         // Create an issue
-        // RedmineManager manager = RedmineManagerFactory.createWithApiKey(uri, apiAccessKey);
-        // def projectManager = manager.getProjectManager();
-        // def attachmentManager = manager.getAttachmentManager();
-        // def issue_manager = manager.getIssueManager();
-        // Project project = projectManager.getProjectByKey(projectKey);
-        // def tracker = project.getTrackerByName("Task");
+        RedmineManager manager = RedmineManagerFactory.createWithApiKey(uri, apiAccessKey);
+        def projectManager = manager.getProjectManager();
+        def attachmentManager = manager.getAttachmentManager();
+        def issue_manager = manager.getIssueManager();
+        Project project = projectManager.getProjectByKey(projectKey);
+        def tracker = project.getTrackerByName("Task");
         
         // Issue issue = new Issue()
         // issue.setSubject("Weekend regression")
