@@ -3,7 +3,7 @@
         @Grab(group = 'org.slf4j', module = 'slf4j-jdk14', version = '1.7.1'),
         @Grab(group = 'org.apache.httpcomponents', module = 'httpclient', version = '4.2'),
         @Grab(group = 'org.easytesting', module = 'fest-assert', version = '1.4'),
-        @Grab(group = 'org.json', module = 'json', version = '20090211'),
+        
         @Grab(group = 'org.slf4j', module = 'slf4j-api', version = '1.7.1'),
         @Grab(group = 'org.apache.httpcomponents', module = 'httpcore', version = '4.2'),
         @Grab(group = 'junit', module = 'junit', version = '4.10')
@@ -12,13 +12,12 @@
 import com.taskadapter.redmineapi.RedmineManager
 import com.taskadapter.redmineapi.RedmineManagerFactory
 import com.taskadapter.redmineapi.bean.Project
-import com.taskadapter.redmineapi.bean.Issue
-import com.taskadapter.redmineapi.bean.Tracker
-import com.taskadapter.redmineapi.bean.IssueFactory
-import com.taskadapter.redmineapi.bean.Version
-import com.taskadapter.redmineapi.bean.VersionFactory
-import groovy.json.JsonSlurper
-import org.apache.http.entity.ContentType;
+// import com.taskadapter.redmineapi.bean.Issue
+// import com.taskadapter.redmineapi.bean.Tracker
+// import com.taskadapter.redmineapi.bean.IssueFactory
+// import com.taskadapter.redmineapi.bean.Version
+// import com.taskadapter.redmineapi.bean.VersionFactory
+// import org.apache.http.entity.ContentType;
 
 def call(){
     def uri = "http://192.168.1.100:8080/"
