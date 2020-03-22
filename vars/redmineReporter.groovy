@@ -18,7 +18,7 @@ import com.taskadapter.redmineapi.bean.Project
 // import com.taskadapter.redmineapi.bean.Version
 // import com.taskadapter.redmineapi.bean.VersionFactory
 // import org.apache.http.entity.ContentType;
-
+@NonCPS
 def call(){
     def uri = "http://192.168.1.100:8080/"
     def apiAccessKey = "0c86aa59eeed3aca23b0973554deec18ebbd4182"
