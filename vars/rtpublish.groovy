@@ -1,6 +1,7 @@
 def call(){
     currentBuild.result = "SUCCESS"
     String result = currentBuild.result?:"SUCCESS"
+    String scmVars = env.scmVars?: "no scm vars"
     String build_id = env.BUILD_ID?: "0"
     String branch_name = env.BRANCH_NAME?: "Cannot find branch name"
     String job_base_name = env.JOB_BASE_NAME ?: "Base name"
@@ -16,7 +17,7 @@ def call(){
     //String basetRow = ""
     String stableText = ""
     
-    stableText += "<br><br><b>ROW 1</b>"
+    stableText += "<br><b>${scmVars}</b>"
     stableText += "<br><b>${build_id}</b>"
     stableText += "<br><b>${branch_name}</b>"
     stableText += "<br><b>${job_base_name}</b>"
