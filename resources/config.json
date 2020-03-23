@@ -14,7 +14,10 @@
         "toolchain": "/home/soft/riscv-sw/riscv-gcc-9.2.0-g3a2b213--200304T2355",
         "base" : {
             "repo": "scr4_release_tecon",
-            "branch": "scr4_release_nextsi"
+            "branch": "scr4_release_nextsi",
+            "scenarios": [
+                "regression_default_64_l1_uni_axi_cfg.yaml"
+            ]
         }
     }
 }
