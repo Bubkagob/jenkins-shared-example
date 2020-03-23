@@ -30,5 +30,5 @@ def call(){
     stableText += "<br><a href='http://localhost:8081/view/Test/job/REPORT/ws/Zmiany1/Zmiany1.html'>Zapisanie</a>"
 
 
-    //rtp parserName: 'HTML', stableText: "${stableText}"
+    rtp parserName: 'HTML', stableText: "${stableText}"
 }
