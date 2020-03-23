@@ -4,7 +4,7 @@ def call(currentBuild){
     rtp parserName: 'HTML', stableText: "<a href='http://localhost:8081/view/Test/job/REPORT/ws/ROBOT_DATA_INPUT_217.xlsx'>DANE WEJSCIOWE</a>"
 
     rtp parserName: 'HTML', stableText: "<br><br>LOGS: "
-    rtp parserName: 'HTML', stableText: currentBuild.result
+    rtp parserName: 'HTML', stableText: "${currentBuild.result}"
     String basetRow = ""
     String stableText = ""
     
