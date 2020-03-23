@@ -1,9 +1,10 @@
 def call(){
-    currentBuild.result = "SUCCESS"
+    //currentBuild.result = "SUCCESS"
     rtp parserName: 'HTML', stableText: "<a href='http://localhost:8081/view/Test/job/REPORT/ws/RPA_RAPORT_ROBOT_217.xlsx'>RAPORT</a>"
     rtp parserName: 'HTML', stableText: "<a href='http://localhost:8081/view/Test/job/REPORT/ws/ROBOT_DATA_INPUT_217.xlsx'>DANE WEJSCIOWE</a>"
 
     rtp parserName: 'HTML', stableText: "<br><br>LOGS: "
+    rtp parserName: 'HTML', stableText: currentBuild.result
     String basetRow = ""
     String stableText = ""
     
