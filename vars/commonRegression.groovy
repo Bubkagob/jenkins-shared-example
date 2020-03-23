@@ -106,9 +106,7 @@ def call(currentBuild, scenarios, repo, branch, mailRecipients) {
                     script {
                         def ts = new Date()
                         def resultObject = reportlib.generateTextReport("${WORKSPACE}/build")
-                        env.GIT_BRANCH = scmVars.GIT_BRANCH
                         env.BUILD_URL = "${BUILD_URL}"
-                        env.GIT_COMMIT = scmVars.GIT_COMMIT
                         env.START_TIME = "${BUILD_TIMESTAMP}"
                         env.BUILD_DATE = ts.format("yyyy-MM-dd", TimeZone.getTimeZone('Europe/Moscow'))
                         env.COMPLETE_TIME = ts.format("EEE, MMMM dd, yyyy, HH:mm:ss '('zzz')'", TimeZone.getTimeZone('Europe/Moscow'))
@@ -179,7 +177,7 @@ def call(currentBuild, scenarios, repo, branch, mailRecipients) {
         }
 
         post{
-            always {
+            success {
                 // slackSend(
                 //     channel: "#ci",
                 //     color: COLOR_MAP[currentBuild.currentResult],
@@ -187,6 +185,7 @@ def call(currentBuild, scenarios, repo, branch, mailRecipients) {
                 // )
                 script{
                     notificators.notifyGeneral(currentBuild.result)
+                    rtpublish()
                 }
                 emailext(
                     attachmentsPattern: "report.txt, report.html",
