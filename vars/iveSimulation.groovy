@@ -57,7 +57,6 @@ def call(currentBuild, repo, branch, mailRecipients, toolchain) {
                         chmod +x build_rtl_sim.sh
                         export SCENARIOS="TCM TCM_L1 TCM_L1_NOFPU TCM_NOFPU"
                         for SCENARIO in ${SCENARIOS} ; do
-                            echo "build "${SCENARIO}
                             $(PLF_SCENARIO=${SCENARIO} ./build_rtl_sim.sh > log_${SCENARIO}.txt 2>&1)
                         done
                         #chmod +x build_rtl_sim.sh
