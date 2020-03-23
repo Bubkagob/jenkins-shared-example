@@ -23,8 +23,8 @@ def call(){
     
     stableText += "<br><b>${scmVars}</b>"
     stableText += "<br><b>${build_id}</b>"
-    stableText += "<br><b>${scmVars.GIT_BRANCH}</b>"
-    stableText += "<br><b>${scmVars.GIT_COMMIT}</b>"
+    stableText += "<br><b>${env.scmVars.GIT_BRANCH}</b>"
+    stableText += "<br><b>${env.scmVars.GIT_COMMIT}</b>"
     stableText += "<br><b>${job_base_name}</b>"
     stableText += "<br><b>${build_url}</b>"
     stableText += "<br><a href='http://localhost:8081/view/Test/job/REPORT/ws/Logowanie1/Logowanie1.html'>Logowanie</a>"
