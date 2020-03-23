@@ -6,8 +6,8 @@ def call(){
     String build_url = env.BUILD_URL ?: "Build Url"
 
     String scmVars = env.scmVars?: "no scm vars"
-    String git_branch = env.scmVars.GIT_BRANCH?: "Cannot find branch name"
-    String git_commit = env.scmVars.GIT_COMMIT?: "Cannot find git_commit name"
+    //String git_branch = env.scmVars.GIT_BRANCH?: "Cannot find branch name"
+    //String git_commit = env.scmVars.GIT_COMMIT?: "Cannot find git_commit name"
     
     
 
@@ -23,8 +23,8 @@ def call(){
     
     stableText += "<br><b>${scmVars}</b>"
     stableText += "<br><b>${build_id}</b>"
-    stableText += "<br><b>${git_branch}</b>"
-    stableText += "<br><b>${git_commit}</b>"
+    stableText += "<br><b>${scmVars.GIT_BRANCH}</b>"
+    stableText += "<br><b>${scmVars.GIT_COMMIT}</b>"
     stableText += "<br><b>${job_base_name}</b>"
     stableText += "<br><b>${build_url}</b>"
     stableText += "<br><a href='http://localhost:8081/view/Test/job/REPORT/ws/Logowanie1/Logowanie1.html'>Logowanie</a>"
