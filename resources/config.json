@@ -1,0 +1,9 @@
+{
+    "version" : 1.0,
+    "tecon": {
+        "toolchain": "file"
+    },
+    "nextsi": {
+        "toolchain": "file"
+    }
+}
