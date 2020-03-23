@@ -1,9 +1,20 @@
 {
     "version" : 1.0,
     "tecon": {
-        "toolchain": "file"
+        "toolchain": "/home/soft/riscv-sw/180115-sc-riscv64-ge5275d6f",
+        "base" : {
+            "repo": "scr4_release_tecon",
+            "branch": "scr4_release_tecon",
+            "scenarios": [
+                "regression_default_tcm_l1_axi_cfg.yaml"
+            ]
+        }
     },
     "nextsi": {
-        "toolchain": "file"
+        "toolchain": "/home/soft/riscv-sw/riscv-gcc-9.2.0-g3a2b213--200304T2355",
+        "base" : {
+            "repo": "scr4_release_tecon",
+            "branch": "scr4_release_nextsi"
+        }
     }
 }
