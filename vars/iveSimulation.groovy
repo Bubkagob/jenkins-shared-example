@@ -55,7 +55,13 @@ def call(currentBuild, repo, branch, mailRecipients, toolchain) {
                         cd encr/ive
                         cd tests_src
                         chmod +x build_rtl_sim.sh
-                        ./build_rtl_sim.sh
+                        export SCENARIOS="TCM TCM_L1 TCM_L1_NOFPU TCM_NOFPU"
+                        for SCENARIO in ${SCENARIOS} ; do
+                            echo "build "${SCENARIO}
+                            $(PLF_SCENARIO=${SCENARIO} ./build_rtl_sim.sh > log_${SCENARIO}.txt 2>&1)
+                        done
+                        #chmod +x build_rtl_sim.sh
+                        #./build_rtl_sim.sh
                     """
                     sh "ls -la"
                 }
@@ -93,7 +99,7 @@ def call(currentBuild, repo, branch, mailRecipients, toolchain) {
                                 cd rtl_src
                                 export RISCV=${toolchain}
                                 export PATH=\$RISCV/bin:\$PATH
-                                make run_vcs MEM=${memory_name} platform_dir=scr4
+                                make make PLF_SCENARIO=tcm run_vcs MEM=${memory_name} platform_dir=scr4
                                 """
                             }
                         }
