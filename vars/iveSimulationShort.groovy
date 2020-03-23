@@ -17,6 +17,13 @@ def call(currentBuild, repo, branch, mailRecipients) {
         triggers{
             pollSCM('H/50 * * * *')
         }
+        // parameters {
+        //     choice(
+        //         name: "toolchain",
+        //         choices: ['development', 'development_ia', 'development_is'],
+        //         description: 'Select branch'
+        //     )
+        // }
         stages{
             stage('Checkout SCM') {
                 steps {
