@@ -21,8 +21,8 @@ def call(){
     //String basetRow = ""
     String stableText = ""
     
-    stableText += "<br><b>${GIT_BRANCH}</b>"
-    stableText += "<br><b>${GIT_COMMIT}</b>"
+    stableText += "<br><b>${scmVars.GIT_BRANCH}</b>"
+    stableText += "<br><b>${scmVars.GIT_COMMIT}</b>"
     //stableText += "<br><b>${git_branch}</b>"
     //stableText += "<br><b>${git_commit}</b>"
     stableText += "<br><b>${job_base_name}</b>"
