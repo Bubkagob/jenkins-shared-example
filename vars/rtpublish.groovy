@@ -5,8 +5,8 @@ def call(currentBuild){
 
     rtp parserName: 'HTML', stableText: "<br><br>LOGS: "
     rtp parserName: 'HTML', stableText: currentBuild.result
-    rtp parserName: 'HTML', stableText: "${BUILD_ID}"
-    rtp parserName: 'HTML', stableText: "${toolchain}"?:"Default toolchain"
+    rtp parserName: 'HTML', stableText: "${env.BUILD_ID}" 
+    rtp parserName: 'HTML', stableText: "${env.toolchain}"?:"Default toolchain"
     String basetRow = ""
     String stableText = ""
     
