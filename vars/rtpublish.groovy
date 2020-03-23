@@ -1,12 +1,14 @@
 def call(currentBuild){
     currentBuild.result = "SUCCESS"
+    String result = currentBuild.result?:"SUCCESS"
+    String build_id = env.BUILD_ID? "New Id"
     rtp parserName: 'HTML', stableText: "<a href='http://localhost:8081/view/Test/job/REPORT/ws/RPA_RAPORT_ROBOT_217.xlsx'>RAPORT</a>"
     rtp parserName: 'HTML', stableText: "<a href='http://localhost:8081/view/Test/job/REPORT/ws/ROBOT_DATA_INPUT_217.xlsx'>DANE WEJSCIOWE</a>"
 
     rtp parserName: 'HTML', stableText: "<br><br>LOGS: "
     rtp parserName: 'HTML', stableText: currentBuild.result
-    rtp parserName: 'HTML', stableText: "${env.BUILD_ID}" 
-    rtp parserName: 'HTML', stableText: "${env.toolchain}"?:"Default toolchain"
+    rtp parserName: 'HTML', stableText: "${build_id}" 
+    rtp parserName: 'HTML', stableText: "${result}"?:"Default toolchain"
     String basetRow = ""
     String stableText = ""
     
