@@ -7,13 +7,14 @@ def call(){
     String git_commit = env.GIT_COMMIT?: "no git commit"
     String git_url = env.GIT_URL ?: "no git url"
     String git_branch = env.GIT_BRANCH ?: "no git branch"
+    String toolchain_id = env.TOOLCHAIN ?: "default toolchain"
     String stableText = ""
     
     stableText += "<br>Project URL: <b>${git_url}</b>"
     stableText += "<br>Branch: <b>${git_branch}</b>"
     stableText += "<br>Commit id: <b>${git_commit}</b>"
+    stableText += "<br>Toolchain used: <font size='3' face='verdana' color='green'><b>${toolchain_id}</b></font></p>"
     //stableText += "<br><b>${job_base_name}</b>"
     //stableText += "<br>Job URL: <b>${build_url}</b>"
-    
     rtp parserName: 'HTML', stableText: "${stableText}"
 }

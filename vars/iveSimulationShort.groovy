@@ -1,6 +1,7 @@
 #!/usr/bin/env groovy
 def call(currentBuild, repo, branch, mailRecipients) {
     def toolchain = "/home/soft/riscv-sw/riscv-gcc-9.2.0-g3a2b213--200304T2355"
+    env.TOOLCHAIN = toolchain
     pipeline {
         agent {
             label "beta"
