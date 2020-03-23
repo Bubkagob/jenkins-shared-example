@@ -56,9 +56,9 @@ def call(currentBuild, repo, branch, mailRecipients, toolchain) {
                         cd tests_src
                         chmod +x build_rtl_sim.sh
                         export SCENARIOS="TCM TCM_L1 TCM_L1_NOFPU TCM_NOFPU"
-                        for SCENARIO in ${SCENARIOS} ; do
-                            $(PLF_SCENARIO=${SCENARIO} ./build_rtl_sim.sh > log_${SCENARIO}.txt 2>&1)
-                        done
+                        #for SCENARIO in ${SCENARIOS} ; do
+                        \$(PLF_SCENARIO=TCM ./build_rtl_sim.sh > log_\${SCENARIO}.txt 2>&1)
+                        #
                         #chmod +x build_rtl_sim.sh
                         #./build_rtl_sim.sh
                     """
