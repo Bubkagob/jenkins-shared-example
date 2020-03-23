@@ -93,7 +93,7 @@ def call(currentBuild, repo, branch, mailRecipients, toolchain) {
                                 cd rtl_src
                                 export RISCV=${toolchain}
                                 export PATH=\$RISCV/bin:\$PATH
-                                make make PLF_SCENARIO=tcm run_vcs MEM=${memory_name} platform_dir=scr4
+                                make PLF_SCENARIO=tcm run_vcs MEM=${memory_name} platform_dir=scr4
                                 """
                             }
                         }
