@@ -29,6 +29,20 @@ def notifyGeneral(String buildStatus = 'STARTED') {
         message: summary
     )
 
+    emailext(
+      attachmentsPattern: "report.txt, report.html",
+      attachLog: true,
+      compressLog: true,
+      body: '''${SCRIPT, template="regression.template"}''',
+      mimeType: 'text/html',
+      subject: "${currentBuild.fullDisplayName} ${currentBuild.durationString.minus(' and counting')} ${currentBuild.currentResult}",
+      to: "${mailRecipients}",
+      replyTo: "${mailRecipients}"
+                    //recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+                    //recipientProviders: [[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+                    //recipientProviders: [[$class: 'CulpritsRecipientProvider']]
+    )
+
   //emailext(
   //    subject: subject,
   //    body: details,
