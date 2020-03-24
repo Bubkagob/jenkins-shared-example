@@ -18,7 +18,7 @@ def call(){
                     alwaysLinkToLastBuild: true,
                     keepAll: true,
                     reportDir: "build/axi_rvimc/coverage",
-                    reportFiles: '*',
+                    reportFiles: '',
                     reportName: 'Regression Coverage Report',
                     reportTitles: 'The Report'
                 ]
