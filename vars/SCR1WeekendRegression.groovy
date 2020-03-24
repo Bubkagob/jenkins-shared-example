@@ -40,7 +40,11 @@ def call(currentBuild, repo, branch, mailRecipients) {
                        echo "env.BUILD_USER_ID=${env.BUILD_USER_ID}"
                        echo "env.BUILD_USER_EMAIL=${env.BUILD_USER_EMAIL}"
                    }
-
+                         echo "env.BUILD_USER=${env.BUILD_USER}"
+                       echo "env.BUILD_USER_FIRST_NAME=${env.BUILD_USER_FIRST_NAME}"
+                       echo "env.BUILD_USER_LAST_NAME=${env.BUILD_USER_LAST_NAME}"
+                       echo "env.BUILD_USER_ID=${env.BUILD_USER_ID}"
+                       echo "env.BUILD_USER_EMAIL=${env.BUILD_USER_EMAIL}"
                         scmVars = scmCheckout(repo, branch)
                     }
 
