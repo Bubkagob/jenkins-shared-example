@@ -39,6 +39,52 @@ def call(currentBuild, repo, branch, mailRecipients) {
                     }
                 }
             }
+
+            stage("Run single test"){
+                agent{
+                    label "power"
+                }
+                steps{
+                    echo "========Run DRY test========" 
+                    sh '''
+                        #!/bin/bash -l
+                        hostname
+                        ls -la
+                        cd scripts
+                        chmod +x run_all_configs.sh
+                        sed -i -- 's/axi ahb/axi/g' run_all_configs.sh
+                        sed -i -- 's/rvimc rvimc_min rvic rvec/rvimc/g' run_all_configs.sh
+                        sed '35,50 {s/^/#/}' ../tests/_scenarios/scr1/regression_*
+                        ls -la ../tests/_scenarios/scr1/
+                        sed -i -- 's/mode: cli/mode: coverage/g' ../tests/_scenarios/scr1/regression_*
+                        #cat ../tests/common/tools/reporters/analyzer.py 
+                        ./run_all_configs.sh
+                    '''
+                }
+            }
+            stage("Run ALL CONFIGS"){
+                agent{
+                    label "power"
+                }
+                steps{
+                    echo "========Run All Configs ========" 
+                    sh '''
+                        #!/bin/bash -l
+                        cd scripts
+                        sed -i -- 's/axi/axi ahb/g' run_all_configs.sh
+                        sed -i -- 's/rvimc/rvimc rvimc_min rvic rvec/g' run_all_configs.sh
+                        sed '35,50 {s/^//}' ../tests/_scenarios/scr1/regression_*
+                        #./run_all_configs.sh
+                    '''
+                }
+            }
+            stage('Analyse/Collect') {
+                steps {
+                    script {
+                        analyzeCollect()
+                    }
+                }
+            }
         }
     }
 }
