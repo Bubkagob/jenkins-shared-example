@@ -28,6 +28,8 @@ def call(currentBuild, repo, branch, mailRecipients) {
                 steps {
                     script {
                         echo "${BUILD_USER}"
+                        echo "${BUILD_USER_ID}"
+                        echo "${BUILD_USER_EMAIL}"
                         scmVars = scmCheckout(repo, branch)
                     }
                 }
