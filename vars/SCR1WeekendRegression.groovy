@@ -135,26 +135,17 @@ def call(currentBuild, repo, branch, mailRecipients) {
                 }
             }
         }
-        post{
-            always{
+        post {
+            success {
                 // slackSend(
                 //     channel: "#ci",
                 //     color: COLOR_MAP[currentBuild.currentResult],
                 //     message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} in time ${currentBuild.durationString.minus(' and counting')}\nMore info at: ${env.BUILD_URL}\n${REPORT}\n"
                 // )
-                // emailext(
-                //     attachmentsPattern: "report.txt, report.html",
-                //     attachLog: true,
-                //     compressLog: true,
-                //     body: '''${SCRIPT, template="regression.template"}''',
-                //     mimeType: 'text/html',
-                //     subject: "${currentBuild.fullDisplayName} ${currentBuild.durationString.minus(' and counting')} ${currentBuild.currentResult}",
-                //     to: "${mailRecipients}",
-                //     replyTo: "${mailRecipients}",
-                //     //recipientProviders: [[$class: 'CulpritsRecipientProvider']]
-                // )
-            }
-            success{
+                script{
+                    notificators.notifyGeneral(currentBuild.result)
+                    rtpublish()
+                }
                 emailext(
                     attachmentsPattern: "report.txt, report.html",
                     attachLog: true,
@@ -163,14 +154,11 @@ def call(currentBuild, repo, branch, mailRecipients) {
                     mimeType: 'text/html',
                     subject: "${currentBuild.fullDisplayName} ${currentBuild.durationString.minus(' and counting')} ${currentBuild.currentResult}",
                     to: "${mailRecipients}",
-                    replyTo: "${mailRecipients}",
+                    replyTo: "${mailRecipients}"
+                    //recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+                    //recipientProviders: [[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']],
                     //recipientProviders: [[$class: 'CulpritsRecipientProvider']]
                 )
-            }
-            failure{
-                script{
-                    notificators.notifyGeneral(currentBuild.result)
-                }
             }
         }
     }
