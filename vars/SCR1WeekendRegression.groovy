@@ -93,7 +93,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
                         archive: true,
                         zipFile: 'artifacts.zip',
                         dir: 'build',
-                        glob: '**/*results.txt, *failed.txt, **/*.xlsx, **/*.json, **/build.log'
+                        glob: '**/coverage/*, **/*results.txt, *failed.txt, **/*.xlsx, **/*.json, **/build.log'
                     )
                 }
             }
@@ -101,7 +101,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
                 steps {
                     script {
                         downloadArtifacts()
-                        publishHTML()
+                        publishWWW()
                     }
                 }
             }

@@ -15,7 +15,7 @@ def call(){
             publishHTML(
                 target : [
                     allowMissing: false,
-                    alwaysLinkToLastBuild: true,
+                    alwaysLinkToLastBuild: false,
                     keepAll: true,
                     reportDir: "build/axi_rvimc/coverage",
                     reportFiles: '',
