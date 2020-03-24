@@ -82,6 +82,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
                 steps {
                     script {
                         analyzeCollect()
+                        publishHTML()
                     }
                 }
             }
