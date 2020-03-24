@@ -30,5 +30,8 @@ def call(String repo, String branch) {
             }
         }
     }
+    env.GIT_COMMIT = scmVars.GIT_COMMIT
+    env.GIT_URL = scmVars.GIT_URL
+    env.GIT_BRANCH = scmVars.GIT_BRANCH
     return scmVars
 }
