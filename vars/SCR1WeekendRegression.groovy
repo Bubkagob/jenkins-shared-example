@@ -27,6 +27,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
             stage('Checkout SCM') {
                 steps {
                     script {
+                        echo "${BUILD_USER}"
                         scmVars = scmCheckout(repo, branch)
                     }
                 }
