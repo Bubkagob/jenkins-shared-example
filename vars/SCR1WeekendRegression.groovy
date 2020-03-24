@@ -116,7 +116,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
                         env.BUILD_DATE = ts.format("yyyy-MM-dd", TimeZone.getTimeZone('Europe/Moscow'))
                         env.COMPLETE_TIME = ts.format("EEE, MMMM dd, yyyy, HH:mm:ss '('zzz')'", TimeZone.getTimeZone('Europe/Moscow'))
                         env.REPORT = resultObject["report"]
-                        env.TOTAL_TESTS = resultObject["total"]
+                        //env.TOTAL_TESTS = resultObject["total"]
                         env.FAILED_TESTS = resultObject["failed"]
                         writeFile(
                             file: "report.txt",
@@ -136,7 +136,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
             }
         }
         post {
-            success {
+            always {
                 // slackSend(
                 //     channel: "#ci",
                 //     color: COLOR_MAP[currentBuild.currentResult],
