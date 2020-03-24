@@ -27,9 +27,9 @@ def call(currentBuild, repo, branch, mailRecipients) {
             stage('Checkout SCM') {
                 steps {
                     script {
+                        def user = env.BUILD_USER_ID
                         echo "${BUILD_USER}"
-                        echo "${BUILD_USER_ID}"
-                        echo "${BUILD_USER_EMAIL}"
+                        echo "${user}"
                         scmVars = scmCheckout(repo, branch)
                     }
                 }
