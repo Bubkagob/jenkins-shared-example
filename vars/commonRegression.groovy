@@ -6,7 +6,7 @@ def call(currentBuild, scenarios, repo, branch, mailRecipients) {
             label "beta"
         }
         environment {
-            BUILD_USER = currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
+            BUILD_USER = currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()?: "poll SCM"
             FTP_DIR = new Date().format("yy_MM_dd_${BUILD_NUMBER}", TimeZone.getTimeZone('Europe/Moscow'))
         }
         options {
@@ -88,16 +88,11 @@ def call(currentBuild, scenarios, repo, branch, mailRecipients) {
                     )
                 }
             }
-            stage("Download artifacts from 110VM"){
-                steps{
-                    echo "========build & run drhtystone test========"
-                    sh "scp -o StrictHostKeyChecking=no -P 64013 physdesign@192.168.1.110:/home/work/jenkins/workspace/${JOB_NAME}/artifacts.zip artifacts.zip"
-                    sh 'ls -la'
-                    unzip(
-                        zipFile: 'artifacts.zip',
-                        dir: 'build'
-                    )
-                    sh 'ls -la'
+            stage('Download From Artifacts from VM') {
+                steps {
+                    script {
+                        downloadArtifacts()
+                    }
                 }
             }
             stage("Generate reports"){
@@ -130,23 +125,10 @@ def call(currentBuild, scenarios, repo, branch, mailRecipients) {
                 }
             }
 
-            stage("Publish html"){
-                steps{
-                    echo "======== Publish HTML report ========"
+            stage('Publish html') {
+                steps {
                     script {
-                        if (fileExists('report.html')) {
-                            publishHTML(
-                                target : [
-                                    allowMissing: false,
-                                    alwaysLinkToLastBuild: true,
-                                    keepAll: true,
-                                    reportDir: '',
-                                    reportFiles: 'report.html',
-                                    reportName: 'Regression Report',
-                                    reportTitles: 'The Report'
-                                ]
-                            )
-                        }
+                        publishWWW()
                     }
                 }
             }
@@ -177,29 +159,11 @@ def call(currentBuild, scenarios, repo, branch, mailRecipients) {
         }
 
         post{
-            success {
-                // slackSend(
-                //     channel: "#ci",
-                //     color: COLOR_MAP[currentBuild.currentResult],
-                //     message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} in time ${currentBuild.durationString.minus(' and counting')}\nMore info at: ${env.BUILD_URL}\n${REPORT}\n"
-                // )
+            always {
                 script{
                     notificators.notifyGeneral(currentBuild.result)
                     rtpublish()
                 }
-                emailext(
-                    attachmentsPattern: "report.txt, report.html",
-                    attachLog: true,
-                    compressLog: true,
-                    body: '''${SCRIPT, template="regression.template"}''',
-                    mimeType: 'text/html',
-                    subject: "${currentBuild.fullDisplayName} ${currentBuild.durationString.minus(' and counting')} ${currentBuild.currentResult}",
-                    to: "${mailRecipients}",
-                    replyTo: "${mailRecipients}"
-                    //recipientProviders: [[$class: 'DevelopersRecipientProvider']]
-                    //recipientProviders: [[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']],
-                    //recipientProviders: [[$class: 'CulpritsRecipientProvider']]
-                )
             }
         }
     }
