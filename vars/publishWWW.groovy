@@ -12,7 +12,7 @@ def call(){
                     reportTitles: 'The Report']
                 )
             }
-            fileList = findFiles(glob: 'index.html')
+            fileList = findFiles(glob: '**/*index.html')
             fileDir = fileList[0].path.minus(fileList[0].name)
             echo "Here is Dir"
             echo fileDir
