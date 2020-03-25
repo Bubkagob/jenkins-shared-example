@@ -12,9 +12,9 @@ def call(){
                     reportTitles: 'The Report']
                 )
             }
-            for (f in findFiles(glob: "**/*dashboard.html")){
-               echo f.path
-               echo f.path.minus(founded.name)
+            for (founded in findFiles(glob: "**/*dashboard.html")){
+               echo founded.path
+               echo founded.path.minus(founded.name)
             }
             // fileList = findFiles(glob: '**/*dashboard.html')
             // fileList.each{
