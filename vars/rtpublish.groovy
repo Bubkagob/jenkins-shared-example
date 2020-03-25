@@ -10,7 +10,8 @@ def call(){
     String git_branch = env.GIT_BRANCH ?: "no git branch"
     String toolchain_id = env.TOOLCHAIN ?: "default toolchain"
     Float coverage = Float.parseFloat(env.coverageScore?: "0.0") 
-    badge.setStatus(coverage.toString())
+    badge.setStatus("coverage.toString()")
+    badge.setColor('red')
     if (coverage < 95 ){
         badge.setColor('green')
     } else {
