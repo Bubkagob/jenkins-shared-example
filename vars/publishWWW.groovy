@@ -13,6 +13,21 @@ def call(){
                 )
             }
             for (founded in findFiles(glob: "**/*dashboard.html")){
+                echo founded.path
+                echo founded.path.minus(founded.name)
+                publishHTML(
+                    target : [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: "build/axi_rvimc/coverage",
+                        reportFiles: '',
+                        reportName: 'Regression Coverage Report',
+                        reportTitles: 'The Report'
+                    ]
+                )
+            }
+            for (founded in findFiles(glob: "**/*dasboard.html")){
                echo founded.path
                echo founded.path.minus(founded.name)
             }
@@ -27,17 +42,7 @@ def call(){
             // echo "Here is Dir"
             // echo fileDir
             
-            publishHTML(
-                target : [
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: false,
-                    keepAll: true,
-                    reportDir: "build/axi_rvimc/coverage",
-                    reportFiles: '',
-                    reportName: 'Regression Coverage Report',
-                    reportTitles: 'The Report'
-                ]
-            )
+            
         } 
     }
 }
