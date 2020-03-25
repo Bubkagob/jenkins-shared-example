@@ -9,6 +9,7 @@ def call(){
     String git_branch = env.GIT_BRANCH ?: "no git branch"
     String toolchain_id = env.TOOLCHAIN ?: "default toolchain"
     String stableText = ""
+    stableText += "<img src='${build_url}badge/icon'>"
     stableText += "<br>Build URL: <font size='2' face='Helvetica' color='blue'><b>${build_url}</b></font>"
     stableText += "<br>Project URL: <font size='2' face='Helvetica' color='blue'><b>${git_url}</b></font>"
     stableText += "<br>Branch: <font size='2' face='Helvetica' color='blue'><b>${git_branch}</b></font>"
