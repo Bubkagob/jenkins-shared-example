@@ -28,6 +28,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
             stage('Checkout SCM') {
                 steps {
                     script {
+                        echo "${BUILD_URL}"
                         buildBadge.setStatus('running')
                         buildBadge.setColor('blue')
                         scmVars = scmCheckout(repo, branch)
