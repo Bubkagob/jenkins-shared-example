@@ -14,7 +14,7 @@ def call(){
             }
             for (founded in findFiles(glob: "**/*dashboard.html")){
                 def dirName = founded.path.minus(founded.name)
-                def score = sh("cat ${dirName}dashboard.html |  grep 's8 cl rt' |  grep -o '[0-9][0-9].[0-99][0-9]' | head -1")
+                def score = sh(script: "cat ${dirName}dashboard.html |  grep 's8 cl rt' |  grep -o '[0-9][0-9].[0-99][0-9]' | head -1", returnStdout: true).trim()
                 echo score
                 publishHTML(
                     target : [
