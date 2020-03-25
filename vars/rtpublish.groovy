@@ -8,8 +8,10 @@ def call(){
     String git_url = env.GIT_URL ?: "no git url"
     String git_branch = env.GIT_BRANCH ?: "no git branch"
     String toolchain_id = env.TOOLCHAIN ?: "default toolchain"
+    Float coverage = env.coverageScore ?: 0.0
     String stableText = ""
     stableText += "<br><img src='${build_url}badge/icon'>"
+    stableText += "<br>Coverage score: <font size='2' face='Helvetica' color='blue'><b>${coverage}</b></font>"
     stableText += "<br>Build URL: <font size='2' face='Helvetica' color='blue'><b>${build_url}</b></font>"
     stableText += "<br>Project URL: <font size='2' face='Helvetica' color='blue'><b>${git_url}</b></font>"
     stableText += "<br>Branch: <font size='2' face='Helvetica' color='blue'><b>${git_branch}</b></font>"
