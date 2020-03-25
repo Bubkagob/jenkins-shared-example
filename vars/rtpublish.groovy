@@ -1,5 +1,5 @@
 def call(){
-    def buildBadge = addEmbeddableBadgeConfiguration(id: 'build', subject: 'Coverage')
+    def buildBadge = addEmbeddableBadgeConfiguration(id: 'Coverage', subject: 'Coverage')
     currentBuild.result = "SUCCESS"
     String result = currentBuild.result?:"SUCCESS"
     String build_id = env.BUILD_ID?: "0"
