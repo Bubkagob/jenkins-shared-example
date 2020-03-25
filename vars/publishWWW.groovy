@@ -13,9 +13,15 @@ def call(){
                 )
             }
             fileList = findFiles(glob: '**/*dashboard.html')
-            fileDir = fileList[0].path.minus(fileList[0].name)
-            echo "Here is Dir"
-            echo fileDir
+            fileList.each{
+                founded->
+                coverageDir.path.minus(founded.name)
+                echo "Here is Dir"
+                echo founded
+            }
+            // fileDir = fileList[0].path.minus(fileList[0].name)
+            // echo "Here is Dir"
+            // echo fileDir
             
             publishHTML(
                 target : [
