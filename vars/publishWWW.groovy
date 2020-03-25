@@ -15,12 +15,13 @@ def call(){
             for (founded in findFiles(glob: "**/*dashboard.html")){
                 echo founded.path
                 echo founded.path.minus(founded.name)
+                def dirName = founded.path.minus(founded.name)
                 publishHTML(
                     target : [
                         allowMissing: false,
                         alwaysLinkToLastBuild: false,
                         keepAll: true,
-                        reportDir: "build/axi_rvimc/coverage",
+                        reportDir: "${dirName}",
                         reportFiles: '',
                         reportName: 'Regression Coverage Report',
                         reportTitles: 'The Report'
