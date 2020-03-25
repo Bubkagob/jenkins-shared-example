@@ -9,8 +9,7 @@ def call(){
     String git_url = env.GIT_URL ?: "no git url"
     String git_branch = env.GIT_BRANCH ?: "no git branch"
     String toolchain_id = env.TOOLCHAIN ?: "default toolchain"
-    Float zeroValue = 0.0
-    Float.parseFloat(env.coverageScore?: zeroValue) 
+    Float.parseFloat(env.coverageScore?: "0.0") 
     if (coverage > 95 ){
         buildBadge.setColor('green')
     }else {
