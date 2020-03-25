@@ -15,7 +15,7 @@ def call(){
             fileList = findFiles(glob: '**/*dashboard.html')
             fileList.each{
                 founded->
-                coverageDir = founded.path.minus(founded.name)
+                coverageDir = founded.path.minus(founded.name).toString()
                 echo "Here is Dir"
                 echo founded
             }
