@@ -12,13 +12,16 @@ def call(){
                     reportTitles: 'The Report']
                 )
             }
-            fileList = findFiles(glob: '**/*dashboard.html')
-            fileList.each{
-                founded->
-                coverageDir = founded.path.minus(founded.name).toString()
-                echo "Here is Dir"
-                echo founded
+            for (f in findFiles(glob: "**/*dashboard.html")){
+               echo f.path 
             }
+            // fileList = findFiles(glob: '**/*dashboard.html')
+            // fileList.each{
+            //     founded->
+            //     coverageDir = founded.path.minus(founded.name).toString()
+            //     echo "Here is Dir"
+            //     echo founded
+            // }
             // fileDir = fileList[0].path.minus(fileList[0].name)
             // echo "Here is Dir"
             // echo fileDir
