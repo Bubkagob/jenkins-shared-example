@@ -6,7 +6,7 @@ def call(currentBuild, repo, branch, mailRecipients, toolchain) {
             label "beta"
         }
         environment {
-            BUILD_USER = currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
+            //BUILD_USER = currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
             FTP_DIR = new Date().format("yy_MM_dd_${BUILD_NUMBER}", TimeZone.getTimeZone('Europe/Moscow'))
         }
         options {
