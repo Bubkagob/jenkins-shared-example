@@ -1,5 +1,6 @@
 #!/usr/bin/env groovy
 def call(currentBuild, repo, branch, mailRecipients) {
+    def buildBadge = addEmbeddableBadgeConfiguration()
     pipeline {
         agent {
             label "beta"
@@ -27,6 +28,8 @@ def call(currentBuild, repo, branch, mailRecipients) {
             stage('Checkout SCM') {
                 steps {
                     script {
+                        buildBadge.setStatus('fetching')
+                        buildBadge.setColor('blue')
                         scmVars = scmCheckout(repo, branch)
                     }
                 }
@@ -85,6 +88,8 @@ def call(currentBuild, repo, branch, mailRecipients) {
                 steps{
                     echo "======== Generate failed.txt ========"
                     script {
+                        buildBadge.setStatus('analyzing')
+                        buildBadge.setColor('green')
                         if (fileExists('artifacts.zip')) {
                             sh "rm artifacts.zip"
                         }
@@ -97,10 +102,14 @@ def call(currentBuild, repo, branch, mailRecipients) {
                     )
                 }
             }
-            stage('Analyse/Collect') {
+            stage('Downloading') {
                 steps {
                     script {
+                        buildBadge.setStatus('downloading')
+                        buildBadge.setColor('green')
                         downloadArtifacts()
+                        buildBadge.setStatus('publishing')
+                        buildBadge.setColor('pink')
                         publishWWW()
                     }
                 }

@@ -13,8 +13,6 @@ def call(){
                 )
             }
             for (founded in findFiles(glob: "**/*dashboard.html")){
-                echo founded.path
-                echo founded.path.minus(founded.name)
                 def dirName = founded.path.minus(founded.name)
                 publishHTML(
                     target : [
@@ -27,10 +25,6 @@ def call(){
                         reportTitles: 'The Report'
                     ]
                 )
-            }
-            for (founded in findFiles(glob: "**/*dasboard.html")){
-               echo founded.path
-               echo founded.path.minus(founded.name)
             }
             // fileList = findFiles(glob: '**/*dashboard.html')
             // fileList.each{

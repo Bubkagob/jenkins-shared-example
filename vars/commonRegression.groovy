@@ -15,7 +15,7 @@ def call(currentBuild, scenarios, repo, branch, mailRecipients) {
             timestamps()
         }
         triggers{
-            pollSCM('H/50 * * * *')
+            pollSCM('H/5 * * * *')
         }
         parameters {
             extendedChoice(
