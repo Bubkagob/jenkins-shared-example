@@ -1,6 +1,5 @@
 #!/usr/bin/env groovy
 def call(currentBuild, repo, branch, mailRecipients) {
-    def buildBadge = addEmbeddableBadgeConfiguration(id: 'build', subject: 'Build')
     pipeline {
         agent {
             label "beta"
@@ -28,9 +27,6 @@ def call(currentBuild, repo, branch, mailRecipients) {
             stage('Checkout SCM') {
                 steps {
                     script {
-                        echo "${BUILD_URL}"
-                        buildBadge.setStatus('running')
-                        buildBadge.setColor('blue')
                         scmVars = scmCheckout(repo, branch)
                     }
                 }
@@ -89,8 +85,6 @@ def call(currentBuild, repo, branch, mailRecipients) {
                 steps{
                     echo "======== Generate failed.txt ========"
                     script {
-                        buildBadge.setStatus('running')
-                        buildBadge.setColor('green')
                         if (fileExists('artifacts.zip')) {
                             sh "rm artifacts.zip"
                         }
@@ -106,11 +100,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
             stage('Downloading') {
                 steps {
                     script {
-                        buildBadge.setStatus('running')
-                        buildBadge.setColor('green')
                         downloadArtifacts()
-                        buildBadge.setStatus('publishing')
-                        buildBadge.setColor('pink')
                         publishWWW()
                     }
                 }
@@ -153,8 +143,8 @@ def call(currentBuild, repo, branch, mailRecipients) {
                 //     message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} in time ${currentBuild.durationString.minus(' and counting')}\nMore info at: ${env.BUILD_URL}\n${REPORT}\n"
                 // )
                 script{
-                    notificators.notifyGeneral(currentBuild.result)
                     rtpublish()
+                    notificators.notifyGeneral(currentBuild.result)
                 }
                 // emailext(
                 //     attachmentsPattern: "report.txt, report.html",
