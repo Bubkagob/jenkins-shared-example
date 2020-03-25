@@ -1,5 +1,5 @@
 def call(){
-    def buildBadge = addEmbeddableBadgeConfiguration(id: 'Coverage', subject: 'Coverage')
+    def badge = addEmbeddableBadgeConfiguration(id: "build", subject: "Coverage")
     currentBuild.result = "SUCCESS"
     String result = currentBuild.result?:"SUCCESS"
     String build_id = env.BUILD_ID?: "0"
@@ -10,11 +10,11 @@ def call(){
     String git_branch = env.GIT_BRANCH ?: "no git branch"
     String toolchain_id = env.TOOLCHAIN ?: "default toolchain"
     Float coverage = Float.parseFloat(env.coverageScore?: "0.0") 
-    buildBadge.setStatus(coverage.toString())
-    if (coverage > 95 ){
-        buildBadge.setColor('green')
-    }else {
-        buildBadge.setColor('red')
+    badge.setStatus(coverage.toString())
+    if (coverage < 95 ){
+        badge.setColor('green')
+    } else {
+        badge.setColor('red')
     }
     String stableText = ""
     stableText += "<br><img src='${build_url}badge/icon'>"
