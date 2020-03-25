@@ -28,7 +28,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
             stage('Checkout SCM') {
                 steps {
                     script {
-                        buildBadge.setStatus('fetching')
+                        buildBadge.setStatus('running')
                         buildBadge.setColor('blue')
                         scmVars = scmCheckout(repo, branch)
                     }
@@ -88,7 +88,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
                 steps{
                     echo "======== Generate failed.txt ========"
                     script {
-                        buildBadge.setStatus('analyzing')
+                        buildBadge.setStatus('running')
                         buildBadge.setColor('green')
                         if (fileExists('artifacts.zip')) {
                             sh "rm artifacts.zip"
@@ -105,7 +105,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
             stage('Downloading') {
                 steps {
                     script {
-                        buildBadge.setStatus('downloading')
+                        buildBadge.setStatus('running')
                         buildBadge.setColor('green')
                         downloadArtifacts()
                         buildBadge.setStatus('publishing')
