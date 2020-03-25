@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 def call(currentBuild, repo, branch, mailRecipients) {
-    def buildBadge = addEmbeddableBadgeConfiguration()
+    def buildBadge = addEmbeddableBadgeConfiguration(id: "SCR1BuildBadge")
     pipeline {
         agent {
             label "beta"
