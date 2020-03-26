@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 def call(currentBuild, repo, branch, mailRecipients, toolchain) {
     env.TOOLCHAIN = toolchain
-    
+    def scenarios = ["TCM", "TCM_NOFPU", "TCM_L1", "TCM_L1_NOFPU"]
     pipeline {
         agent {
             label "beta"
@@ -48,7 +48,7 @@ def call(currentBuild, repo, branch, mailRecipients, toolchain) {
                 }
                 steps{
                     script {
-                        def scenarios = ["TCM", "TCM_NOFPU", "TCM_L1", "TCM_L1_NOFPU"]
+                        
                         scenarios.each{ scenario ->
                             stage("Run simulation ${memory_name}"){
                                 sh """
@@ -91,7 +91,7 @@ def call(currentBuild, repo, branch, mailRecipients, toolchain) {
                 }
                 steps {
                     script {
-                        def scenarios = ["TCM", "TCM_NOFPU", "TCM_L1", "TCM_L1_NOFPU"]
+                        
                         scenarios.each{ scenario ->
                             stage("Run simulation ${memory_name}"){
                                 sh """
