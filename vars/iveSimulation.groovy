@@ -47,8 +47,8 @@ def call(currentBuild, repo, branch, mailRecipients, toolchain) {
                     label "power"
                 }
                 steps{
-                    def scenarios = ["TCM", "TCM_NOFPU", "TCM_L1", "TCM_L1_NOFPU"]
-                    scenarios.each{ scenario ->
+                    def scenarios1 = ["TCM", "TCM_NOFPU", "TCM_L1", "TCM_L1_NOFPU"]
+                    scenarios1.each{ scenario ->
                         stage("Run simulation ${memory_name}"){
                             sh """
                             #!/bin/bash -l
@@ -89,8 +89,8 @@ def call(currentBuild, repo, branch, mailRecipients, toolchain) {
                 }
                 steps {
                     script {
-                        def scenarios = ["TCM", "TCM_NOFPU", "TCM_L1", "TCM_L1_NOFPU"]
-                        scenarios.each{ scenario ->
+                        def scenarios2 = ["TCM", "TCM_NOFPU", "TCM_L1", "TCM_L1_NOFPU"]
+                        scenarios2.each{ scenario ->
                             stage("Run simulation ${memory_name}"){
                                 sh """
                                 #!/bin/bash -l
