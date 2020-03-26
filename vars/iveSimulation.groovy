@@ -47,22 +47,24 @@ def call(currentBuild, repo, branch, mailRecipients, toolchain) {
                     label "power"
                 }
                 steps{
-                    def scenarios1 = ["TCM", "TCM_NOFPU", "TCM_L1", "TCM_L1_NOFPU"]
-                    scenarios1.each{ scenario ->
-                        stage("Run simulation ${memory_name}"){
-                            sh """
-                            #!/bin/bash -l
-                            export RISCV=${toolchain}
-                            export PATH=\$RISCV/bin:\$PATH
-                            cd encr/ive
-                            cd tests_src
-                            chmod +x build_rtl_sim.sh
-                            make PLF_SCENARIO=${scenario} run_vcs MEM=tcm
-                            \$(PLF_SCENARIO=${scenario} ./build_rtl_sim.sh > log_TCM.txt 2>&1)
-                            """
+                    script {
+                        def scenarios = ["TCM", "TCM_NOFPU", "TCM_L1", "TCM_L1_NOFPU"]
+                        scenarios.each{ scenario ->
+                            stage("Run simulation ${memory_name}"){
+                                sh """
+                                #!/bin/bash -l
+                                export RISCV=${toolchain}
+                                export PATH=\$RISCV/bin:\$PATH
+                                cd encr/ive
+                                cd tests_src
+                                chmod +x build_rtl_sim.sh
+                                make PLF_SCENARIO=${scenario} run_vcs MEM=tcm
+                                \$(PLF_SCENARIO=${scenario} ./build_rtl_sim.sh > log_TCM.txt 2>&1)
+                                """
+                            }
                         }
+                        sh "ls -la"
                     }
-                    sh "ls -la"
                 }
             }
 
@@ -89,8 +91,8 @@ def call(currentBuild, repo, branch, mailRecipients, toolchain) {
                 }
                 steps {
                     script {
-                        def scenarios2 = ["TCM", "TCM_NOFPU", "TCM_L1", "TCM_L1_NOFPU"]
-                        scenarios2.each{ scenario ->
+                        def scenarios = ["TCM", "TCM_NOFPU", "TCM_L1", "TCM_L1_NOFPU"]
+                        scenarios.each{ scenario ->
                             stage("Run simulation ${memory_name}"){
                                 sh """
                                 #!/bin/bash -l
