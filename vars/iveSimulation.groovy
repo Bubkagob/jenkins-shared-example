@@ -58,7 +58,6 @@ def call(currentBuild, repo, branch, mailRecipients, toolchain) {
                                 cd encr/ive
                                 cd tests_src
                                 chmod +x build_rtl_sim.sh
-                                make PLF_SCENARIO=${scenario} run_vcs MEM=tcm
                                 \$(PLF_SCENARIO=${scenario} ./build_rtl_sim.sh > log_TCM.txt 2>&1)
                                 """
                             }
