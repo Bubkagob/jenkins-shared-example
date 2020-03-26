@@ -50,7 +50,7 @@ def call(currentBuild, repo, branch, mailRecipients, toolchain) {
                     script {
                         
                         scenarios.each{ scenario ->
-                            stage("Run simulation ${memory_name}"){
+                            stage("Run simulation ${scenario}"){
                                 sh """
                                 #!/bin/bash -l
                                 export RISCV=${toolchain}
@@ -93,7 +93,7 @@ def call(currentBuild, repo, branch, mailRecipients, toolchain) {
                     script {
                         
                         scenarios.each{ scenario ->
-                            stage("Run simulation ${memory_name}"){
+                            stage("Run simulation ${scenario}"){
                                 sh """
                                 #!/bin/bash -l
                                 cd encr/ive
