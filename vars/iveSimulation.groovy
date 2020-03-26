@@ -1,6 +1,7 @@
 #!/usr/bin/env groovy
 def call(currentBuild, repo, branch, mailRecipients, toolchain) {
     env.TOOLCHAIN = toolchain
+    def scenarios = ["TCM", "TCM_NOFPU", "TCM_L1", "TCM_L1_NOFPU"]
     pipeline {
         agent {
             label "beta"
@@ -29,8 +30,6 @@ def call(currentBuild, repo, branch, mailRecipients, toolchain) {
                 steps {
                     script {
                         scmVars = scmSimpleCheckout(repo, branch)
-                        sh "git status"
-                        sh "ls -lat"
                     }
                 }
             }
@@ -48,15 +47,20 @@ def call(currentBuild, repo, branch, mailRecipients, toolchain) {
                     label "power"
                 }
                 steps{
-                    sh """
-                        #!/bin/bash -l
-                        export RISCV=${toolchain}
-                        export PATH=\$RISCV/bin:\$PATH
-                        cd encr/ive
-                        cd tests_src
-                        chmod +x build_rtl_sim.sh
-                        \$(PLF_SCENARIO=TCM ./build_rtl_sim.sh > log_TCM.txt 2>&1)
-                    """
+                    scenarios.each{ scenario ->
+                        stage("Run simulation ${memory_name}"){
+                            sh """
+                            #!/bin/bash -l
+                            export RISCV=${toolchain}
+                            export PATH=\$RISCV/bin:\$PATH
+                            cd encr/ive
+                            cd tests_src
+                            chmod +x build_rtl_sim.sh
+                            make PLF_SCENARIO=${scenario} run_vcs MEM=tcm
+                            \$(PLF_SCENARIO=${scenario} ./build_rtl_sim.sh > log_TCM.txt 2>&1)
+                            """
+                        }
+                    }
                     sh "ls -la"
                 }
             }
@@ -84,8 +88,7 @@ def call(currentBuild, repo, branch, mailRecipients, toolchain) {
                 }
                 steps {
                     script {
-                        def memories = ["sram", "tcm"]
-                        memories.each{ memory_name ->
+                        scenarios.each{ scenario ->
                             stage("Run simulation ${memory_name}"){
                                 sh """
                                 #!/bin/bash -l
@@ -93,7 +96,7 @@ def call(currentBuild, repo, branch, mailRecipients, toolchain) {
                                 cd rtl_src
                                 export RISCV=${toolchain}
                                 export PATH=\$RISCV/bin:\$PATH
-                                make PLF_SCENARIO=tcm run_vcs MEM=${memory_name} platform_dir=scr4
+                                make PLF_SCENARIO=${scenario} run_vcs MEM=tcm
                                 """
                             }
                         }
