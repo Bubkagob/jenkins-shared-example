@@ -94,17 +94,12 @@ def generateTextReport(build_dir){
 
 def getIVEReport(build_dir){
     echo build_dir
-    // for (founded in findFiles(glob: "**/results*.txt")) {
-    //     founded.each{
-    //         resultFile ->
-    //         println resultFile.path
-    //     }
-    // }
-    def testAlignFormat = "| %-30s|%60s\t|%n";
+    
+    def testAlignFormat = "| %-40s|%60s\t|%n";
     def resultString = ""
-    resultString = resultString.concat("+"+"-"*95+"+\n")
+    resultString = resultString.concat("+"+"-"*105+"+\n")
     resultString += String.format(testAlignFormat, "", "Failed tests")
-    resultString = resultString.concat("+"+"-"*95+"+\n")
+    resultString = resultString.concat("+"+"-"*105+"+\n")
     def passed = 0
     def failed = 0
 
@@ -136,13 +131,13 @@ def getIVEReport(build_dir){
         failed += failed_counter
         resultString += String.format(testAlignFormat, "Passed:", passed_counter);
         resultString += String.format(testAlignFormat, "Failed:", failed_counter);
-        resultString = resultString.concat("+"+"-"*95+"+\n")
+        resultString = resultString.concat("+"+"-"*105+"+\n")
         //}
     }
     resultString += String.format(testAlignFormat, "Total:", passed + failed);
     resultString += String.format(testAlignFormat, "Total Passed:", passed);
     resultString += String.format(testAlignFormat, "Total Failed:", failed);
-    resultString = resultString.concat("+"+"-"*95+"+\n")
+    resultString = resultString.concat("+"+"-"*105+"+\n")
     int total = passed+failed
     return new ReportResult(failed: failed, total: total, report: resultString)
 }
