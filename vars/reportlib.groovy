@@ -104,13 +104,14 @@ def getIVEReport(build_dir){
     for (founded in findFiles(glob: "**/results*.txt")) {
         founded.each{
             resultFile ->
-            echo resultFile.name
-            resultString += String.format(testAlignFormat, resultFile.name, "");
-            println resultFile.name
+            File resFile = new File ("${resultFile}")
+            echo resFile.name
+            resultString += String.format(testAlignFormat, resFile.name, "");
+            println resFile.name
             int passed_counter = 0
             int failed_counter = 0
 
-            resultFile.eachLine { line ->
+            resFile.eachLine { line ->
                 if (line.contains("PASSED")){
                     passed_counter += 1
                 }
