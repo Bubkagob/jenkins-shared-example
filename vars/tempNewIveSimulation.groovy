@@ -2,16 +2,13 @@
 def call(currentBuild, String repo, String branch, String mailRecipients, String toolchain, def scenarios = null, String platformDir = null) {
     env.TOOLCHAIN = toolchain
     pipeline {
-        
         agent {
             label "beta"
         }
-
         environment {
             FTP_DIR = new Date().format("yy_MM_dd_${BUILD_NUMBER}", TimeZone.getTimeZone('Europe/Moscow'))
             
         }
-
         options {
             buildDiscarder(logRotator(numToKeepStr:'5'))
             disableConcurrentBuilds()
@@ -28,7 +25,7 @@ def call(currentBuild, String repo, String branch, String mailRecipients, String
         //         description: 'Select branch'
         //     )
         // }
-        // stages{
+        stages{
         //     stage('Checkout SCM') {
         //         steps {
         //             script {
@@ -181,9 +178,10 @@ def call(currentBuild, String repo, String branch, String mailRecipients, String
                 }
             }
 
+            
+
             stage("Generate reports"){
                 steps{
-                    echo "======== Generate reports with groovy scripts ========"
                     script {
                         def ts = new Date()
                         def resultObject = reportlib.getIVEReport("${WORKSPACE}/encr/ive")
@@ -282,7 +280,7 @@ def call(currentBuild, String repo, String branch, String mailRecipients, String
             //         } 
             //     }
             // }
-        //}
+        }
 
         // post{
         //     always {
