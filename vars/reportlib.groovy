@@ -85,12 +85,12 @@ def generateTextReport(build_dir){
 @NonCPS
 def getIVEReport(build_dir){
     echo build_dir
-    // for (founded in findFiles(glob: "**/*results*.txt")) {
-    //     founded.each{
-    //         resultFile ->
-    //         println resultFile.path
-    //     }
-    // }
+    for (founded in findFiles(glob: "**/results*.txt")) {
+        founded.each{
+            resultFile ->
+            println resultFile.path
+        }
+    }
     def testAlignFormat = "| %-30s|%60s\t|%n";
     def resultString = ""
     resultString = resultString.concat("+"+"-"*95+"+\n")
