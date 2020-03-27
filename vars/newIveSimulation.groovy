@@ -1,7 +1,9 @@
 #!/usr/bin/env groovy
 def call(currentBuild, String repo, String branch, String mailRecipients, String toolchain, def scenarios = null) {
     env.TOOLCHAIN = toolchain
-    
+    if(toolchain){
+        echo "OK"
+    }
     pipeline {
         agent {
             label "beta"
@@ -29,7 +31,7 @@ def call(currentBuild, String repo, String branch, String mailRecipients, String
             stage('Checkout SCM') {
                 steps {
                     script {
-                        echo scenarios
+                        echo scenarios.size()
                         //scmVars = scmSimpleCheckout(repo, branch)
                     }
                 }
