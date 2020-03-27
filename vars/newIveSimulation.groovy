@@ -1,16 +1,13 @@
 #!/usr/bin/env groovy
 def call(currentBuild, String repo, String branch, String mailRecipients, String toolchain, def scenarios = null, String platformDir = null) {
-    if(scenarios && platformDir){
-        echo "OK"
-        echo platformDir
-    }
+    env.TOOLCHAIN = toolchain
     pipeline {
         agent {
             label "beta"
         }
         environment {
             FTP_DIR = new Date().format("yy_MM_dd_${BUILD_NUMBER}", TimeZone.getTimeZone('Europe/Moscow'))
-            TOOLCHAIN = toolchain
+            
         }
         options {
             buildDiscarder(logRotator(numToKeepStr:'5'))
