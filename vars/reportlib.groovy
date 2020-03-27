@@ -102,32 +102,33 @@ def getIVEReport(build_dir){
     // new File(".").eachFileRecurse(FILES) {
     //     if(it.name.matches("results_*.txt")) {
     for (founded in findFiles(glob: "**/results*.txt")) {
-        founded.each{
-            resultFile ->
-            File resFile = new File ("${resultFile}")
-            echo resFile.name
-            resultString += String.format(testAlignFormat, resFile.name, "");
-            println resFile.name
-            int passed_counter = 0
-            int failed_counter = 0
-
-            resFile.eachLine { line ->
-                if (line.contains("PASSED")){
-                    passed_counter += 1
-                }
-                else if (line.contains("FAILED")){
-                    failed_counter += 1
-                    String result = line.substring(line.indexOf("/") + 1, line.indexOf("*"));
-                    resultString += String.format(testAlignFormat, "", result.trim())
-                }
-                
+        //founded.each{
+        File resFile = new File ("${founded}")
+        echo resFile.name
+        resultString += String.format(testAlignFormat, resFile.name, "");
+        println resFile.name
+        int passed_counter = 0
+        int failed_counter = 0
+        final String content = readFile(file: "${founded}")
+        final List myKeys = extractLines(content)
+        myKeys.each {
+            String line -> 
+            if (line.contains("PASSED")){
+                passed_counter += 1
             }
-            passed += passed_counter
-            failed += failed_counter
-            resultString += String.format(testAlignFormat, "Passed:", passed_counter);
-            resultString += String.format(testAlignFormat, "Failed:", failed_counter);
-            resultString = resultString.concat("+"+"-"*95+"+\n")
+            else if (line.contains("FAILED")){
+                failed_counter += 1
+                String result = line.substring(line.indexOf("/") + 1, line.indexOf("*"));
+                resultString += String.format(testAlignFormat, "", result.trim())
+            }
+                
         }
+        passed += passed_counter
+        failed += failed_counter
+        resultString += String.format(testAlignFormat, "Passed:", passed_counter);
+        resultString += String.format(testAlignFormat, "Failed:", failed_counter);
+        resultString = resultString.concat("+"+"-"*95+"+\n")
+        //}
     }
     resultString += String.format(testAlignFormat, "Total:", passed + failed);
     resultString += String.format(testAlignFormat, "Total Passed:", passed);
