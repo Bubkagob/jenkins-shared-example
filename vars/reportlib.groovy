@@ -84,6 +84,7 @@ def generateTextReport(build_dir){
 
 @NonCPS
 def getIVEReport(build_dir){
+    echo build_dir
     // for (founded in findFiles(glob: "**/*results*.txt")) {
     //     founded.each{
     //         resultFile ->
@@ -98,8 +99,9 @@ def getIVEReport(build_dir){
     def passed = 0
     def failed = 0
 
-    new File(build_dir).eachFileRecurse(FILES) {
+    new File(".").eachFileRecurse(FILES) {
         if(it.name.matches("results.*")) {
+            echo it.name
             resultString += String.format(testAlignFormat, it.name, "");
             println it.name
             int passed_counter = 0
