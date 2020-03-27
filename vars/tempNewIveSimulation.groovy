@@ -2,18 +2,22 @@
 def call(currentBuild, String repo, String branch, String mailRecipients, String toolchain, def scenarios = null, String platformDir = null) {
     env.TOOLCHAIN = toolchain
     pipeline {
+        
         agent {
             label "beta"
         }
+
         environment {
             FTP_DIR = new Date().format("yy_MM_dd_${BUILD_NUMBER}", TimeZone.getTimeZone('Europe/Moscow'))
             
         }
+
         options {
             buildDiscarder(logRotator(numToKeepStr:'5'))
             disableConcurrentBuilds()
             timestamps()
         }
+
         triggers{
             pollSCM('H/5 * * * *')
         }
@@ -167,6 +171,7 @@ def call(currentBuild, String repo, String branch, String mailRecipients, String
                     )
                 }
             }
+
             stage('Downloading') {
                 steps {
                     script {
@@ -277,7 +282,7 @@ def call(currentBuild, String repo, String branch, String mailRecipients, String
             //         } 
             //     }
             // }
-        }
+        //}
 
         // post{
         //     always {
