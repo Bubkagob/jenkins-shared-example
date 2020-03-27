@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 def call(currentBuild, String repo, String branch, String mailRecipients, String toolchain, def scenarios = null, String platformDir = null) {
     env.TOOLCHAIN = toolchain
-    if(scenarios and platformDir){
+    if(scenarios && platformDir){
         echo "OK"
         echo platformDir
     }
