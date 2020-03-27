@@ -9,14 +9,6 @@ class ReportResult {
      String report
 }
 
-@NonCPS
-List extractLines(final String content) {
-    List myKeys = []
-    content.eachLine { line -> 
-        myKeys << line
-    }
-    return myKeys
-}
 
 @NonCPS
 def mergeJSON(pair){
