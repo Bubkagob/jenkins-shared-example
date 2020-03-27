@@ -141,7 +141,6 @@ def readReleaseDir(project_path) {
 // }
 
 Result rc_analyze(message){
-    //echo "Release Candidate: ${message}"
     String summary = ""
     int total_failed = 0
     int total_all = 0

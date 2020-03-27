@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
-def call(currentBuild, repo, branch, mailRecipients, toolchain) {
+def call(currentBuild, String repo, String branch, String mailRecipients, String toolchain, def scenarios = null) {
     env.TOOLCHAIN = toolchain
-    def scenarios = ["TCM", "TCM_NOFPU", "TCM_L1", "TCM_L1_NOFPU"]
+    
     pipeline {
         agent {
             label "beta"
@@ -29,83 +29,84 @@ def call(currentBuild, repo, branch, mailRecipients, toolchain) {
             stage('Checkout SCM') {
                 steps {
                     script {
-                        scmVars = scmSimpleCheckout(repo, branch)
+                        echo scenarios
+                        //scmVars = scmSimpleCheckout(repo, branch)
                     }
                 }
             }
 
-            stage('Push To VM') {
-                steps {
-                    script {
-                        pushToVm()
-                    }
-                }
-            }
+            // stage('Push To VM') {
+            //     steps {
+            //         script {
+            //             pushToVm()
+            //         }
+            //     }
+            // }
 
-            stage("Build tests"){
-                agent{
-                    label "power"
-                }
-                steps{
-                    script {
+            // stage("Build tests"){
+            //     agent{
+            //         label "power"
+            //     }
+            //     steps{
+            //         script {
                         
-                        scenarios.each{ scenario ->
-                            stage("Build ${scenario}"){
-                                sh """
-                                #!/bin/bash -l
-                                export RISCV=${toolchain}
-                                export PATH=\$RISCV/bin:\$PATH
-                                cd encr/ive
-                                cd tests_src
-                                chmod +x build_rtl_sim.sh
-                                \$(PLF_SCENARIO=${scenario} ./build_rtl_sim.sh > log_TCM.txt 2>&1)
-                                """
-                            }
-                        }
-                        sh "ls -la"
-                    }
-                }
-            }
+            //             scenarios.each{ scenario ->
+            //                 stage("Build ${scenario}"){
+            //                     sh """
+            //                     #!/bin/bash -l
+            //                     export RISCV=${toolchain}
+            //                     export PATH=\$RISCV/bin:\$PATH
+            //                     cd encr/ive
+            //                     cd tests_src
+            //                     chmod +x build_rtl_sim.sh
+            //                     \$(PLF_SCENARIO=${scenario} ./build_rtl_sim.sh > log_TCM.txt 2>&1)
+            //                     """
+            //                 }
+            //             }
+            //             sh "ls -la"
+            //         }
+            //     }
+            // }
 
-            stage("Build simulator"){
-                agent{
-                    label "power"
-                }
-                steps{
-                    sh """
-                        #!/bin/bash -l
-                        export RISCV=${toolchain}
-                        export PATH=\$RISCV/bin:\$PATH
-                        cd encr/ive
-                        cd rtl_src
-                        make build_vcs
-                    """
-                    sh "ls -la"
-                }
-            }
+            // stage("Build simulator"){
+            //     agent{
+            //         label "power"
+            //     }
+            //     steps{
+            //         sh """
+            //             #!/bin/bash -l
+            //             export RISCV=${toolchain}
+            //             export PATH=\$RISCV/bin:\$PATH
+            //             cd encr/ive
+            //             cd rtl_src
+            //             make build_vcs
+            //         """
+            //         sh "ls -la"
+            //     }
+            // }
 
-            stage('Run simulation') {
-                agent{
-                    label "power"
-                }
-                steps {
-                    script {
+            // stage('Run simulation') {
+            //     agent{
+            //         label "power"
+            //     }
+            //     steps {
+            //         script {
                         
-                        scenarios.each{ scenario ->
-                            stage("Run simulation ${scenario}"){
-                                sh """
-                                #!/bin/bash -l
-                                cd encr/ive
-                                cd rtl_src
-                                export RISCV=${toolchain}
-                                export PATH=\$RISCV/bin:\$PATH
-                                make PLF_SCENARIO=${scenario} run_vcs MEM=tcm
-                                """
-                            }
-                        }
-                    }
-                }
-            }
+            //             scenarios.each{ scenario ->
+            //                 stage("Run simulation ${scenario}"){
+            //                     sh """
+            //                     #!/bin/bash -l
+            //                     cd encr/ive
+            //                     cd rtl_src
+            //                     export RISCV=${toolchain}
+            //                     export PATH=\$RISCV/bin:\$PATH
+            //                     make PLF_SCENARIO=${scenario} run_vcs MEM=tcm
+            //                     """
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
 
             // stage("Analyze and Collect antifacts"){
             //     agent{
