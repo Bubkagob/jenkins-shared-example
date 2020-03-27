@@ -1,6 +1,5 @@
 #!/usr/bin/env groovy
 def call(currentBuild, String repo, String branch, String mailRecipients, String toolchain, def scenarios = null, String platformDir = null) {
-    env.TOOLCHAIN = toolchain
     if(scenarios && platformDir){
         echo "OK"
         echo platformDir
@@ -10,8 +9,8 @@ def call(currentBuild, String repo, String branch, String mailRecipients, String
             label "beta"
         }
         environment {
-            //BUILD_USER = currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
             FTP_DIR = new Date().format("yy_MM_dd_${BUILD_NUMBER}", TimeZone.getTimeZone('Europe/Moscow'))
+            TOOLCHAIN = toolchain
         }
         options {
             buildDiscarder(logRotator(numToKeepStr:'5'))
@@ -32,45 +31,54 @@ def call(currentBuild, String repo, String branch, String mailRecipients, String
             stage('Checkout SCM') {
                 steps {
                     script {
-                        echo "Hello"
                         //echo scenarios.size().toString()
-                        //scmVars = scmSimpleCheckout(repo, branch)
+                        scmSimpleCheckout(repo, branch)
                     }
                 }
             }
 
-            // stage('Push To VM') {
-            //     steps {
-            //         script {
-            //             pushToVm()
-            //         }
-            //     }
-            // }
+            stage('Push To VM') {
+                steps {
+                    script {
+                        pushToVm()
+                    }
+                }
+            }
 
-            // stage("Build tests"){
-            //     agent{
-            //         label "power"
-            //     }
-            //     steps{
-            //         script {
-                        
-            //             scenarios.each{ scenario ->
-            //                 stage("Build ${scenario}"){
-            //                     sh """
-            //                     #!/bin/bash -l
-            //                     export RISCV=${toolchain}
-            //                     export PATH=\$RISCV/bin:\$PATH
-            //                     cd encr/ive
-            //                     cd tests_src
-            //                     chmod +x build_rtl_sim.sh
-            //                     \$(PLF_SCENARIO=${scenario} ./build_rtl_sim.sh > log_TCM.txt 2>&1)
-            //                     """
-            //                 }
-            //             }
-            //             sh "ls -la"
-            //         }
-            //     }
-            // }
+            stage("Build tests"){
+                agent{
+                    label "power"
+                }
+                steps{
+                    script {
+                        if(scenarios){
+                            scenarios.each{ scenario ->
+                                stage("Build ${scenario}"){
+                                    sh """
+                                    #!/bin/bash -l
+                                    export RISCV=${toolchain}
+                                    export PATH=\$RISCV/bin:\$PATH
+                                    cd encr/ive
+                                    cd tests_src
+                                    chmod +x build_rtl_sim.sh
+                                    \$(PLF_SCENARIO=${scenario} ./build_rtl_sim.sh > log_TCM.txt 2>&1)
+                                    """
+                                }
+                            }
+                        } else {
+                            sh """
+                                #!/bin/bash -l
+                                export RISCV=${toolchain}
+                                export PATH=\$RISCV/bin:\$PATH
+                                cd encr/ive
+                                cd tests_src
+                                chmod +x build_rtl_sim.sh
+                                ./build_rtl_sim.sh
+                            """
+                        }
+                    }
+                }
+            }
 
             // stage("Build simulator"){
             //     agent{
