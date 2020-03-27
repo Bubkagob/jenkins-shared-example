@@ -97,9 +97,9 @@ def getIVEReport(build_dir){
     
     def testAlignFormat = "| %-40s|%60s\t|%n";
     def resultString = ""
-    resultString = resultString.concat("+"+"-"*105+"+\n")
+    resultString = resultString.concat("+"+"-"*103+"+\n")
     resultString += String.format(testAlignFormat, "", "Failed tests")
-    resultString = resultString.concat("+"+"-"*105+"+\n")
+    resultString = resultString.concat("+"+"-"*103+"+\n")
     def passed = 0
     def failed = 0
 
@@ -114,7 +114,7 @@ def getIVEReport(build_dir){
         int passed_counter = 0
         int failed_counter = 0
         final String content = readFile(file: "${founded}")
-        final List myKeys = extractLines(content)
+        final List myKeys = misc.extractLines(content)
         myKeys.each {
             String line -> 
             if (line.contains("PASSED")){
@@ -131,13 +131,13 @@ def getIVEReport(build_dir){
         failed += failed_counter
         resultString += String.format(testAlignFormat, "Passed:", passed_counter);
         resultString += String.format(testAlignFormat, "Failed:", failed_counter);
-        resultString = resultString.concat("+"+"-"*105+"+\n")
+        resultString = resultString.concat("+"+"-"*103+"+\n")
         //}
     }
     resultString += String.format(testAlignFormat, "Total:", passed + failed);
     resultString += String.format(testAlignFormat, "Total Passed:", passed);
     resultString += String.format(testAlignFormat, "Total Failed:", failed);
-    resultString = resultString.concat("+"+"-"*105+"+\n")
+    resultString = resultString.concat("+"+"-"*103+"+\n")
     int total = passed+failed
     return new ReportResult(failed: failed, total: total, report: resultString)
 }
