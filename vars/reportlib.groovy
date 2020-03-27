@@ -82,7 +82,7 @@ def generateTextReport(build_dir){
     return new ReportResult(failed: total_failed, total: total, report: resultString)
 }
 
-@NonCPS
+
 def getIVEReport(build_dir){
     echo build_dir
     for (founded in findFiles(glob: "**/results*.txt")) {
