@@ -85,12 +85,12 @@ def generateTextReport(build_dir){
 
 def getIVEReport(build_dir){
     echo build_dir
-    for (founded in findFiles(glob: "**/results*.txt")) {
-        founded.each{
-            resultFile ->
-            println resultFile.path
-        }
-    }
+    // for (founded in findFiles(glob: "**/results*.txt")) {
+    //     founded.each{
+    //         resultFile ->
+    //         println resultFile.path
+    //     }
+    // }
     def testAlignFormat = "| %-30s|%60s\t|%n";
     def resultString = ""
     resultString = resultString.concat("+"+"-"*95+"+\n")
@@ -99,15 +99,18 @@ def getIVEReport(build_dir){
     def passed = 0
     def failed = 0
 
-    new File(".").eachFileRecurse(FILES) {
-        if(it.name.matches("results_*.txt")) {
-            echo it.name
-            resultString += String.format(testAlignFormat, it.name, "");
-            println it.name
+    // new File(".").eachFileRecurse(FILES) {
+    //     if(it.name.matches("results_*.txt")) {
+    for (founded in findFiles(glob: "**/results*.txt")) {
+        founded.each{
+            resultFile ->
+            echo resultFile.name
+            resultString += String.format(testAlignFormat, resultFile.name, "");
+            println resultFile.name
             int passed_counter = 0
             int failed_counter = 0
 
-            it.eachLine { line ->
+            resultFile.eachLine { line ->
                 if (line.contains("PASSED")){
                     passed_counter += 1
                 }
