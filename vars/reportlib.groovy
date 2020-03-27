@@ -100,7 +100,7 @@ def getIVEReport(build_dir){
     def failed = 0
 
     new File(".").eachFileRecurse(FILES) {
-        if(it.name.matches("results.*")) {
+        if(it.name.matches("results_*.txt")) {
             echo it.name
             resultString += String.format(testAlignFormat, it.name, "");
             println it.name
