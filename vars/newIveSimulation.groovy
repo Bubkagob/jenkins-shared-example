@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 def call(currentBuild, String repo, String branch, String mailRecipients, String toolchain, def scenarios = null) {
     env.TOOLCHAIN = toolchain
-    if(scenarios){
+    if(!scenarios){
         echo "OK"
     }
     pipeline {
