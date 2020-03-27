@@ -31,7 +31,8 @@ def call(currentBuild, String repo, String branch, String mailRecipients, String
             stage('Checkout SCM') {
                 steps {
                     script {
-                        echo scenarios.size().toString()
+                        echo "Hello"
+                        //echo scenarios.size().toString()
                         //scmVars = scmSimpleCheckout(repo, branch)
                     }
                 }
