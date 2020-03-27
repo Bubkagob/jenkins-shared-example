@@ -10,6 +10,15 @@ class ReportResult {
 }
 
 @NonCPS
+List extractLines(final String content) {
+    List myKeys = []
+    content.eachLine { line -> 
+        myKeys << line
+    }
+    return myKeys
+}
+
+@NonCPS
 def mergeJSON(pair){
     def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
     def bArr = jsonSlurper.parseText(pair[0])
