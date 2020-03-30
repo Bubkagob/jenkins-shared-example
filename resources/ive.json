@@ -2,7 +2,7 @@
     "version": 1.0,
     "scr4_tecon": {
         "toolchain": "/home/soft/riscv-sw/180115-sc-riscv64-ge5275d6f",
-        "repo": "scr4_release_niime",
+        "repo": "https://github.com/ar-sc/scrx_src_release",
         "branch": "scr4_release_tecon",
         "scenarios": [
             "TCM",
@@ -13,7 +13,7 @@
     },
     "scr3_niime": {
         "toolchain": "/home/soft/riscv-sw/180115-sc-riscv64-ge5275d6f",
-        "repo": "scr3_release_niime",
+        "repo": "https://github.com/ar-sc/scrx_src_release",
         "branch": "scr3_release_niime",
         "scenarios": [
             "SCR3_L1",
@@ -22,7 +22,7 @@
     },
     "scr4_niime": {
         "toolchain": "/home/soft/riscv-sw/180115-sc-riscv64-ge5275d6f",
-        "repo": "scr4_release_niime",
+        "repo": "https://github.com/ar-sc/scrx_src_release",
         "branch": "scr4_release_niime",
         "buses": [
             "axi",
