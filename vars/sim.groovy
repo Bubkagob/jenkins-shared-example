@@ -56,6 +56,18 @@ def call(config) {
                     }
                 }
             }
+
+            stage("Run simulation") {
+                agent{
+                    label "power"
+                }
+                steps {
+                    script {
+                        runIVEsimulator(config)
+                    }
+                }
+            }
+
         }
     }
 }
