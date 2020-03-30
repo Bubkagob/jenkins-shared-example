@@ -6,7 +6,7 @@ def call(scenarios){
         stage("Build ${scenario}"){
           sh """
           #!/bin/bash -l
-          export RISCV=${config.toolchain}
+          export RISCV=${toolchain}
           export PATH=\$RISCV/bin:\$PATH
           cd encr/ive
           cd tests_src
