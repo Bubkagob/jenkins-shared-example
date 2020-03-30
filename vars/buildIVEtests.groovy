@@ -1,12 +1,12 @@
-def call(scenarios){
+def call(config){
     
-    if(scenarios){
-      scenarios.each{
+    if(config.scenarios){
+      config.scenarios.each{
         scenario ->
         stage("Build ${scenario}"){
           sh """
           #!/bin/bash -l
-          export RISCV=${toolchain}
+          export RISCV=${config.toolchain}
           export PATH=\$RISCV/bin:\$PATH
           cd encr/ive
           cd tests_src
@@ -18,7 +18,7 @@ def call(scenarios){
     } else {
       sh """
       #!/bin/bash -l
-      export RISCV=${toolchain}
+      export RISCV=${config.toolchain}
       export PATH=\$RISCV/bin:\$PATH
       cd encr/ive
       cd tests_src

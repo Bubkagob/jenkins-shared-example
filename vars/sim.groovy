@@ -41,7 +41,18 @@ def call(config) {
                 }
                 steps {
                     script {
-                        buildIVEtests(config.scenarios)
+                        buildIVEtests(config)
+                    }
+                }
+            }
+
+            stage("Build simulator") {
+                agent{
+                    label "power"
+                }
+                steps {
+                    script {
+                        buildIVEsimulator(config)
                     }
                 }
             }
