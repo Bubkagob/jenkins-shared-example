@@ -15,7 +15,7 @@ def call(currentBuild, String repo, String branch, String mailRecipients, String
             timestamps()
         }
         triggers{
-            pollSCM('H/5 * * * *')
+            pollSCM("H/5 * * * *")
         }
         // parameters {
         //     choice(
@@ -28,7 +28,6 @@ def call(currentBuild, String repo, String branch, String mailRecipients, String
             stage('Checkout SCM') {
                 steps {
                     script {
-                        //echo scenarios.size().toString()
                         scmSimpleCheckout(repo, branch)
                     }
                 }

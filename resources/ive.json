@@ -1,0 +1,29 @@
+{
+    "version": 1.0,
+    "scr4_tecon": {
+        "repo": "scr4_release_niime",
+        "branch": "scr4_release_tecon",
+        "scenarios": [
+            "TCM",
+            "TCM_NOFPU",
+            "TCM_L1",
+            "TCM_L1_NOFPU"
+        ]
+    },
+    "scr3_niime": {
+        "repo": "scr3_release_niime",
+        "branch": "scr3_release_niime",
+        "scenarios": [
+            "SCR3_L1",
+            "SCR3_TCM"
+        ]
+    },
+    "scr4_niime": {
+        "repo": "scr4_release_niime",
+        "branch": "scr4_release_niime",
+        "buses": [
+            "axi",
+            "ahb"
+        ]
+    }
+}
