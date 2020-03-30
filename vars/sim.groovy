@@ -27,6 +27,14 @@ def call(config) {
                     }
                 }
             }
+            pushToVm()
+            // stage('Push To VM') {
+            //     steps {
+            //         script {
+            //             pushToVm()
+            //         }
+            //     }
+            // }
         }
     }
 }
