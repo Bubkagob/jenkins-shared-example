@@ -20,21 +20,31 @@ def call(config) {
             pollSCM("H/5 * * * *")
         }
         stages{
-            stage('Checkout SCM') {
+            stage("Checkout SCM") {
                 steps {
                     script {
                         scmSimpleCheckout(repo, branch)
                     }
                 }
             }
-            pushToVm()
-            // stage('Push To VM') {
-            //     steps {
-            //         script {
-            //             pushToVm()
-            //         }
-            //     }
-            // }
+            stage("Push To VM") {
+                steps {
+                    script {
+                        pushToVm()
+                    }
+                }
+            }
+
+            stage("Build tests") {
+                agent{
+                    label "power"
+                }
+                steps {
+                    script {
+                        buildIVEtests(config.scenarios)
+                    }
+                }
+            }
         }
     }
 }
