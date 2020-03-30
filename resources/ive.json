@@ -1,6 +1,7 @@
 {
     "version": 1.0,
     "scr4_tecon": {
+        "toolchain": "/home/soft/riscv-sw/180115-sc-riscv64-ge5275d6f",
         "repo": "scr4_release_niime",
         "branch": "scr4_release_tecon",
         "scenarios": [
@@ -11,6 +12,7 @@
         ]
     },
     "scr3_niime": {
+        "toolchain": "/home/soft/riscv-sw/180115-sc-riscv64-ge5275d6f",
         "repo": "scr3_release_niime",
         "branch": "scr3_release_niime",
         "scenarios": [
@@ -19,6 +21,7 @@
         ]
     },
     "scr4_niime": {
+        "toolchain": "/home/soft/riscv-sw/180115-sc-riscv64-ge5275d6f",
         "repo": "scr4_release_niime",
         "branch": "scr4_release_niime",
         "buses": [
