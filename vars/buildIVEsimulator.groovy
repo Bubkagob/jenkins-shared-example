@@ -1,6 +1,5 @@
 def call(config){
   stage('Parallel In Sequential') {
-    parallel {
       if(config.buses){
         config.buses.each{
           bus ->
@@ -27,6 +26,6 @@ def call(config){
           """
         }
       }
-    }
+    
   }
 }
