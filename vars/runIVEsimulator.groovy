@@ -26,7 +26,6 @@ def call(config){
 
       if(config.scenarios) {
         stage('1') {
-          steps {
             script {
               def builds = [:]
               for (f in config.scenarios) {
@@ -40,7 +39,7 @@ def call(config){
               }
               parallel builds
             }
-          }
+          
         }
 
         // config.scenarios.each{
