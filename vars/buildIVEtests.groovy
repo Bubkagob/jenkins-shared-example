@@ -10,12 +10,13 @@ def call(config){
                 stage("${scenario}") {
                   sh """
                   #!/bin/bash -l
+                  ls -la
                   export RISCV=${config.toolchain}
                   export PATH=\$RISCV/bin:\$PATH
                   cd encr/ive
                   cd tests_src
                   chmod +x build_rtl_sim.sh
-                  \$(PLF_SCENARIO=${scenario} ./build_rtl_sim.sh > log_TCM.txt 2>&1)
+                  \$(PLF_SCENARIO=${scenario} ./build_rtl_sim.sh > log_${scenario}.txt 2>&1)
                   """
                 }
               }
@@ -42,7 +43,7 @@ def call(config){
       //   }
       // }
 
-      
+
     } else {
       sh """
       #!/bin/bash -l
