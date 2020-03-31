@@ -2,6 +2,9 @@ def call(config){
     
     if(config.scenarios){
       stage("Build") {
+        agent {
+            label "power"
+        }
         script {
           def builds = [:]
           for (scenario in config.scenarios) {
