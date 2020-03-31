@@ -25,16 +25,14 @@ def call(config){
       }
 
       if(config.scenarios) {
-        stage('1') {
+        stage("${memo}") {
           script {
             def builds = [:]
-            for (f in config.scenarios) {
-              builds["${f}"] = {
-                node('power') {
-                  stage("${f}") {
-                    echo "${f}"
+            for (scenario in config.scenarios) {
+              builds["${scenario}"] = {
+                  stage("Run ${scenario}") {
+                    echo "${scenario}"
                   }
-                }
               }
             }
             parallel builds

@@ -1,18 +1,13 @@
 def call(config){
     
     if(config.scenarios){
-      //stage("Build") {
         script {
           def builds = [:]
           for (scenario in config.scenarios) {
             builds["${scenario}"] = {
-              //node("power") {
                 stage("${scenario}") {
                   sh """
                   #!/bin/bash -l
-                  uname -r
-                  echo $PWD
-                  ls -la
                   export RISCV=${config.toolchain}
                   export PATH=\$RISCV/bin:\$PATH
                   cd encr/ive
@@ -21,12 +16,10 @@ def call(config){
                   \$(PLF_SCENARIO=${scenario} ./build_rtl_sim.sh > log_${scenario}.txt 2>&1)
                   """
                 }
-              //}
             }
           }
           parallel builds
         }
-      //}
 
 
 
