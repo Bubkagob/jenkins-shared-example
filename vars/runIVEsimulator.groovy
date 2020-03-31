@@ -5,9 +5,9 @@ def call(config){
   ]
   memories.each{
     memo ->
-    
+      
       if(config.buses){
-        
+         parallel {
         config.buses.each{
           bus ->
           stage("Build bus ${bus} with ${memo}"){
@@ -20,8 +20,10 @@ def call(config){
           }
         }
       }
+      }
 
       if(config.scenarios) {
+         parallel {
         config.scenarios.each{
           scenario -> 
             stage("Run ${scenario} with ${memo}"){
@@ -37,6 +39,7 @@ def call(config){
               """
             }
         }
+      }
       }
 
       else {
