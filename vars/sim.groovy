@@ -58,6 +58,7 @@ def call(config) {
             }
 
             stage("Run simulation") {
+                parallel {
                 agent{
                     label "power"
                 }
@@ -66,6 +67,7 @@ def call(config) {
                         runIVEsimulator(config)
                     }
                 }
+            }
             }
 
         }
