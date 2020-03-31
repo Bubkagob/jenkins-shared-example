@@ -27,13 +27,13 @@ def call(config) {
                     }
                 }
             }
-            stage("Push To VM") {
-                steps {
-                    script {
-                        pushToVm()
-                    }
-                }
-            }
+            // stage("Push To VM") {
+            //     steps {
+            //         script {
+            //             pushToVm()
+            //         }
+            //     }
+            // }
 
             stage("Build tests") {
                 agent{

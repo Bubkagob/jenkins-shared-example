@@ -11,6 +11,7 @@ def call(config){
                   sh """
                   #!/bin/bash -l
                   uname -r
+                  echo $PWD
                   ls -la
                   export RISCV=${config.toolchain}
                   export PATH=\$RISCV/bin:\$PATH
