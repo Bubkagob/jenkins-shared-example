@@ -5,7 +5,7 @@ def call(config){
   ]
   memories.each{
     memo ->
-    {
+    
       if(config.buses){
         config.buses.each{
           bus ->
@@ -47,6 +47,6 @@ def call(config){
           echo "BUSES"
           """
       }
-    }
+    
   }  
 }
