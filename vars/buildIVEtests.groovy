@@ -1,7 +1,7 @@
 def call(config){
     
     if(config.scenarios){
-      stage("Build tests") {
+      stage("Build") {
         script {
           def builds = [:]
           for (scenario in config.scenarios) {
