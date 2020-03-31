@@ -10,14 +10,16 @@ def call(config){
         
         config.buses.each{
           bus ->
-          stage("Build bus ${bus} with ${memo}"){
-            sh """
-            #!/bin/bash -l
-            export RISCV=${config.toolchain}
-            export PATH=\$RISCV/bin:\$PATH
-            echo "BUSES"
-            """
-          }
+          parallel (
+            stage("Build bus ${bus} with ${memo}"){
+              sh """
+              #!/bin/bash -l
+              export RISCV=${config.toolchain}
+              export PATH=\$RISCV/bin:\$PATH
+              echo "BUSES"
+              """
+            }
+          )
         }
       
       }
