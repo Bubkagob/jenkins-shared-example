@@ -58,7 +58,6 @@ def call(config) {
             }
 
             stage("Run simulation") {
-           
                 agent{
                     label "power"
                 }
@@ -67,7 +66,6 @@ def call(config) {
                         runIVEsimulator(config)
                     }
                 }
-            
             }
 
         }
