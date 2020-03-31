@@ -7,9 +7,10 @@ def call(config){
     memo ->
     
       if(config.buses){
+        
         config.buses.each{
           bus ->
-          stage("Build bus ${bus}"){
+          stage("Build bus ${bus} with ${memo}"){
             sh """
             #!/bin/bash -l
             export RISCV=${config.toolchain}
@@ -23,7 +24,7 @@ def call(config){
       if(config.scenarios) {
         config.scenarios.each{
           scenario -> 
-            stage("Run ${scenario}"){
+            stage("Run ${scenario} with ${memo}"){
               sh """
               #!/bin/bash -l
               export RISCV=${config.toolchain}
@@ -43,7 +44,7 @@ def call(config){
           #!/bin/bash -l
           export RISCV=${config.toolchain}
           export PATH=\$RISCV/bin:\$PATH
-          echo "BUSES"
+          echo "BUSES with ${memo}"
           """
       }
     
