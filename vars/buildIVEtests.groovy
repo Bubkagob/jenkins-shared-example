@@ -1,12 +1,12 @@
 def call(config){
     
     if(config.scenarios){
-      stage("Build") {
+      //stage("Build") {
         script {
           def builds = [:]
           for (scenario in config.scenarios) {
             builds["${scenario}"] = {
-              node("power") {
+              //node("power") {
                 stage("${scenario}") {
                   sh """
                   #!/bin/bash -l
@@ -20,12 +20,12 @@ def call(config){
                   \$(PLF_SCENARIO=${scenario} ./build_rtl_sim.sh > log_${scenario}.txt 2>&1)
                   """
                 }
-              }
+              //}
             }
           }
           parallel builds
         }
-      }
+      //}
 
 
 
