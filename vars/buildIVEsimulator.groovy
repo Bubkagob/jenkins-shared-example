@@ -1,5 +1,5 @@
 def call(config){
-  stage('Parallel In Sequential') {
+  stage('Build IVE simulator') {
       if(config.buses){
         config.buses.each{
           bus ->
