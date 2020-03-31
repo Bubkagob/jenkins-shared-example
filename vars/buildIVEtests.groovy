@@ -2,17 +2,15 @@ def call(config){
     
     if(config.scenarios){
       stage("Build") {
-        agent {
-            label "power"
-        }
         script {
           def builds = [:]
           for (scenario in config.scenarios) {
             builds["${scenario}"] = {
-              node('power') {
+              node("power") {
                 stage("${scenario}") {
                   sh """
                   #!/bin/bash -l
+                  uname -r
                   ls -la
                   export RISCV=${config.toolchain}
                   export PATH=\$RISCV/bin:\$PATH
