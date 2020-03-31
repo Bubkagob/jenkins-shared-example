@@ -24,6 +24,7 @@ def call(config) {
                 steps {
                     script {
                         scmSimpleCheckout(repo, branch)
+                        
                     }
                 }
             }
@@ -42,32 +43,11 @@ def call(config) {
                 steps {
                     script {
                         buildIVEtests(config)
-                    }
-                }
-            }
-
-            stage("Build simulator") {
-                agent{
-                    label "power"
-                }
-                steps {
-                    script {
                         buildIVEsimulator(config)
-                    }
-                }
-            }
-
-            stage("Run simulation") {
-                agent{
-                    label "power"
-                }
-                steps {
-                    script {
                         runIVEsimulator(config)
                     }
                 }
             }
-
         }
     }
 }

@@ -5,7 +5,7 @@ def call(config){
           def builds = [:]
           for (scenario in config.scenarios) {
             builds["${scenario}"] = {
-                stage("${scenario}") {
+                stage("Build ${scenario}") {
                   sh """
                   #!/bin/bash -l
                   export RISCV=${config.toolchain}
