@@ -22,7 +22,7 @@ def call(config){
 
       if(config.scenarios) {
         config.scenarios.each{
-          scenario -> {
+          scenario -> 
             stage("Run ${scenario}"){
               sh """
               #!/bin/bash -l
@@ -35,7 +35,6 @@ def call(config){
               ##\$(PLF_SCENARIO=${scenario} ./build_rtl_sim.sh > log_TCM.txt 2>&1)
               """
             }
-          }
         }
       }
 
