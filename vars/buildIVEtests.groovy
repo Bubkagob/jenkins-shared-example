@@ -6,7 +6,7 @@ def call(config){
           def builds = [:]
           for (scenario in config.scenarios) {
             builds["${scenario}"] = {
-              node {
+              node('power') {
                 stage("${scenario}") {
                   sh """
                   #!/bin/bash -l
