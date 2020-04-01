@@ -15,9 +15,9 @@ def call(config) {
             disableConcurrentBuilds()
             timestamps()
         }
-        triggers{
-            pollSCM('H/5 * * * *')
-        }
+        // triggers{
+        //     pollSCM('H/5 * * * *')
+        // }
         stages{
             stage('Checkout SCM') {
                 steps {
