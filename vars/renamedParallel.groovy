@@ -46,7 +46,7 @@ def call(config) {
                 }
             }
 
-            stage("run ${memo}") {
+            stage("run") {
                 script {
                     def builds = [:]
                     for (scenario in scenarios) {
