@@ -50,12 +50,13 @@ def call(config) {
                 steps {
                     script {
                         def builds = [:]
-                        for (scenario in scenarios.keySet()) {
-                            builds["${scenario}"] = {
-                                stage("Run ${scenario}") {
+                        for (build_dir in scenarios.keySet()) {
+                            def conf = scenarios[build_dir]
+                            builds["${build_dir}"] = {
+                                stage("Run ${build_dir}") {
                                 sh """
                                 #!/bin/bash -l
-                                echo "Run ----- ${scenario}"
+                                echo "Run ----- ${build_dir} and ${conf.launcher} --scenario ${conf.scenarioFile} "
                                 """
                                 }
                             }
