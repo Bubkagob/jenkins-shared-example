@@ -47,6 +47,9 @@ def call(config) {
             // }
 
             stage("run") {
+                agent{
+                    label "power"
+                }
                 steps {
                     script {
                         def builds = [:]
@@ -58,6 +61,8 @@ def call(config) {
                                 #!/bin/bash -l
                                 echo "Run ----- ${build_dir} and ${conf.launcher} --scenario ${conf.scenarioFile} "
                                 """
+                                sh "[ -d ${build_dir} ] && echo OK || mkdir -p ${build_dir}"
+                                sh "cd ${build_dir}; perl ${conf.launcher} --scenario ${conf.scenarioFile} "
                                 }
                             }
                         }
