@@ -38,7 +38,7 @@ def call(config) {
                 steps {
                     echo "${scenarios}"
                     script {
-                        scenarios.each{
+                        config.scenarios.each{
                             scenario_name -> 
                             echo "${scenario_name}"
                         }
