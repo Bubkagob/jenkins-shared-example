@@ -38,28 +38,28 @@ def call(config) {
                 }
             }
 
-            stage('Push To VM') {
-                steps {
-                    script {
-                        pushToVm()
-                    }
-                }
-            }
+            // stage('Push To VM') {
+            //     steps {
+            //         script {
+            //             pushToVm()
+            //         }
+            //     }
+            // }
 
             stage("run") {
                 steps {
                     script {
-                    def builds = [:]
-                    for (scenario in scenarios) {
-                    builds["${scenario}"] = {
-                        stage("Run ${scenario}") {
-                            sh """
-                            #!/bin/bash -l
-                            echo "Run ----- ${scenario}"
-                            """
+                        def builds = [:]
+                        for (scenario in scenarios.keySet()) {
+                            builds["${scenario}"] = {
+                                stage("Run ${scenario}") {
+                                sh """
+                                #!/bin/bash -l
+                                echo "Run ----- ${scenario}"
+                                """
+                                }
+                            }
                         }
-                    }
-                    }
                     parallel builds
                     }
                 }
