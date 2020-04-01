@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 def call(config) {
-    def choices = config.scenarios.join(',')
+    def scenarios = config.scenarios.join(',')
     String repo = config.repo
     String branch = config.branch
     env.TOOLCHAIN = config.toolchain
@@ -19,29 +19,24 @@ def call(config) {
         triggers{
             pollSCM('H/5 * * * *')
         }
-        parameters {
-            extendedChoice(
-                defaultValue: '', 
-                description: 'Choose scenarios to run', 
-                multiSelectDelimiter: ',', 
-                name: 'CHOSEN_SCENARIOS', 
-                quoteValue: false, 
-                saveJSONParameterToFile: false, 
-                type: 'PT_CHECKBOX', 
-                value: choices, 
-                visibleItemCount: 10
-            )
-        }
+        // parameters {
+        //     extendedChoice(
+        //         defaultValue: '', 
+        //         description: 'Choose scenarios to run', 
+        //         multiSelectDelimiter: ',', 
+        //         name: 'CHOSEN_SCENARIOS', 
+        //         quoteValue: false, 
+        //         saveJSONParameterToFile: false, 
+        //         type: 'PT_CHECKBOX', 
+        //         value: choices, 
+        //         visibleItemCount: 10
+        //     )
+        // }
         stages{
 
             stage('ECHO') {
                 steps {
-                    script {
-                        env.CHOSEN_SCENARIOS = env.CHOSEN_SCENARIOS.join(',')
-                         
-                    }
-                    
-                    echo "${CHOSEN_SCENARIOS}"
+                    echo "${scenarios}"
                 }
             }
             // stage('Checkout SCM') {
