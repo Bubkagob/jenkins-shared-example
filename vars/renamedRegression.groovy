@@ -57,11 +57,11 @@ def call(config) {
                             stage("Run stage ${build_dir}"){
                                 echo "${build_dir}"
                                 echo "${conf}"
-                                // sh "[ -d ${build_dir} ] && echo OK || mkdir -p ${build_dir}"
-                                // sh "ls -lat ${WORKSPACE}"
-                                // sh "hostname"
-                                // sh "riscv64-unknown-elf-gcc -v"
-                                // sh "cd ${build_dir}; perl ${conf.launcher} --scenario ${conf.scenarioFile} "
+                                sh "[ -d ${build_dir} ] && echo OK || mkdir -p ${build_dir}"
+                                sh "ls -lat ${WORKSPACE}"
+                                sh "hostname"
+                                sh "riscv64-unknown-elf-gcc -v"
+                                sh "cd ${build_dir}; perl ${conf.launcher} --scenario ${conf.scenarioFile} "
                             }
                         }
                     }
