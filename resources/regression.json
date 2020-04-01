@@ -24,8 +24,8 @@
         "repo": "https://github.com/ar-sc/sc_riscv",
         "branch": "scr4_release_niime",
         "scenarios": [
-            "regression_cluster_scr4_rv64x4_cfg.yaml",
-            "regression_cluster_l2_scr4_rv64x4_cfg.yaml"
+            "regression_default_tcm_axi_cfg.yaml",
+            "regression_default_tcm_ahb_cfg.yaml"
         ]
     },
     "scr3_kraftway": {
