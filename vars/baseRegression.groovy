@@ -37,6 +37,12 @@ def call(config) {
             stage('ECHO') {
                 steps {
                     echo "${scenarios}"
+                    script {
+                        scenarios.each{
+                            scenario_name -> 
+                            echo "${scenario_name}"
+                        }
+                    }
                 }
             }
             // stage('Checkout SCM') {
