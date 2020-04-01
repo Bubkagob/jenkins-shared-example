@@ -36,6 +36,7 @@ def call(config) {
 
             stage('ECHO') {
                 steps {
+                    CHOSEN_SCENARIOS = CHOSEN_SCENARIOS.join(',')
                     echo "${CHOSEN_SCENARIOS}"
                 }
             }
