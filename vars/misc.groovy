@@ -52,7 +52,7 @@ def getFiles(subdir){
 
 def prepareBuildDir(){
   def scenariosMap = [:]
-  for (f in findFiles(glob: "**/regression_default_*.yaml")){
+  for (f in findFiles(glob: "**/regression_*.yaml")){
     echo "${f.path}"
     String scenario = "${f.path}".split("/")[-1]
     String tests = "${f.path}".split("/")[-3]
