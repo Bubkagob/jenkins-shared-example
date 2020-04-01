@@ -65,22 +65,22 @@ def call(config) {
                 }
             }
 
-            stage('Create stages ') {
-                agent{
-                    label "power"
-                }
-                steps {
-                    script{
-                        scenarios.each {
-                            build_dir, conf ->           
-                            stage("Run stage ${build_dir}"){
-                                sh "[ -d ${build_dir} ] && echo OK || mkdir -p ${build_dir}"
-                                sh "cd ${build_dir}; perl ${conf.launcher} --scenario ${conf.scenarioFile} "
-                            }
-                        }
-                    }
-                }
-            }
+            // stage('Create stages ') {
+            //     agent{
+            //         label "power"
+            //     }
+            //     steps {
+            //         script{
+            //             scenarios.each {
+            //                 build_dir, conf ->           
+            //                 stage("Run stage ${build_dir}"){
+            //                     sh "[ -d ${build_dir} ] && echo OK || mkdir -p ${build_dir}"
+            //                     sh "cd ${build_dir}; perl ${conf.launcher} --scenario ${conf.scenarioFile} "
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
 
             // stage("Analyze and Collect antifacts"){
             //     agent{
