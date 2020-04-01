@@ -19,5 +19,10 @@
         "toolchain": "/home/soft/riscv-sw/180115-sc-riscv64-ge5275d6f_64f",
         "repo": "https://github.com/ar-sc/scrx_src_release",
         "branch": "scr3_release_kraftway"
+    },
+    "scr4_nextsi": {
+        "toolchain": "/home/soft/riscv-sw/riscv-gcc-9.2.0-g3a2b213--200304T2355",
+        "repo": "https://github.com/ar-sc/scrx_src_release",
+        "branch": "scr4_release_nextsi"
     }
 }
