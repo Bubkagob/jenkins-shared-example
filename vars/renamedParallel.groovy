@@ -47,7 +47,8 @@ def call(config) {
             }
 
             stage("run") {
-                script {
+                steps {
+                    script {
                     def builds = [:]
                     for (scenario in scenarios) {
                     builds["${scenario}"] = {
@@ -60,8 +61,9 @@ def call(config) {
                     }
                     }
                     parallel builds
+                    }
                 }
-                }
+            }
 
             stage('Create stages ') {
                 agent{
