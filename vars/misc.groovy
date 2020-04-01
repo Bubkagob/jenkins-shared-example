@@ -71,7 +71,7 @@ def prepareBuildDir(){
 
 @NonCPS
 def readDir(project_path) {
-  echo "Prject path"
+  echo "Prоject path"
   echo project_path
   dlist = []
 	new File(project_path + "/rename").eachDir{dlist << it.name }
