@@ -59,10 +59,19 @@ def call(config) {
                                 stage("Run ${build_dir}") {
                                 sh """
                                 #!/bin/bash -l
+                                export RISCV=${config.toolchain}
+                                export RISCV_TESTS_1_10=/home/work/priv_1_10/riscv-tests
+                                export SWTOOLS_1_10=${config.toolchain}/bin
+                                export PATH=\$RISCV/bin:\$PATH
+                                
+                                echo \$SWTOOLS_1_10
                                 echo "Run ----- ${build_dir} and ${conf.launcher} --scenario ${conf.scenarioFile} "
+                                [ -d ${build_dir} ] && echo OK || mkdir -p ${build_dir}
+                                cd ${build_dir}
+                                perl ${conf.launcher} --scenario ${conf.scenarioFile}
                                 """
-                                sh "[ -d ${build_dir} ] && echo OK || mkdir -p ${build_dir}"
-                                sh "cd ${build_dir}; perl ${conf.launcher} --scenario ${conf.scenarioFile} "
+                                //sh "[ -d ${build_dir} ] && echo OK || mkdir -p ${build_dir}"
+                                //sh "cd ${build_dir}; perl ${conf.launcher} --scenario ${conf.scenarioFile} "
                                 }
                             }
                         }
