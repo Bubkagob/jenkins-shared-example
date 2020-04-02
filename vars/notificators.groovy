@@ -1,7 +1,7 @@
 def notifyGeneral(String buildStatus = 'STARTED') {
   // build status of null means successful
   buildStatus =  buildStatus ?: 'SUCCESS'
-  def mailRecipients = "ivan.alexandrov@syntacore.com"
+  def mailRecipients = "ivan.alexandrov@syntacore.com, ilja.stepanov@syntacore.com"
   // Default values
   def colorName = 'RED'
   def colorCode = '#FF0000'
