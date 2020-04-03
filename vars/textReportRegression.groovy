@@ -11,9 +11,9 @@ def traverseHelper() {
 }
 
 
-@NonCPS
 def call(build_dir){
-    traverseHelper()
+    //traverseHelper()
+    sh "ls -lat"
     echo build_dir
     def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
     def resultMap = [:]
