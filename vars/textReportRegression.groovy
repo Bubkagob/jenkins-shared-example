@@ -20,15 +20,16 @@ def call(build_dir){
         if(f.name.endsWith('results.json')) {
             //echo "${f.name}"
             dir = it.getParentFile()
-            def jsonFiles = new FileNameFinder().getFileNames("${dir}", '*.json')
-            if (jsonFiles.size() != 2) {println "Bad"}
-            def list = []
-            jsonFiles.each{list.add(JsonOutput.toJson(jsonSlurper.parse(new File("${it}"))))}
-            //def mergedJson = mergeJSON(list)
-            def mergedJson = jsonSlurper.parseText(list[0]) + jsonSlurper.parseText(list[1])
-            def key = mergedJson.name + mergedJson._index
-            if(!resultMap.containsKey(key)) resultMap.put(key, [])
-            resultMap[key].add(mergedJson)
+            echo dir.name
+            // def jsonFiles = new FileNameFinder().getFileNames("${dir}", '*.json')
+            // if (jsonFiles.size() != 2) {println "Bad"}
+            // def list = []
+            // jsonFiles.each{list.add(JsonOutput.toJson(jsonSlurper.parse(new File("${it}"))))}
+            // //def mergedJson = mergeJSON(list)
+            // def mergedJson = jsonSlurper.parseText(list[0]) + jsonSlurper.parseText(list[1])
+            // def key = mergedJson.name + mergedJson._index
+            // if(!resultMap.containsKey(key)) resultMap.put(key, [])
+            // resultMap[key].add(mergedJson)
         }
     }
     def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
