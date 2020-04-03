@@ -17,7 +17,7 @@ def call(build_dir){
     echo build_dir
     for (f in findFiles(glob: "**/*.json")){
         //echo "${f.path}"
-        if(it.name.endsWith('results.json')) {
+        if(f.name.endsWith('results.json')) {
             echo "${f.name}"
         }
     }
