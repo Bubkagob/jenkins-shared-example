@@ -20,7 +20,7 @@ def call(build_dir){
         if(f.name.endsWith('results.json')) {
             //echo "${f.name}"
             File file = new File(f.path)
-            dir = file.getParentFile().absolutePath
+            dir = file.getParentFile().absolutePath.substring(1)
             echo dir
             
             def jsonFiles = sh(returnStdout: true, script: "find ${dir} -name '*.json'").trim()
