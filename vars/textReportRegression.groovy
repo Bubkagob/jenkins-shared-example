@@ -2,19 +2,9 @@ import static groovy.io.FileType.FILES
 import groovy.json.JsonOutput
 import groovy.json.JsonParserType
 import groovy.json.JsonSlurper
-@NonCPS
-def traverseHelper() {
-    new File(pwd()).traverse(type: FILES, nameFilter: ~/.*\.cpp/) {
-        println it.path
-        echo it.path
-    }
-}
-
 
 def call(build_dir){
-    //traverseHelper()
-    sh "ls -lat"
-    echo build_dir
+    def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
     for (f in findFiles(glob: "**/*.json")){
         //echo "${f.path}"
         if(f.name.endsWith('results.json')) {
