@@ -105,6 +105,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
                         publishWWW()
                         pythonLibs.testPy()
                         sh "ls -lat"
+                        sh "hostname"
                         // def failed = 0
                         // def total = 0
                         // def result = ""
