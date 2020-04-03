@@ -104,7 +104,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
                         downloadArtifacts()
                         publishWWW()
                         pythonLibs.testPy()
-                        (failed, total, result) = getSummaryMap("${WORKSPACE}/build")
+                        (failed, total, result) = textReportRegression("${WORKSPACE}/build")
                         println failed
                         println total
                         println result
