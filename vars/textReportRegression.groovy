@@ -5,6 +5,7 @@ import groovy.json.JsonSlurper
 
 def call(build_dir){
     sh "ls -lat"
+    sh "hostname"
     echo build_dir
     def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
     def resultMap = [:]
