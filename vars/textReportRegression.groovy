@@ -15,11 +15,12 @@ def call(build_dir){
     //traverseHelper()
     sh "ls -lat"
     echo build_dir
-    def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
-    def resultMap = [:]
-    for (f in findFiles(glob: "**/*.json")){
+    for (f in findFiles(glob: "build_dir/**/*.json")){
         echo "${f.path}"
     }
+    def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
+    def resultMap = [:]
+   
     new File(build_dir).eachFileRecurse(FILES) {
         if(it.name.endsWith('results.json')) {
             dir = it.getParentFile()
