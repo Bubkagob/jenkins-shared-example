@@ -3,7 +3,17 @@ import groovy.json.JsonOutput
 import groovy.json.JsonParserType
 import groovy.json.JsonSlurper
 @NonCPS
+def traverseHelper() {
+    new File(pwd()).traverse(type: FileType.FILES, nameFilter: ~/.*\.cpp/) {
+        println it.path
+        echo it.path
+    }
+}
+
+
+@NonCPS
 def call(build_dir){
+    traverseHelper()
     echo build_dir
     def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
     def resultMap = [:]
