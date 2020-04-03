@@ -16,7 +16,10 @@ def call(build_dir){
     sh "ls -lat"
     echo build_dir
     for (f in findFiles(glob: "**/*.json")){
-        echo "${f.path}"
+        //echo "${f.path}"
+        if(it.name.endsWith('results.json')) {
+            echo "${f.name}"
+        }
     }
     def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
     def resultMap = [:]
