@@ -7,7 +7,7 @@ def call(build_dir){
     echo build_dir
     def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
     def resultMap = [:]
-    new File(build_dir).eachFileRecurse(FileType.FILES) {
+    new File(build_dir).eachFileRecurse(FILES) {
         if(it.name.endsWith('results.json')) {
             dir = it.getParentFile()
             def jsonFiles = new FileNameFinder().getFileNames("${dir}", '*.json')
