@@ -21,7 +21,7 @@ def call(build_dir){
             //echo "${f.name}"
             File file = new File(f.path)
             dir = file.getParentFile()
-            echo dir
+            echo dir.name
             // def jsonFiles = new FileNameFinder().getFileNames("${dir}", '*.json')
             // if (jsonFiles.size() != 2) {println "Bad"}
             // def list = []
