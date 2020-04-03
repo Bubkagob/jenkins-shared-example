@@ -17,7 +17,7 @@ def call(build_dir){
     echo build_dir
     def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
     def resultMap = [:]
-    for (f in findFiles(glob: "build_dir/**/*.json")){
+    for (f in findFiles(glob: "**/*.json")){
         echo "${f.path}"
     }
     new File(build_dir).eachFileRecurse(FILES) {
