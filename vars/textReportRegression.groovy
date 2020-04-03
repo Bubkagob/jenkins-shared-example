@@ -24,16 +24,16 @@ def call(build_dir){
             echo dir
             
             def jsonFiles = sh(returnStdout: true, script: "find ${dir} -name '*.json'").split("\n").collect{ it.trim().replace("*", "")}
-            echo jsonFiles.size().toString()
+            
             // def jsonFiles = new FileNameFinder().getFileNames("${dir}", '*.json')
-            // if (jsonFiles.size() != 2) {println "Bad"}
-            // def list = []
-            // jsonFiles.each{list.add(JsonOutput.toJson(jsonSlurper.parse(new File(f.path))))}
+            if (jsonFiles.size() != 2) {println "Bad"}
+            def list = []
+            jsonFiles.each{list.add(JsonOutput.toJson(jsonSlurper.parse(new File(f.path))))}
             // // //def mergedJson = mergeJSON(list)
-            // def mergedJson = jsonSlurper.parseText(list[0]) + jsonSlurper.parseText(list[1])
-            // def key = mergedJson.name + mergedJson._index
-            // if(!resultMap.containsKey(key)) resultMap.put(key, [])
-            // resultMap[key].add(mergedJson)
+            def mergedJson = jsonSlurper.parseText(list[0]) + jsonSlurper.parseText(list[1])
+            def key = mergedJson.name + mergedJson._index
+            if(!resultMap.containsKey(key)) resultMap.put(key, [])
+            resultMap[key].add(mergedJson)
         }
     }
     def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
