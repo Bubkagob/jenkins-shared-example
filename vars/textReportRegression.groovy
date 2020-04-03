@@ -15,7 +15,7 @@ def call(build_dir){
     //traverseHelper()
     sh "ls -lat"
     echo build_dir
-    for (f in findFiles(glob: "build_dir/**/*.json")){
+    for (f in findFiles(glob: "${build_dir}/**/*.json")){
         echo "${f.path}"
     }
     def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
