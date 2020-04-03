@@ -110,10 +110,10 @@ def call(currentBuild, repo, branch, mailRecipients) {
                         // def total = 0
                         // def result = ""
                         // sh "ls -lat"
-                        // (failed, total, result) = textReportRegression("${WORKSPACE}/build")
+                        result = textReportRegression("${WORKSPACE}/build")
                         // echo failed.toString()
                         // echo total.toString()
-                        // echo result
+                        echo result
                     }
                 }
             }

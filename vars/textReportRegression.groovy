@@ -57,6 +57,7 @@ def call(build_dir){
         }
         resultString = resultString.concat("+"+"-"*95+"+\n")
     }
-    return [total_failed, totalCounter, resultString]
+    // return [total_failed, totalCounter, resultString]
+    return resultString
 }
 // (failed, total, result) = getSummaryMap('build')
