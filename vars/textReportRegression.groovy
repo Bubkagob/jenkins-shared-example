@@ -18,14 +18,7 @@ def call(build_dir){
     for (f in findFiles(glob: "**/*.json")){
         //echo "${f.path}"
         if(f.name.endsWith('results.json')) {
-            echo "${f.name}"
-        }
-    }
-    def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
-    def resultMap = [:]
-   
-    new File(build_dir).eachFileRecurse(FILES) {
-        if(it.name.endsWith('results.json')) {
+            //echo "${f.name}"
             dir = it.getParentFile()
             def jsonFiles = new FileNameFinder().getFileNames("${dir}", '*.json')
             if (jsonFiles.size() != 2) {println "Bad"}
@@ -38,6 +31,23 @@ def call(build_dir){
             resultMap[key].add(mergedJson)
         }
     }
+    def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
+    def resultMap = [:]
+   
+    // new File(build_dir).eachFileRecurse(FILES) {
+    //     if(it.name.endsWith('results.json')) {
+    //         dir = it.getParentFile()
+    //         def jsonFiles = new FileNameFinder().getFileNames("${dir}", '*.json')
+    //         if (jsonFiles.size() != 2) {println "Bad"}
+    //         def list = []
+    //         jsonFiles.each{list.add(JsonOutput.toJson(jsonSlurper.parse(new File("${it}"))))}
+    //         //def mergedJson = mergeJSON(list)
+    //         def mergedJson = jsonSlurper.parseText(list[0]) + jsonSlurper.parseText(list[1])
+    //         def key = mergedJson.name + mergedJson._index
+    //         if(!resultMap.containsKey(key)) resultMap.put(key, [])
+    //         resultMap[key].add(mergedJson)
+    //     }
+    // }
     // return resultMap
     // =========================================== resultMap here
     def failList = []
