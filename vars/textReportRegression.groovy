@@ -4,12 +4,13 @@ import groovy.json.JsonParserType
 import groovy.json.JsonSlurper
 
 def call(build_dir){
-    def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
+    
     def resultMap = [:]
     for (f in findFiles(glob: "**/*.json")){
         //echo "${f.path}"
         if(f.name.endsWith('results.json')) {
             //echo "${f.name}"
+            def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
             File file = new File(f.path)
             dir = file.getParentFile().absolutePath.substring(1)
             echo dir
