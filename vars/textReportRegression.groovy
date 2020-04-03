@@ -5,6 +5,7 @@ import groovy.json.JsonSlurper
 
 def call(build_dir){
     def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
+    def resultMap = [:]
     for (f in findFiles(glob: "**/*.json")){
         //echo "${f.path}"
         if(f.name.endsWith('results.json')) {
@@ -26,8 +27,8 @@ def call(build_dir){
             resultMap[key].add(mergedJson)
         }
     }
-    def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
-    def resultMap = [:]
+    // def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
+    
    
     // new File(build_dir).eachFileRecurse(FILES) {
     //     if(it.name.endsWith('results.json')) {
