@@ -2,7 +2,7 @@
 // import groovy.json.JsonOutput
 // import groovy.json.JsonParserType
 // import groovy.json.JsonSlurper
-
+@NonCPS
 def call(build_dir){
     sh "ls -lat"
     sh "hostname"
