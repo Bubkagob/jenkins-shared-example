@@ -2,7 +2,7 @@
 def call(currentBuild, repo, branch, mailRecipients) {
     pipeline {
         agent {
-            label "beta"
+            label "alpha50"
         }
         environment {
             BUILD_USER = currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
@@ -102,6 +102,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
                     script {
                         downloadArtifacts()
                         publishWWW()
+                        pythonLibs.testPy()
                     }
                 }
             }
