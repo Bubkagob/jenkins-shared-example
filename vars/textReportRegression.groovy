@@ -22,7 +22,7 @@ def call(build_dir){
             File file = new File(f.path)
             dir = file.getParentFile().absolutePath
             echo dir
-            def jsonFiles = findFiles(glob: "${dir}/*.json")
+            def jsonFiles = findFiles(glob: "**/*.json")
             echo jsonFiles.size().toString()
             // def jsonFiles = new FileNameFinder().getFileNames("${dir}", '*.json')
             // if (jsonFiles.size() != 2) {println "Bad"}
