@@ -104,13 +104,15 @@ def call(currentBuild, repo, branch, mailRecipients) {
                         downloadArtifacts()
                         publishWWW()
                         pythonLibs.testPy()
-                        def failed = 0
-                        def total = 0
-                        def result = ""
-                        (failed, total, result) = textReportRegression("${WORKSPACE}/build")
-                        echo failed.toString()
-                        echo total.toString()
-                        echo result
+                        sh "ls -lat"
+                        // def failed = 0
+                        // def total = 0
+                        // def result = ""
+                        // sh "ls -lat"
+                        // (failed, total, result) = textReportRegression("${WORKSPACE}/build")
+                        // echo failed.toString()
+                        // echo total.toString()
+                        // echo result
                     }
                 }
             }
