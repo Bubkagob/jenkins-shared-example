@@ -114,35 +114,35 @@ def call(currentBuild, repo, branch, mailRecipients) {
                     }
                 }
             }
-            stage("Generate reports"){
-                steps{
-                    echo "======== Generate reports with groovy scripts ========"
-                    script {
-                        def ts = new Date()
-                        def resultObject = reportlib.generateTextReport("${WORKSPACE}/build")
-                        env.BUILD_URL = "${BUILD_URL}"
-                        env.START_TIME = "${BUILD_TIMESTAMP}"
-                        env.BUILD_DATE = ts.format("yyyy-MM-dd", TimeZone.getTimeZone('Europe/Moscow'))
-                        env.COMPLETE_TIME = ts.format("EEE, MMMM dd, yyyy, HH:mm:ss '('zzz')'", TimeZone.getTimeZone('Europe/Moscow'))
-                        env.REPORT = resultObject["report"]
-                        env.TOTAL_TESTS = resultObject["total"]
-                        env.FAILED_TESTS = resultObject["failed"]
-                        writeFile(
-                            file: "report.txt",
-                            text: "${REPORT}" 
-                        )
-                        def HTML_REPORT = reportlib.generateHTMLreport("${WORKSPACE}/build")
-                        writeFile(
-                            file: "report.html",
-                            text: "${HTML_REPORT}" 
-                        )
-                        archiveArtifacts(
-                            artifacts: 'artifacts.zip, report.txt, report.html',
-                            fingerprint: true
-                        )
-                    }
-                }
-            }
+            // stage("Generate reports"){
+            //     steps{
+            //         echo "======== Generate reports with groovy scripts ========"
+            //         script {
+            //             def ts = new Date()
+            //             def resultObject = reportlib.generateTextReport("${WORKSPACE}/build")
+            //             env.BUILD_URL = "${BUILD_URL}"
+            //             env.START_TIME = "${BUILD_TIMESTAMP}"
+            //             env.BUILD_DATE = ts.format("yyyy-MM-dd", TimeZone.getTimeZone('Europe/Moscow'))
+            //             env.COMPLETE_TIME = ts.format("EEE, MMMM dd, yyyy, HH:mm:ss '('zzz')'", TimeZone.getTimeZone('Europe/Moscow'))
+            //             env.REPORT = resultObject["report"]
+            //             env.TOTAL_TESTS = resultObject["total"]
+            //             env.FAILED_TESTS = resultObject["failed"]
+            //             writeFile(
+            //                 file: "report.txt",
+            //                 text: "${REPORT}" 
+            //             )
+            //             def HTML_REPORT = reportlib.generateHTMLreport("${WORKSPACE}/build")
+            //             writeFile(
+            //                 file: "report.html",
+            //                 text: "${HTML_REPORT}" 
+            //             )
+            //             archiveArtifacts(
+            //                 artifacts: 'artifacts.zip, report.txt, report.html',
+            //                 fingerprint: true
+            //             )
+            //         }
+            //     }
+            // }
         }
         post {
             always {
