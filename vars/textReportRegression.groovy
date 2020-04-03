@@ -23,8 +23,8 @@ def call(build_dir){
             dir = file.getParentFile().absolutePath.substring(1)
             echo dir
             
-            def jsonFiles = sh(returnStdout: true, script: "find ${dir} -name '*.json'").trim()
-            echo jsonFiles
+            def jsonFiles = sh(returnStdout: true, script: "find ${dir} -name '*.json'").split("\n").collect{ it.trim().replace("*", "")}
+            echo jsonFiles.size()
             // def jsonFiles = new FileNameFinder().getFileNames("${dir}", '*.json')
             // if (jsonFiles.size() != 2) {println "Bad"}
             // def list = []
