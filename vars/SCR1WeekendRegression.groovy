@@ -100,6 +100,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
             stage('Downloading') {
                 steps {
                     script {
+                        pythonLibs.testPy()
                         downloadArtifacts()
                         publishWWW()
                         pythonLibs.testPy()
