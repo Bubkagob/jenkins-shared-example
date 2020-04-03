@@ -1,7 +1,7 @@
-import static groovy.io.FileType.FILES
-import groovy.json.JsonOutput
-import groovy.json.JsonParserType
-import groovy.json.JsonSlurper
+// import static groovy.io.FileType.FILES
+// import groovy.json.JsonOutput
+// import groovy.json.JsonParserType
+// import groovy.json.JsonSlurper
 
 def call(build_dir){
     sh "ls -lat"
@@ -9,7 +9,7 @@ def call(build_dir){
     echo build_dir
     def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
     def resultMap = [:]
-    new File(build_dir).eachFileRecurse(FILES) {
+    new File(build_dir).eachFileRecurse(FileType.FILES) {
         if(it.name.endsWith('results.json')) {
             dir = it.getParentFile()
             def jsonFiles = new FileNameFinder().getFileNames("${dir}", '*.json')
