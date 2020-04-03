@@ -146,7 +146,7 @@ def call(currentBuild, repo, branch, mailRecipients) {
                 // )
                 script{
                     rtpublish()
-                    notificators.notifyGeneral(currentBuild.result)
+                    //notificators.notifyGeneral(currentBuild.result)
                 }
                 // emailext(
                 //     attachmentsPattern: "report.txt, report.html",
