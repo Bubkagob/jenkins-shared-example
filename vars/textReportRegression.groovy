@@ -4,6 +4,8 @@ import groovy.json.JsonParserType
 import groovy.json.JsonSlurper
 
 def call(build_dir){
+    sh "ls -lat"
+    echo build_dir
     def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
     def resultMap = [:]
     new File(build_dir).eachFileRecurse(FILES) {
