@@ -4,7 +4,7 @@ import groovy.json.JsonParserType
 import groovy.json.JsonSlurper
 @NonCPS
 def traverseHelper() {
-    new File(pwd()).traverse(type: FileType.FILES, nameFilter: ~/.*\.cpp/) {
+    new File(pwd()).traverse(type: FILES, nameFilter: ~/.*\.cpp/) {
         println it.path
         echo it.path
     }
