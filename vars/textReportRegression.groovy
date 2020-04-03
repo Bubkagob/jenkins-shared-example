@@ -22,15 +22,15 @@ def call(build_dir){
             File file = new File(f.path)
             dir = file.getParentFile().absolutePath
             echo dir
-            // def jsonFiles = new FileNameFinder().getFileNames("${dir}", '*.json')
-            // if (jsonFiles.size() != 2) {println "Bad"}
-            // def list = []
-            // jsonFiles.each{list.add(JsonOutput.toJson(jsonSlurper.parse(new File("${it}"))))}
+            def jsonFiles = new FileNameFinder().getFileNames("${dir}", '*.json')
+            if (jsonFiles.size() != 2) {println "Bad"}
+            def list = []
+            jsonFiles.each{list.add(JsonOutput.toJson(jsonSlurper.parse(new File(f.path))))}
             // //def mergedJson = mergeJSON(list)
-            // def mergedJson = jsonSlurper.parseText(list[0]) + jsonSlurper.parseText(list[1])
-            // def key = mergedJson.name + mergedJson._index
-            // if(!resultMap.containsKey(key)) resultMap.put(key, [])
-            // resultMap[key].add(mergedJson)
+            def mergedJson = jsonSlurper.parseText(list[0]) + jsonSlurper.parseText(list[1])
+            def key = mergedJson.name + mergedJson._index
+            if(!resultMap.containsKey(key)) resultMap.put(key, [])
+            resultMap[key].add(mergedJson)
         }
     }
     def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
