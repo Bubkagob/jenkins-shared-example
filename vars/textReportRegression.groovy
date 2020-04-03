@@ -24,7 +24,7 @@ def call(build_dir){
             echo dir
             
             def jsonFiles = sh(returnStdout: true, script: "find ${dir} -name '*.json'").trim()
-            echo jsonFiles.size().toString()
+            echo jsonFiles
             // def jsonFiles = new FileNameFinder().getFileNames("${dir}", '*.json')
             // if (jsonFiles.size() != 2) {println "Bad"}
             // def list = []
