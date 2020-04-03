@@ -105,9 +105,9 @@ def call(currentBuild, repo, branch, mailRecipients) {
                         publishWWW()
                         pythonLibs.testPy()
                         (failed, total, result) = textReportRegression("${WORKSPACE}/build")
-                        println failed
-                        println total
-                        println result
+                        echo failed.toString()
+                        echo total.toString()
+                        echo result
                     }
                 }
             }
