@@ -1,12 +1,11 @@
 import static groovy.io.FileType.FILES
 import groovy.json.JsonOutput
 import groovy.json.JsonParserType
-//import groovy.json.JsonSlurper
-import groovy.json.JsonSlurperClassic
+import groovy.json.JsonSlurper
 
 @NonCPS
 def call(build_dir){
-    def jsonSlurper = new JsonSlurperClassic(type: JsonParserType.INDEX_OVERLAY)
+    def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
     def resultMap = [:]
     for (f in findFiles(glob: "**/*.json")){
         //echo "${f.path}"
