@@ -4,6 +4,7 @@ import groovy.json.JsonParserType
 //import groovy.json.JsonSlurper
 import groovy.json.JsonSlurperClassic
 
+@NonCPS
 def call(build_dir){
     def jsonSlurper = new JsonSlurperClassic(type: JsonParserType.INDEX_OVERLAY)
     def resultMap = [:]
