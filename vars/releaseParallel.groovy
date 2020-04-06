@@ -31,7 +31,7 @@ def call(config) {
                 steps{
                     script{
                         misc.readReleaseDir("${WORKSPACE}")
-                        scenarios = misc.prepareReleaseBuildDirWithCoverage()
+                        scenarios = misc.prepareReleaseBuildDir()
                     }
                     sh "ls -lat"
                     sh "ls -lat build" 
