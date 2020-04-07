@@ -49,9 +49,10 @@ def call(config){
             def builds = [:]
             def count = 0
             for (scenario in config.scenarios) {
-              count++
+              
               builds["${scenario}"] = {
                   stage("Run ${scenario}") {
+                    count++
                     sleep count*10
                     sh """
                     #!/bin/bash -l
