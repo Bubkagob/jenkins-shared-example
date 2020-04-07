@@ -47,9 +47,12 @@ def call(config){
         stage("Run ${memo}") {
           script {
             def builds = [:]
+            def count = 0
             for (scenario in config.scenarios) {
+              count++
               builds["${scenario}"] = {
                   stage("Run ${scenario}") {
+                    sleep count*10
                     sh """
                     #!/bin/bash -l
                     export RISCV=${config.toolchain}
