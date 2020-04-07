@@ -56,7 +56,8 @@ def call(config){
                     export PATH=\$RISCV/bin:\$PATH
                     cd encr/ive
                     cd rtl_src
-                    make PLF_SCENARIO=${scenario} run_vcs MEM=${memo}
+                    # make PLF_SCENARIO=${scenario} run_vcs MEM=${memo}
+                    make PLF_SCENARIO=${scenario}  MEM=${memo}
                     """
                   }
               }
