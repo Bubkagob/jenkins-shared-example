@@ -1,5 +1,5 @@
 def call(String repo, String branch) {
-    def project_name = repo.split("/")[-1].toUpperCase()
+    //def project_name = repo.split("/")[-1].toUpperCase()
     //stage("Checkout ${project_name}") {
         //script{
             retry(5){

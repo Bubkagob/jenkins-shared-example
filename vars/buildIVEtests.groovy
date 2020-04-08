@@ -4,18 +4,21 @@ def call(config){
         script {
           def builds = [:]
           for (scenario in config.scenarios) {
+            echo "IN LOOP"
+            echo scenario
             builds["${scenario}"] = {
-                stage("Build ${scenario}") {
+                //stage("Build ${scenario}") {
                   sh """
                   #!/bin/bash -l
+                  echo "SCENARIO! ${scenario}"
                   export RISCV=${config.toolchain}
                   export PATH=\$RISCV/bin:\$PATH
                   cd encr/ive
                   cd tests_src
                   chmod +x build_rtl_sim.sh
-                  \$(PLF_SCENARIO=${scenario} ./build_rtl_sim.sh > log_${scenario}.txt 2>&1)
+                  # \$(PLF_SCENARIO=${scenario} ./build_rtl_sim.sh > log_${scenario}.txt 2>&1)
                   """
-                }
+                //}
             }
           }
           parallel builds
