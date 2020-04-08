@@ -1,12 +1,13 @@
 def call(config){
   def count = 0
+  stage("Build simulator "){
   if(config.buses){
     script{
       def builds = [:]
       for (bus in config.buses) {
         def new_bus = bus
         builds[bus] = {
-          stage("Build simulator ${bus}") {
+          //stage("Build simulator ${bus}") {
             count++
             sleep count*10
             sh """
@@ -18,7 +19,7 @@ def call(config){
             cd rtl_src
             # make BUS=${new_bus} build_vcs
             """
-          }
+          //}
         }
       }
       parallel builds
@@ -37,7 +38,7 @@ def call(config){
     //     }
     // }
   } else {
-    stage("Build simulator "){
+    //stage("Build simulator "){
       sh """
       #!/bin/bash -l
       export RISCV=${config.toolchain}
@@ -46,6 +47,7 @@ def call(config){
       cd rtl_src
       #make build_vcs
       """
-    }
+    //}
   }
+}
 }
