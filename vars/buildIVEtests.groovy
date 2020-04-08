@@ -6,10 +6,11 @@ def call(config){
           for (scenario in config.scenarios) {
             echo "IN LOOP"
             echo scenario
+            def new_conf = scenario
             builds[scenario] = {
               // node {
               //   stage("Build ${scenario}") {
-                  def new_conf = scenario
+                  
                   sh """
                   #!/bin/bash -l
                   echo "SCENARIO NEW! ${new_conf}"
