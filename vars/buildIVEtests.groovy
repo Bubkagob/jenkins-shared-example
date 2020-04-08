@@ -7,8 +7,8 @@ def call(config){
             echo "IN LOOP"
             echo scenario
             builds[scenario] = {
-              node {
-                stage("Build ${scenario}") {
+              // node {
+              //   stage("Build ${scenario}") {
                   sh """
                   #!/bin/bash -l
                   echo "SCENARIO NEW! ${scenario}"
@@ -19,8 +19,8 @@ def call(config){
                   chmod +x build_rtl_sim.sh
                   # \$(PLF_SCENARIO=${scenario} ./build_rtl_sim.sh > log_${scenario}.txt 2>&1)
                   """
-                }
-              }
+              //   }
+              // }
             }
           }
           parallel builds
