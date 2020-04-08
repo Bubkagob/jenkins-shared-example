@@ -100,6 +100,7 @@ def call(config){
           export PATH=\$RISCV/bin:\$PATH
           cd encr/ive
           cd rtl_src
+          echo "platform_dir=scr4 ${memo} !!!!!!!!!"
           # make MEM=${memo} platform_dir=scr4
           # make run_vcs MEM=${memo} platform_dir=scr4
           """
