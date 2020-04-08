@@ -8,8 +8,6 @@ def call(config){
             echo scenario
             def new_conf = scenario
             builds[scenario] = {
-              // node {
-              //   stage("Build ${scenario}") {
                   
                   sh """
                   #!/bin/bash -l
@@ -19,10 +17,9 @@ def call(config){
                   cd encr/ive
                   cd tests_src
                   chmod +x build_rtl_sim.sh
-                  # \$(PLF_SCENARIO=${scenario} ./build_rtl_sim.sh > log_${scenario}.txt 2>&1)
+                  \$(PLF_SCENARIO=${new_conf} ./build_rtl_sim.sh > log_${new_conf}.txt 2>&1)
                   """
-              //   }
-              // }
+   
             }
           }
           parallel builds
