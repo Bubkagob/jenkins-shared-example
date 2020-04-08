@@ -69,7 +69,7 @@ def call(config) {
                 }
             }
 
-            stage('Downloading') {
+            stage("Download artifacts from 110VM") {
                 steps {
                     script {
                         downloadArtifacts()

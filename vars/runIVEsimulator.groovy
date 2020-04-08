@@ -8,7 +8,7 @@ def call(config){
     memo ->
       
       if(config.buses){
-        //stage("run ${memo}") {
+        stage("run ${memo}") {
           script {
             def builds = [:]
             for (bus in config.buses) {
@@ -23,15 +23,15 @@ def call(config){
                     export PATH=\$RISCV/bin:\$PATH
                     cd encr/ive
                     cd rtl_src
-                    #make run_vcs BUS=${new_bus} MEM=${memo}" platform_dir=scr4
-                    make  BUS=${new_bus} MEM=${memo}" platform_dir=scr4
+                    #make run_vcs BUS=${new_bus} MEM=${memo} platform_dir=scr4
+                    make BUS=${new_bus} MEM=${memo} platform_dir=scr4
                     """
                   //}
               }
             }
             parallel builds
           }
-        //}
+        }
 
 
 
@@ -49,14 +49,12 @@ def call(config){
       }
 
       if(config.scenarios) {
-        //stage("Run ${memo}") {
+        stage("Run ${memo}") {
           script {
             def builds = [:]
-            
             for (scenario in config.scenarios) {
               def new_conf = scenario
               builds[scenario] = {
-                  //stage("Run ${scenario}") {
                 count++
                 sleep count*10
                 sh """
@@ -68,12 +66,11 @@ def call(config){
                 # make PLF_SCENARIO=${scenario} run_vcs MEM=${memo}
                 make PLF_SCENARIO=${new_conf}  MEM=${memo}
                 """
-                  //}
               }
             }
             parallel builds
           }
-        //}
+        }
 
         // config.scenarios.each{
         //   scenario -> 
