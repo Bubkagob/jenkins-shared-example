@@ -6,8 +6,9 @@ def call(config){
           for (scenario in config.scenarios) {
             echo "IN LOOP"
             echo scenario
-            builds["${scenario}"] = {
-                //stage("Build ${scenario}") {
+            builds[scenario] = {
+              // node {
+              //   stage("Build ${scenario}") {
                   sh """
                   #!/bin/bash -l
                   echo "SCENARIO! ${scenario}"
@@ -18,13 +19,12 @@ def call(config){
                   chmod +x build_rtl_sim.sh
                   # \$(PLF_SCENARIO=${scenario} ./build_rtl_sim.sh > log_${scenario}.txt 2>&1)
                   """
-                //}
+              //   }
+              // }
             }
           }
           parallel builds
         }
-
-
 
       // config.scenarios.each{
       //   scenario ->
