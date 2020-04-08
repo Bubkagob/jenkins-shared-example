@@ -32,6 +32,10 @@
     "scr3_kraftway": {
         "toolchain": "/home/soft/riscv-sw/180115-sc-riscv64-ge5275d6f",
         "repo": "https://github.com/ar-sc/scrx_src_release",
-        "branch": "scr4_release_niime"
+        "branch": "scr4_release_niime",
+        "scenarios": [
+            "SCR3_L1",
+            "SCR3_L2"
+        ]
     }
 }
