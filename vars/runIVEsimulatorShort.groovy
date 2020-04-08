@@ -5,12 +5,12 @@ def call(config){
   ]
   def count = 0
 
-stage("Run simulation") {
+
   memories.each{
     memo ->
-      
+      stage("Run ${memo}") {
       if(config.buses){
-        stage("run ${memo}") {
+        //stage("run ${memo}") {
           script {
             def builds = [:]
             for (bus in config.buses) {
@@ -34,7 +34,7 @@ stage("Run simulation") {
             }
             parallel builds
           }
-        }
+        //}
 
 
 
@@ -52,7 +52,7 @@ stage("Run simulation") {
       }
 
       if(config.scenarios) {
-        stage("Run ${memo}") {
+        //stage("Run ${memo}") {
           script {
             def builds = [:]
             for (scenario in config.scenarios) {
@@ -74,7 +74,7 @@ stage("Run simulation") {
             }
             parallel builds
           }
-        }
+        //}
 
         // config.scenarios.each{
         //   scenario -> 
@@ -103,6 +103,8 @@ stage("Run simulation") {
           # make run_vcs MEM=${memo}
           """
       }
+      }
+
   }
-}
+
 }
