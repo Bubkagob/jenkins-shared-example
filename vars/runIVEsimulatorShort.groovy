@@ -4,6 +4,8 @@ def call(config){
     "sram"
   ]
   def count = 0
+
+stage("Run simulation") {
   memories.each{
     memo ->
       
@@ -101,6 +103,6 @@ def call(config){
           # make run_vcs MEM=${memo}
           """
       }
-    
-  }  
+  }
+}
 }
