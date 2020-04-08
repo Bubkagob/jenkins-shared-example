@@ -6,16 +6,18 @@ def call(config){
       for (bus in config.buses) {
         def new_bus = bus
         builds[bus] = {
-          count++
-          sleep count*10
-          sh """
-          #!/bin/bash -l
-          export RISCV=${config.toolchain}
-          export PATH=\$RISCV/bin:\$PATH
-          cd encr/ive
-          cd rtl_src
-          make BUS=${bus} build_vcs
-          """
+          stage("Build ${bus}") {
+            count++
+            sleep count*10
+            sh """
+            #!/bin/bash -l
+            export RISCV=${config.toolchain}
+            export PATH=\$RISCV/bin:\$PATH
+            cd encr/ive
+            cd rtl_src
+            make BUS=${new_bus} build_vcs
+            """
+          }
         }
       }
       parallel builds
