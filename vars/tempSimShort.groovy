@@ -29,13 +29,13 @@ def call(config) {
                 }
             }
 
-            // stage("Push To VM") {
-            //     steps {
-            //         script {
-            //             pushToVm()
-            //         }
-            //     }
-            // }
+            stage("Push To VM") {
+                steps {
+                    script {
+                        pushToVm()
+                    }
+                }
+            }
 
             stage("Build tests") {
                 agent{
@@ -43,9 +43,9 @@ def call(config) {
                 }
                 steps {
                     script {
-                        buildIVEtests(config)
-                        buildIVEsimulator(config)
-                        runIVEsimulator(config)
+                        buildIVEtestsShort(config)
+                        buildIVEsimulatorShort(config)
+                        runIVEsimulatorShort(config)
                     }
                 }
             }
