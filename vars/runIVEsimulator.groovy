@@ -62,10 +62,11 @@ def call(config){
                     #!/bin/bash -l
                     export RISCV=${config.toolchain}
                     export PATH=\$RISCV/bin:\$PATH
+                    echo "SCENARIO! ${scenario} MEMO! ${memo}"
                     cd encr/ive
                     cd rtl_src
                     # make PLF_SCENARIO=${scenario} run_vcs MEM=${memo}
-                    make PLF_SCENARIO=${scenario}  MEM=${memo}
+                    # make PLF_SCENARIO=${scenario}  MEM=${memo}
                     """
                   }
               }

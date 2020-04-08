@@ -28,26 +28,26 @@ def call(config) {
                     }
                 }
             }
-            // stage("Push To VM") {
-            //     steps {
-            //         script {
-            //             pushToVm()
-            //         }
-            //     }
-            // }
+            stage("Push To VM") {
+                steps {
+                    script {
+                        pushToVm()
+                    }
+                }
+            }
 
-            // stage("Build tests") {
-            //     agent{
-            //         label "power"
-            //     }
-            //     steps {
-            //         script {
-            //             //buildIVEtests(config)
-            //             //buildIVEsimulator(config)
-            //             //runIVEsimulator(config)
-            //         }
-            //     }
-            // }
+            stage("Build tests") {
+                agent{
+                    label "power"
+                }
+                steps {
+                    script {
+                        buildIVEtests(config)
+                        buildIVEsimulator(config)
+                        runIVEsimulator(config)
+                    }
+                }
+            }
 
             stage("Analyze and Collect antifacts"){
                 agent{
