@@ -36,18 +36,18 @@ def call(config) {
             //     }
             // }
 
-            stage("Build tests") {
-                agent{
-                    label "power"
-                }
-                steps {
-                    script {
-                        //buildIVEtests(config)
-                        //buildIVEsimulator(config)
-                        //runIVEsimulator(config)
-                    }
-                }
-            }
+            // stage("Build tests") {
+            //     agent{
+            //         label "power"
+            //     }
+            //     steps {
+            //         script {
+            //             //buildIVEtests(config)
+            //             //buildIVEsimulator(config)
+            //             //runIVEsimulator(config)
+            //         }
+            //     }
+            // }
 
             stage("Analyze and Collect antifacts"){
                 agent{
