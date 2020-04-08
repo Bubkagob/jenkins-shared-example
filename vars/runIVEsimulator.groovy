@@ -3,6 +3,7 @@ def call(config){
     "tcm",
     "sram"
   ]
+  def count = 0
   memories.each{
     memo ->
       
@@ -13,13 +14,16 @@ def call(config){
             for (bus in config.buses) {
               builds["${bus}"] = {
                   stage("Run ${bus}") {
+                    count++
+                    sleep count*10
                     sh """
                     #!/bin/bash -l
                     export RISCV=${config.toolchain}
                     export PATH=\$RISCV/bin:\$PATH
                     cd encr/ive
                     cd rtl_src
-                    make run_vcs BUS=${bus} MEM=${memo}" platform_dir=scr4
+                    #make run_vcs BUS=${bus} MEM=${memo}" platform_dir=scr4
+                    make  BUS=${bus} MEM=${memo}" platform_dir=scr4
                     """
                   }
               }
@@ -47,7 +51,7 @@ def call(config){
         stage("Run ${memo}") {
           script {
             def builds = [:]
-            def count = 0
+            
             for (scenario in config.scenarios) {
               
               builds["${scenario}"] = {
