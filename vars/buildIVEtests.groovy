@@ -11,7 +11,7 @@ def call(config){
               //   stage("Build ${scenario}") {
                   sh """
                   #!/bin/bash -l
-                  echo "SCENARIO! ${scenario}"
+                  echo "SCENARIO NEW! ${scenario}"
                   export RISCV=${config.toolchain}
                   export PATH=\$RISCV/bin:\$PATH
                   cd encr/ive
