@@ -9,9 +9,10 @@ def call(config){
             builds[scenario] = {
               // node {
               //   stage("Build ${scenario}") {
+                  def config = scenario
                   sh """
                   #!/bin/bash -l
-                  echo "SCENARIO NEW! ${scenario}"
+                  echo "SCENARIO NEW! ${config}"
                   export RISCV=${config.toolchain}
                   export PATH=\$RISCV/bin:\$PATH
                   cd encr/ive
