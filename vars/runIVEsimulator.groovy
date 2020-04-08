@@ -8,12 +8,13 @@ def call(config){
     memo ->
       
       if(config.buses){
-        stage("run ${memo}") {
+        //stage("run ${memo}") {
           script {
             def builds = [:]
             for (bus in config.buses) {
-              builds["${bus}"] = {
-                  stage("Run ${bus}") {
+              def new_bus = bus
+              builds[bus] = {
+                  //stage("Run ${bus}") {
                     count++
                     sleep count*10
                     sh """
@@ -22,15 +23,15 @@ def call(config){
                     export PATH=\$RISCV/bin:\$PATH
                     cd encr/ive
                     cd rtl_src
-                    #make run_vcs BUS=${bus} MEM=${memo}" platform_dir=scr4
-                    make  BUS=${bus} MEM=${memo}" platform_dir=scr4
+                    #make run_vcs BUS=${new_bus} MEM=${memo}" platform_dir=scr4
+                    make  BUS=${new_bus} MEM=${memo}" platform_dir=scr4
                     """
-                  }
+                  //}
               }
             }
             parallel builds
           }
-        }
+        //}
 
 
 
@@ -48,32 +49,31 @@ def call(config){
       }
 
       if(config.scenarios) {
-        stage("Run ${memo}") {
+        //stage("Run ${memo}") {
           script {
             def builds = [:]
             
             for (scenario in config.scenarios) {
-              
-              builds["${scenario}"] = {
-                  stage("Run ${scenario}") {
-                    count++
-                    sleep count*10
-                    sh """
-                    #!/bin/bash -l
-                    export RISCV=${config.toolchain}
-                    export PATH=\$RISCV/bin:\$PATH
-                    echo "SCENARIO! ${scenario} MEMO! ${memo}"
-                    cd encr/ive
-                    cd rtl_src
-                    # make PLF_SCENARIO=${scenario} run_vcs MEM=${memo}
-                    # make PLF_SCENARIO=${scenario}  MEM=${memo}
-                    """
-                  }
+              def new_conf = scenario
+              builds[scenario] = {
+                  //stage("Run ${scenario}") {
+                count++
+                sleep count*10
+                sh """
+                #!/bin/bash -l
+                export RISCV=${config.toolchain}
+                export PATH=\$RISCV/bin:\$PATH
+                cd encr/ive
+                cd rtl_src
+                # make PLF_SCENARIO=${scenario} run_vcs MEM=${memo}
+                make PLF_SCENARIO=${new_conf}  MEM=${memo}
+                """
+                  //}
               }
             }
             parallel builds
           }
-        }
+        //}
 
         // config.scenarios.each{
         //   scenario -> 

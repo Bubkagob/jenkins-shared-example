@@ -1,30 +1,23 @@
 def call(config){
-    
     if(config.scenarios){
         script {
           def builds = [:]
           for (scenario in config.scenarios) {
-            echo "IN LOOP"
-            echo scenario
             def new_conf = scenario
             builds[scenario] = {
-                  
-                  sh """
-                  #!/bin/bash -l
-                  echo "SCENARIO NEW! ${new_conf}"
-                  export RISCV=${config.toolchain}
-                  export PATH=\$RISCV/bin:\$PATH
-                  cd encr/ive
-                  cd tests_src
-                  chmod +x build_rtl_sim.sh
-                  \$(PLF_SCENARIO=${new_conf} ./build_rtl_sim.sh > log_${new_conf}.txt 2>&1)
-                  """
-   
+              sh """
+              #!/bin/bash -l
+              export RISCV=${config.toolchain}
+              export PATH=\$RISCV/bin:\$PATH
+              cd encr/ive
+              cd tests_src
+              chmod +x build_rtl_sim.sh
+              \$(PLF_SCENARIO=${new_conf} ./build_rtl_sim.sh > log_${new_conf}.txt 2>&1)
+              """
             }
           }
           parallel builds
         }
-
       // config.scenarios.each{
       //   scenario ->
       //   stage("Build ${scenario}"){
