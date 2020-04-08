@@ -6,7 +6,7 @@ def call(config){
       for (bus in config.buses) {
         def new_bus = bus
         builds[bus] = {
-          stage("Build ${bus}") {
+          stage("Build simulator ${bus}") {
             count++
             sleep count*10
             sh """
