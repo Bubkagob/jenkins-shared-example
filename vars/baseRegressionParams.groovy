@@ -27,7 +27,7 @@ def call(config) {
                 quoteValue: false, 
                 saveJSONParameterToFile: false, 
                 type: 'PT_SINGLE_SELECT', 
-                value: config.scenarios, 
+                value: config.scenarios.join(','), 
                 visibleItemCount: 10
             )
         }
