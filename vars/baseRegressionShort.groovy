@@ -56,6 +56,7 @@ def call(config) {
                                     #!/bin/bash -l
                                     echo "Toolchain : ${config.toolchain}"
                                     [ -d build ] && echo OK || mkdir -p build
+                                    ls -lat
                                     sed -i -- "s/mode: cli/mode: coverage/g" tests/_scenarios/${scenario_name}
                                     export RISCV=${config.toolchain}
                                     export SWTOOLS_1_10=${config.toolchain}/bin
