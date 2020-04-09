@@ -21,7 +21,7 @@ def call(config) {
         }
         parameters {
             extendedChoice(
-                //defaultValue: '', 
+                defaultValue: config.scenarios[0], 
                 description: 'Choose scenarios to run', 
                 //multiSelectDelimiter: ',', 
                 name: 'CHOSEN_SCENARIO', 
