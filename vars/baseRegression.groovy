@@ -38,6 +38,39 @@ def call(config) {
                 }
             }
 
+            stage('Build tests from scenarios') {
+                agent{
+                    label "power"
+                }
+                steps {
+                    script {
+                        config.scenarios.each{
+                            scenario_name -> 
+                               // stage("Run scenario ${scenario_name}"){
+                                    echo "${scenario_name}"
+                                    echo "========Build test from ${scenario_name}========"
+                                    
+                                    //sh "[ -d build ] && echo OK || mkdir -p build"
+                                    //sh "sed -i -- 's/mode: cli/mode: coverage/g' tests/_scenarios/${scenario_name}"
+                                    sh """
+                                    #!/bin/bash -l
+                                    echo "Toolchain : ${config.toolchain}"
+                                    [ -d build ] && echo OK || mkdir -p build
+                                    ls -lat
+                                    #sed -i -- "s/mode: cli/mode: coverage/g" tests/_scenarios/${scenario_name}
+                                    export RISCV=${config.toolchain}
+                                    export SWTOOLS_1_10=${config.toolchain}/bin
+                                    export PATH=\$RISCV/bin:\$PATH
+                                    echo \$SWTOOLS_1_10
+                                    cd build
+                                    perl ../tests/common/framework/launcher/launch.pl --tests --scenario ../tests/_scenarios/${scenario_name}
+                                    """
+                                //}
+                        }
+                    }
+                }
+            }
+
             stage('Run scenarios') {
                 agent{
                     label "power"
@@ -46,14 +79,18 @@ def call(config) {
                     script {
                         config.scenarios.each{
                             scenario_name -> 
-                                stage("Run scenario ${scenario_name}"){
+                               // stage("Run scenario ${scenario_name}"){
                                     echo "${scenario_name}"
                                     echo "========Run ${scenario_name}========"
                                     
-                                    sh "[ -d build ] && echo OK || mkdir -p build"
-                                    sh "sed -i -- 's/mode: cli/mode: coverage/g' tests/_scenarios/${scenario_name}"
+                                    //sh "[ -d build ] && echo OK || mkdir -p build"
+                                    //sh "sed -i -- 's/mode: cli/mode: coverage/g' tests/_scenarios/${scenario_name}"
                                     sh """
                                     #!/bin/bash -l
+                                    echo "Toolchain : ${config.toolchain}"
+                                    [ -d build ] && echo OK || mkdir -p build
+                                    ls -lat
+                                    #sed -i -- "s/mode: cli/mode: coverage/g" tests/_scenarios/${scenario_name}
                                     export RISCV=${config.toolchain}
                                     export SWTOOLS_1_10=${config.toolchain}/bin
                                     export PATH=\$RISCV/bin:\$PATH
@@ -61,7 +98,7 @@ def call(config) {
                                     cd build
                                     perl ../tests/common/framework/launcher/launch.pl --scenario ../tests/_scenarios/${scenario_name}
                                     """
-                                }
+                                //}
                         }
                     }
                 }

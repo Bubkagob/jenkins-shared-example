@@ -57,7 +57,7 @@ def call(config) {
                                     echo "Toolchain : ${config.toolchain}"
                                     [ -d build ] && echo OK || mkdir -p build
                                     ls -lat
-                                    sed -i -- "s/mode: cli/mode: coverage/g" tests/_scenarios/${scenario_name}
+                                    #sed -i -- "s/mode: cli/mode: coverage/g" tests/_scenarios/${scenario_name}
                                     export RISCV=${config.toolchain}
                                     export SWTOOLS_1_10=${config.toolchain}/bin
                                     export PATH=\$RISCV/bin:\$PATH
@@ -90,13 +90,13 @@ def call(config) {
                                     echo "Toolchain : ${config.toolchain}"
                                     [ -d build ] && echo OK || mkdir -p build
                                     ls -lat
-                                    sed -i -- "s/mode: cli/mode: coverage/g" tests/_scenarios/${scenario_name}
+                                    #sed -i -- "s/mode: cli/mode: coverage/g" tests/_scenarios/${scenario_name}
                                     export RISCV=${config.toolchain}
                                     export SWTOOLS_1_10=${config.toolchain}/bin
                                     export PATH=\$RISCV/bin:\$PATH
                                     echo \$SWTOOLS_1_10
                                     cd build
-                                    #perl ../tests/common/framework/launcher/launch.pl --scenario ../tests/_scenarios/${scenario_name}
+                                    perl ../tests/common/framework/launcher/launch.pl --scenario ../tests/_scenarios/${scenario_name}
                                     """
                                 //}
                         }
@@ -172,7 +172,7 @@ def call(config) {
         post{
             always {
                 script{
-                    //notificators.notifyGeneral(currentBuild.result)
+                    notificators.notifyGeneral(currentBuild.result)
                     rtpublish()
                 }
             }
