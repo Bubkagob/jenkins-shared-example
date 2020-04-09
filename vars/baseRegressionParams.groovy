@@ -58,7 +58,7 @@ def call(config) {
                 }
                 steps {
                     script {
-                        echo "CHOSEN ${scenario_name}"
+                        echo "CHOSEN ${CHOSEN_SCENARIO}"
                     }
                 }
             }
