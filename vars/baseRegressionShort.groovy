@@ -50,11 +50,13 @@ def call(config) {
                                     echo "${scenario_name}"
                                     echo "========Run ${scenario_name}========"
                                     
-                                    sh "[ -d build ] && echo OK || mkdir -p build"
-                                    sh "sed -i -- 's/mode: cli/mode: coverage/g' tests/_scenarios/${scenario_name}"
+                                    //sh "[ -d build ] && echo OK || mkdir -p build"
+                                    //sh "sed -i -- 's/mode: cli/mode: coverage/g' tests/_scenarios/${scenario_name}"
                                     sh """
                                     #!/bin/bash -l
                                     echo "Toolchain : ${config.toolchain}"
+                                    [ -d build ] && echo OK || mkdir -p build
+                                    sed -i -- "s/mode: cli/mode: coverage/g" tests/_scenarios/${scenario_name}
                                     export RISCV=${config.toolchain}
                                     export SWTOOLS_1_10=${config.toolchain}/bin
                                     export PATH=\$RISCV/bin:\$PATH
