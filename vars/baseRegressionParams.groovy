@@ -1,5 +1,6 @@
 #!/usr/bin/env groovy
 def call(config) {
+    def choices = config.scenarios.join(',')
     String repo = config.repo
     String branch = config.branch
     env.TOOLCHAIN = config.toolchain
@@ -27,7 +28,7 @@ def call(config) {
                 quoteValue: false, 
                 saveJSONParameterToFile: false, 
                 type: 'PT_SINGLE_SELECT', 
-                value: config.scenarios.join(','), 
+                value: choices, 
                 visibleItemCount: 10
             )
         }
