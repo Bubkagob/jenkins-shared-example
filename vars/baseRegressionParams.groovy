@@ -21,10 +21,10 @@ def call(config) {
         }
         parameters {
             extendedChoice(
-                defaultValue: '', 
+                //defaultValue: '', 
                 description: 'Choose scenarios to run', 
-                multiSelectDelimiter: ',', 
-                name: 'CHOSEN_SCENARIOS', 
+                //multiSelectDelimiter: ',', 
+                name: 'CHOSEN_SCENARIO', 
                 quoteValue: false, 
                 saveJSONParameterToFile: false, 
                 type: 'PT_SINGLE_SELECT', 
@@ -58,13 +58,7 @@ def call(config) {
                 }
                 steps {
                     script {
-                        CHOSEN_SCENARIOS.each{
-                            scenario_name -> 
-                               // stage("Run scenario ${scenario_name}"){
-                                    echo "CHOSEN ${scenario_name}"
-                                    
-                                //}
-                        }
+                        echo "CHOSEN ${scenario_name}"
                     }
                 }
             }
