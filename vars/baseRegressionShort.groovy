@@ -18,6 +18,19 @@ def call(config) {
         triggers{
             pollSCM('H/5 * * * *')
         }
+        parameters {
+            extendedChoice(
+                defaultValue: '', 
+                description: 'Choose scenarios to run', 
+                multiSelectDelimiter: ',', 
+                name: 'CHOSEN_SCENARIOS', 
+                quoteValue: false, 
+                saveJSONParameterToFile: false, 
+                type: 'PT_SINGLE_SELECT', 
+                value: config.scenarios, 
+                visibleItemCount: 10
+            )
+        }
         stages{
             stage('Checkout SCM') {
                 steps {
@@ -63,7 +76,7 @@ def call(config) {
                                     export PATH=\$RISCV/bin:\$PATH
                                     echo \$SWTOOLS_1_10
                                     cd build
-                                    perl ../tests/common/framework/launcher/launch.pl --tests --scenario ../tests/_scenarios/${scenario_name}
+                                    #perl ../tests/common/framework/launcher/launch.pl --tests --scenario ../tests/_scenarios/${scenario_name}
                                     """
                                 //}
                         }
