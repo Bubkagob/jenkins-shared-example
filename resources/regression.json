@@ -36,5 +36,13 @@
             "regression_cluster_scr4_rv64x4_cfg.yaml",
             "regression_cluster_l2_scr4_rv64x4_cfg.yaml"
         ]
+    },
+    "scr4_nextsi": {
+        "toolchain": "/home/soft/riscv-sw/riscv-gcc-9.2.0-g3a2b213--200304T2355",
+        "repo": "https://github.com/ar-sc/scrx_src_release",
+        "branch": "scr4_release_nextsi",
+        "scenarios": [
+            "regression_default_64_l1_uni_axi_cfg.yaml"
+        ]
     }
 }
