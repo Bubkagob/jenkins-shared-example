@@ -1,5 +1,6 @@
 #!/usr/bin/env groovy
 def call(config) {
+    def choices = config.scenarios.join(',')
     String repo = config.repo
     String branch = config.branch
     env.TOOLCHAIN = config.toolchain
@@ -16,7 +17,20 @@ def call(config) {
             timestamps()
         }
         triggers{
-            pollSCM('H/5 * * * *')
+            pollSCM('H H * * 0')
+        }
+        parameters {
+            extendedChoice(
+                defaultValue: config.scenarios[0], 
+                description: 'Choose scenarios to run', 
+                //multiSelectDelimiter: ',', 
+                name: 'CHOSEN_SCENARIO', 
+                quoteValue: false, 
+                saveJSONParameterToFile: false, 
+                type: 'PT_SINGLE_SELECT', 
+                value: choices, 
+                visibleItemCount: 10
+            )
         }
         stages{
             stage('Checkout SCM') {
@@ -38,68 +52,50 @@ def call(config) {
                 }
             }
 
-            stage('Build tests from scenarios') {
+            stage("Build tests from ${CHOSEN_SCENARIO}") {
                 agent{
                     label "power"
                 }
                 steps {
                     script {
-                        config.scenarios.each{
-                            scenario_name -> 
-                               // stage("Run scenario ${scenario_name}"){
-                                    echo "${scenario_name}"
-                                    echo "========Build test from ${scenario_name}========"
-                                    
-                                    //sh "[ -d build ] && echo OK || mkdir -p build"
-                                    //sh "sed -i -- 's/mode: cli/mode: coverage/g' tests/_scenarios/${scenario_name}"
-                                    sh """
-                                    #!/bin/bash -l
-                                    echo "Toolchain : ${config.toolchain}"
-                                    [ -d build ] && echo OK || mkdir -p build
-                                    ls -lat
-                                    #sed -i -- "s/mode: cli/mode: coverage/g" tests/_scenarios/${scenario_name}
-                                    export RISCV=${config.toolchain}
-                                    export SWTOOLS_1_10=${config.toolchain}/bin
-                                    export PATH=\$RISCV/bin:\$PATH
-                                    echo \$SWTOOLS_1_10
-                                    cd build
-                                    perl ../tests/common/framework/launcher/launch.pl --tests --scenario ../tests/_scenarios/${scenario_name}
-                                    """
-                                //}
-                        }
+                        echo "======== Build test from ${CHOSEN_SCENARIO} ========"
+                        sh """
+                        #!/bin/bash -l
+                        echo "Toolchain : ${config.toolchain}"
+                        [ -d build ] && echo OK || mkdir -p build
+                        ls -lat
+                        #sed -i -- "s/mode: cli/mode: coverage/g" tests/_scenarios/${scenario_name}
+                        export RISCV=${config.toolchain}
+                        export SWTOOLS_1_10=${config.toolchain}/bin
+                        export PATH=\$RISCV/bin:\$PATH
+                        echo \$SWTOOLS_1_10
+                        cd build
+                        perl ../tests/common/framework/launcher/launch.pl --tests --scenario ../tests/_scenarios/${scenario_name}
+                        """
                     }
                 }
             }
 
-            stage('Run scenarios') {
+            stage("Run ${CHOSEN_SCENARIO}") {
                 agent{
                     label "power"
                 }
                 steps {
                     script {
-                        config.scenarios.each{
-                            scenario_name -> 
-                               // stage("Run scenario ${scenario_name}"){
-                                    echo "${scenario_name}"
-                                    echo "========Run ${scenario_name}========"
-                                    
-                                    //sh "[ -d build ] && echo OK || mkdir -p build"
-                                    //sh "sed -i -- 's/mode: cli/mode: coverage/g' tests/_scenarios/${scenario_name}"
-                                    sh """
-                                    #!/bin/bash -l
-                                    echo "Toolchain : ${config.toolchain}"
-                                    [ -d build ] && echo OK || mkdir -p build
-                                    ls -lat
-                                    #sed -i -- "s/mode: cli/mode: coverage/g" tests/_scenarios/${scenario_name}
-                                    export RISCV=${config.toolchain}
-                                    export SWTOOLS_1_10=${config.toolchain}/bin
-                                    export PATH=\$RISCV/bin:\$PATH
-                                    echo \$SWTOOLS_1_10
-                                    cd build
-                                    perl ../tests/common/framework/launcher/launch.pl --scenario ../tests/_scenarios/${scenario_name}
-                                    """
-                                //}
-                        }
+                        echo "========Run ${CHOSEN_SCENARIO} ========"
+                        sh """
+                        #!/bin/bash -l
+                        echo "Toolchain : ${config.toolchain}"
+                        [ -d build ] && echo OK || mkdir -p build
+                        ls -lat
+                        #sed -i -- "s/mode: cli/mode: coverage/g" tests/_scenarios/${scenario_name}
+                        export RISCV=${config.toolchain}
+                        export SWTOOLS_1_10=${config.toolchain}/bin
+                        export PATH=\$RISCV/bin:\$PATH
+                        echo \$SWTOOLS_1_10
+                        cd build
+                        perl ../tests/common/framework/launcher/launch.pl --scenario ../tests/_scenarios/${scenario_name}
+                        """
                     }
                 }
             }
