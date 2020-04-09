@@ -30,13 +30,13 @@ def call(config) {
                 }
             }
 
-            // stage('Push To VM') {
-            //     steps {
-            //         script {
-            //             pushToVm()
-            //         }
-            //     }
-            // }
+            stage('Push To VM') {
+                steps {
+                    script {
+                        pushToVm()
+                    }
+                }
+            }
 
             stage('Run scenarios') {
                 agent{
